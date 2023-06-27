@@ -20,6 +20,8 @@ const Header = (props) => {
     setSelectedCategory(category);
   };
 
+  if (!data.includes('home')) data.unshift('home');
+
   const selectedItemClass = 'header-item header-item-seelcted';
 
   return (

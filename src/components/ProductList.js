@@ -12,7 +12,10 @@ const ProductList = (props) => {
   const categoryWiseProductsApiURL = `https://fakestoreapi.com/products/category/${selectedCategory}`;
 
   const { data, loading, loadError } = useApi({
-    url: selectedCategory ? categoryWiseProductsApiURL : allProductsApiURL,
+    url:
+      selectedCategory === 'home'
+        ? allProductsApiURL
+        : categoryWiseProductsApiURL,
   });
 
   // useEffect(() => {
@@ -29,7 +32,7 @@ const ProductList = (props) => {
   if (loading === true)
     return (
       <div className="center">
-        <ProductListLoader cardCount={4} />
+        <ProductListLoader cardCount={6} />
       </div>
     );
 

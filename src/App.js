@@ -5,7 +5,7 @@ import Header from './components/Header';
 import ProductList from './components/ProductList';
 
 export default function App() {
-  const [selectedCategory, setSelectedCategory] = useState();
+  const [selectedCategory, setSelectedCategory] = useState('home');
 
   return (
     <div>
