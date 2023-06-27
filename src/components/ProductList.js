@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import Product from './Product';
 import useApi from '../hooks/useApi';
+import ProductListLoader from '../components/Loader/ProductListLoader';
 
 const ProductList = (props) => {
   const { selectedCategory } = props;
   // const [products, setProducts] = useState([]);
   // const [loading, setLoading] = useState();
 
+  const allProductsApiURL = 'https://fakestoreapi.com/products';
+  const categoryWiseProductsApiURL = `https://fakestoreapi.com/products/category/${selectedCategory}`;
+
   const { data, loading, loadError } = useApi({
-    url: `https://fakestoreapi.com/products/category/${selectedCategory}`,
+    url: selectedCategory ? categoryWiseProductsApiURL : allProductsApiURL,
   });
 
   // useEffect(() => {
@@ -22,13 +26,20 @@ const ProductList = (props) => {
   //   });
   // }, [selectedCategory]);
 
-  if (loading === true) return <div className="center">Fetching Products</div>;
+  if (loading === true)
+    return (
+      <div className="center">
+        <ProductListLoader cardCount={4} />
+      </div>
+    );
 
   return (
-    <div className="products">
-      {data.map((product) => {
-        return <Product key={product.id} product={product} />;
-      })}
+    <div className="center">
+      <div className="products">
+        {data.map((product) => {
+          return <Product key={product.id} product={product} />;
+        })}
+      </div>
     </div>
   );
 };
