@@ -16,10 +16,10 @@ const ProductListLoader = (props) => {
           backgroundColor="#f3f3f3"
           foregroundColor="#ecebeb"
         >
-          <rect x="0" y="0" rx="10" ry="10" width="400" height="200" />
-          <rect x="0" y="220" rx="3" ry="3" width="200" height="20" />
-          <rect x="0" y="250" rx="3" ry="3" width="400" height="15" />
-          <rect x="0" y="275" rx="3" ry="3" width="380" height="15" />
+          <rect x="0" y="0" rx="0" ry="0" width="220" height="200" />
+          <rect x="0" y="225" rx="3" ry="3" width="300" height="15" />
+          <rect x="0" y="250" rx="3" ry="3" width="300" height="15" />
+          <rect x="0" y="275" rx="3" ry="3" width="150" height="15" />
         </ContentLoader>
       </div>
     );
