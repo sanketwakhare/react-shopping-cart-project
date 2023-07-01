@@ -1,34 +1,27 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import useApi from '../hooks/useApi';
 
 const Header = (props) => {
   const { selectedCategory, setSelectedCategory } = props;
-  // const [data, setData] = useState([]);
-
-  const { data } = useApi({
+  const { data: categoriesList } = useApi({
     url: 'https://fakestoreapi.com/products/categories',
   });
 
-  // useEffect(() => {
-  // fetch('https://fakestoreapi.com/products/categories')
-  //   .then((res) => res.json())
-  //   .then((json) => setData(json));
-  // }, []);
-
   const handleSelectedCategory = (category) => {
-    console.log(category);
     setSelectedCategory(category);
   };
-
-  if (!data.includes('home')) data.unshift('home');
+  let categories = ['home'];
+  categories.push(...categoriesList);
 
   const selectedItemClass = 'header-item header-item-seelcted';
 
   return (
     <div className="header-items">
-      {data.map((category) => {
+      {categories.map((category) => {
         return (
-          <div
+          <Link
+            to={category === 'home' ? '' : `category/${category}`}
             key={category}
             className={
               selectedCategory === category ? selectedItemClass : 'header-item'
@@ -36,7 +29,7 @@ const Header = (props) => {
             onClick={() => handleSelectedCategory(category)}
           >
             {category}
-          </div>
+          </Link>
         );
       })}
     </div>

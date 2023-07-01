@@ -20,6 +20,10 @@ p {
   background-color: rgb(63, 62, 61);
   justify-content: center;
   width: 100%;
+
+  a {
+    text-decoration: none;
+  }
 }
 
 .header-item {
@@ -47,6 +51,10 @@ p {
   flex-wrap: wrap;
   flex-direction: row;
   padding: 2rem;
+
+  a {
+    text-decoration: none;
+  }
 }
 
 .product {
