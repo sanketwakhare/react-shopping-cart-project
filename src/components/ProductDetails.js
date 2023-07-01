@@ -31,7 +31,7 @@ const ProductDetails = () => {
 
   if (loading === true)
     return (
-      <div className="center">
+      <div className="main-container">
         <ProductDetailsLoader />
       </div>
     );
@@ -45,7 +45,6 @@ const ProductDetails = () => {
             <div>{product.title}</div>
           </div>
           <div className="product-details__price">
-            {/* <label>Price:</label> */}
             <span>{product.price}</span>
           </div>
           <div className="product-details__description">
@@ -59,7 +58,6 @@ const ProductDetails = () => {
           <div className="product-details__ratings">
             <label>Ratings:</label>
             <span>{product.rating?.rate}</span>
-            {/* <span>{product.rating?.count}</span> */}
           </div>
           <div className="product-actions">
             <button onClick={() => handleAddToCart(product)}>

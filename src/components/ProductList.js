@@ -37,12 +37,10 @@ const ProductList = (props) => {
     );
 
   return (
-    <div className="center">
-      <div className="products">
-        {data.map((product) => {
-          return <Product key={product.id} product={product} />;
-        })}
-      </div>
+    <div className="products">
+      {data.map((product) => {
+        return <Product key={product.id} product={product} />;
+      })}
     </div>
   );
 };

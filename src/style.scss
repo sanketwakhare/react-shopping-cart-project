@@ -17,9 +17,13 @@ p {
 }
 
 .header-container {
-  background-color: rgb(63, 62, 61);
+  background-color: #3f3e3d;
   display: flex;
   justify-content: space-around;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 .cart-container {
@@ -65,7 +69,7 @@ p {
   .header-items {
     display: flex;
     padding: 1rem;
-    background-color: rgb(63, 62, 61);
+    background-color: #3f3e3d;
     justify-content: flex-start;
     width: 100%;
     flex-wrap: wrap;
@@ -105,6 +109,22 @@ p {
 
   a {
     text-decoration: none;
+  }
+}
+
+.main-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+@media (max-width: 400px) {
+  .main-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 7rem;
   }
 }
 
@@ -164,7 +184,7 @@ p {
         cursor: pointer;
         font-weight: bold;
         background-color: #ffa500a1;
-        padding: 5px;
+        padding: 5px 10px;
         border-radius: 4px;
         color: #3f3e3d;
       }
@@ -187,4 +207,5 @@ p {
   align-items: center;
   justify-content: center;
   margin: 20px;
+  margin-top: 5rem;
 }

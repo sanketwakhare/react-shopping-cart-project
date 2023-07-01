@@ -25,21 +25,23 @@ export default function App() {
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
         />
-        <Routes>
-          <Route
-            path=""
-            element={<ProductList selectedCategory="home" />}
-          ></Route>
-          <Route
-            path="category/:categoryId"
-            element={<ProductList selectedCategory={selectedCategory} />}
-          ></Route>
-          <Route
-            path="products/:productId"
-            element={<ProductDetails />}
-          ></Route>
-          <Route path="*" element={<NoItemsOverlay />}></Route>
-        </Routes>
+        <div className="main-container">
+          <Routes>
+            <Route
+              path=""
+              element={<ProductList selectedCategory="home" />}
+            ></Route>
+            <Route
+              path="category/:categoryId"
+              element={<ProductList selectedCategory={selectedCategory} />}
+            ></Route>
+            <Route
+              path="products/:productId"
+              element={<ProductDetails />}
+            ></Route>
+            <Route path="*" element={<NoItemsOverlay />}></Route>
+          </Routes>
+        </div>
       </CartContext.Provider>
     </div>
   );
