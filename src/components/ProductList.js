@@ -5,8 +5,6 @@ import ProductListLoader from '../components/Loader/ProductListLoader';
 
 const ProductList = (props) => {
   const { selectedCategory } = props;
-  // const [products, setProducts] = useState([]);
-  // const [loading, setLoading] = useState();
 
   const allProductsApiURL = 'https://fakestoreapi.com/products';
   const categoryWiseProductsApiURL = `https://fakestoreapi.com/products/category/${selectedCategory}`;
@@ -18,23 +16,16 @@ const ProductList = (props) => {
         : categoryWiseProductsApiURL,
   });
 
-  // useEffect(() => {
-  // setLoading(false);
-  // fetch(`https://fakestoreapi.com/products/category/${selectedCategory}`)
-  //   .then((res) => res.json())
-  //   .then((json) => {
-  //     setProducts(json);
-  //     console.log(json);
-  //     setLoading(true);
-  //   });
-  // }, [selectedCategory]);
-
   if (loading === true)
     return (
       <div className="center">
         <ProductListLoader cardCount={6} />
       </div>
     );
+
+  if (loadError === true) {
+    return <div className="no-items-overlay">Opps. Somehing went wrong</div>;
+  }
 
   return (
     <div className="products">

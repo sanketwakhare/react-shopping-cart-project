@@ -14,10 +14,6 @@ export default function App() {
 
   const [cartItems, setCartItems] = useState([]);
 
-  // TODOs:
-  // modify product details page
-  // add to cart button
-  // cart icon and contents
   return (
     <div>
       <CartContext.Provider value={{ cartItems, setCartItems }}>

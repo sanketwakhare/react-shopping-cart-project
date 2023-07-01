@@ -36,6 +36,10 @@ const ProductDetails = () => {
       </div>
     );
 
+  if (loadError === true) {
+    return <div className="no-items-overlay">Opps. Somehing went wrong</div>;
+  }
+
   return (
     <div className="product-details-container">
       <div className="product-details">
