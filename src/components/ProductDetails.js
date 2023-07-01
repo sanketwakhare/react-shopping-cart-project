@@ -4,7 +4,6 @@ import useApi from '../hooks/useApi';
 import ProductDetailsLoader from '../components/Loader/ProductDetailsLoader';
 
 import CartContext from '../context/CartContext';
-import ReactStars from 'react-rating-stars-component';
 
 import './product-details.scss';
 
