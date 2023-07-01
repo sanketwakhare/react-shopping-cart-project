@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import './style.scss';
 import { Routes, Route } from 'react-router-dom';
 
-import NoItemsOverlay from './components/NoItemsOverlay';
-import Header from './components/Header';
-import ProductList from './components/ProductList';
-import ProductDetails from './components/ProductDetails';
+import NoItemsOverlay from './components/NoItemsOverlay/NoItemsOverlay';
+import Header from './components/Header/Header';
+import ProductList from './components/Products/ProductList';
+import ProductDetails from './components/Products/ProductDetails/ProductDetails';
 
 import CartContext from './context/CartContext';
 
 export default function App() {
-  const [selectedCategory, setSelectedCategory] = useState('home');
 
+  const [selectedCategory, setSelectedCategory] = useState('home');
   const [cartItems, setCartItems] = useState([]);
 
   return (
