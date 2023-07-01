@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import useApi from '../hooks/useApi';
 
+import CartContext from '../context/CartContext';
+
 const Header = (props) => {
   const { selectedCategory, setSelectedCategory } = props;
+
+  const { cartItems, setCartItems } = useContext(CartContext);
+
   const { data: categoriesList } = useApi({
     url: 'https://fakestoreapi.com/products/categories',
   });
@@ -38,7 +43,7 @@ const Header = (props) => {
       </div>
       <div className="cart-container">
         <i class="fa fa-shopping-cart"></i>
-        <span>1</span>
+        <span>{cartItems?.length}</span>
       </div>
     </div>
   );
