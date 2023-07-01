@@ -42,7 +42,7 @@ const Header = (props) => {
         })}
       </div>
       <div className="cart-container">
-        <i class="fa fa-shopping-cart"></i>
+        <i className="fa fa-shopping-cart"></i>
         <span>{cartItems?.length}</span>
       </div>
     </div>

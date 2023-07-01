@@ -11,15 +11,16 @@ const ProductListLoader = (props) => {
         <ContentLoader
           speed={1}
           width={220}
-          height={300}
-          viewBox="0 0 220 300"
+          height={380}
+          viewBox="0 0 220 380"
           backgroundColor="#f3f3f3"
           foregroundColor="#ecebeb"
         >
           <rect x="0" y="0" rx="0" ry="0" width="220" height="200" />
-          <rect x="0" y="225" rx="3" ry="3" width="300" height="15" />
-          <rect x="0" y="250" rx="3" ry="3" width="300" height="15" />
-          <rect x="0" y="275" rx="3" ry="3" width="150" height="15" />
+          <rect x="0" y="275" rx="3" ry="3" width="300" height="15" />
+          <rect x="0" y="300" rx="3" ry="3" width="150" height="15" />
+          <rect x="0" y="350" rx="3" ry="3" width="100" height="15" />
+          <rect x="120" y="350" rx="3" ry="3" width="100" height="15" />
         </ContentLoader>
       </div>
     );

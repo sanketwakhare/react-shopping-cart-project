@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import useApi from '../hooks/useApi';
 import ProductDetailsLoader from '../components/Loader/ProductDetailsLoader';
+
+import CartContext from '../context/CartContext';
+import ReactStars from 'react-rating-stars-component';
 
 import './product-details.scss';
 
 const ProductDetails = () => {
   const { productId } = useParams();
+
+  const { cartItems, setCartItems } = useContext(CartContext);
+
+  const handleAddToCart = (currProduct) => {
+    setCartItems((prevItems) => {
+      let newCartItems = [...prevItems];
+      newCartItems.push(currProduct);
+      return newCartItems;
+    });
+  };
+
   const {
     data: product,
     loading,
@@ -18,7 +32,7 @@ const ProductDetails = () => {
   if (loading === true)
     return (
       <div className="center">
-        <ProductDetailsLoader cardCount={1} />
+        <ProductDetailsLoader />
       </div>
     );
 
@@ -46,6 +60,11 @@ const ProductDetails = () => {
             <label>Ratings:</label>
             <span>{product.rating?.rate}</span>
             {/* <span>{product.rating?.count}</span> */}
+          </div>
+          <div className="product-actions">
+            <button onClick={() => handleAddToCart(product)}>
+              Add To Cart
+            </button>
           </div>
         </div>
       </div>

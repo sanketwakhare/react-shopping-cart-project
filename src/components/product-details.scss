@@ -44,9 +44,7 @@
       .product-details__category {
         span {
           text-transform: capitalize;
-        }
-        span:before {
-          content: ' ';
+          margin-left: 5px;
         }
       }
 
@@ -57,13 +55,41 @@
           font-weight: bolder;
         }
         span:before {
-          content: ' $';
+          content: '$';
         }
       }
 
       .product-details__ratings {
-        span:before {
-          content: ' ';
+        span {
+          margin-left: 5px;
+        }
+      }
+
+      .product-actions {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+
+        button {
+          all: unset;
+          cursor: pointer;
+          font-weight: bold;
+          background-color: #ffa500a1;
+          padding: 5px;
+          border-radius: 4px;
+          color: #3f3e3d;
+        }
+
+        button:hover {
+          background-color: orange;
+        }
+
+        button:active {
+          background-color: orange;
+          box-shadow: 0 5px white;
+          transform: translateY(2px);
         }
       }
     }

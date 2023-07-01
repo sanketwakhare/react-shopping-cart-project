@@ -10,7 +10,6 @@ const Product = (props) => {
   const { cartItems, setCartItems } = useContext(CartContext);
 
   const handleAddToCart = (currProduct) => {
-    console.log(currProduct);
     setCartItems((prevItems) => {
       let newCartItems = [...prevItems];
       newCartItems.push(currProduct);

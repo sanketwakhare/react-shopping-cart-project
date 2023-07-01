@@ -7,7 +7,6 @@ const useApi = (props) => {
   const [loadError, setLoadError] = useState(null);
 
   useEffect(() => {
-    console.log('api start');
     setLoading(true);
     setLoadError(null);
 
@@ -16,12 +15,10 @@ const useApi = (props) => {
       .then((json) => {
         setData(json);
         setLoading(false);
-        console.log('api success');
       })
       .catch((err) => {
         setLoadError(err);
         setLoading(false);
-        console.log('api failure');
       });
   }, [url]);
 
