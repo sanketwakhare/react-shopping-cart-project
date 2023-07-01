@@ -17,21 +17,29 @@ const Header = (props) => {
   const selectedItemClass = 'header-item header-item-seelcted';
 
   return (
-    <div className="header-items">
-      {categories.map((category) => {
-        return (
-          <Link
-            to={category === 'home' ? '' : `category/${category}`}
-            key={category}
-            className={
-              selectedCategory === category ? selectedItemClass : 'header-item'
-            }
-            onClick={() => handleSelectedCategory(category)}
-          >
-            {category}
-          </Link>
-        );
-      })}
+    <div className="header-container">
+      <div className="header-items">
+        {categories.map((category) => {
+          return (
+            <Link
+              to={category === 'home' ? '' : `category/${category}`}
+              key={category}
+              className={
+                selectedCategory === category
+                  ? selectedItemClass
+                  : 'header-item'
+              }
+              onClick={() => handleSelectedCategory(category)}
+            >
+              {category}
+            </Link>
+          );
+        })}
+      </div>
+      <div className="cart-container">
+        <i class="fa fa-shopping-cart"></i>
+        <span>1</span>
+      </div>
     </div>
   );
 };
