@@ -31,7 +31,6 @@
 
     .product-info {
         color: black;
-        font-weight: bold;
         display: flex;
         flex-direction: column;
         row-gap: 10px;
@@ -46,12 +45,14 @@
             color: #635c5c;
             display: flex;
             justify-content: center;
+            font-weight: bold;
         }
 
         .product-price {
             color: green;
             display: flex;
             justify-content: center;
+            font-weight: bold;
         }
 
         .product-actions {
@@ -69,6 +70,7 @@
                 padding: 5px 10px;
                 border-radius: 4px;
                 color: #3f3e3d;
+                font-weight: bold;
             }
 
             button:hover {
@@ -79,6 +81,10 @@
                 background-color: orange;
                 box-shadow: 0 5px white;
                 transform: translateY(2px);
+            }
+
+            .spacing__quantity {
+                margin: 0px 10px;
             }
         }
     }

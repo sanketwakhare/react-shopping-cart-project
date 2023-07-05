@@ -8,15 +8,15 @@ import ProductList from './components/Products/ProductList';
 import ProductDetails from './components/Products/ProductDetails/ProductDetails';
 
 import CartContext from './context/CartContext';
+import CartContextProvider from './context/CartContext';
 
 export default function App() {
 
   const [selectedCategory, setSelectedCategory] = useState('home');
-  const [cartItems, setCartItems] = useState([]);
 
   return (
     <div>
-      <CartContext.Provider value={{ cartItems, setCartItems }}>
+      <CartContextProvider>
         <Header
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
@@ -38,7 +38,7 @@ export default function App() {
             <Route path="*" element={<NoItemsOverlay />}></Route>
           </Routes>
         </div>
-      </CartContext.Provider>
+      </CartContextProvider>
     </div>
   );
 }

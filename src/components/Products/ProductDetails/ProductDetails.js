@@ -3,23 +3,12 @@ import { useParams } from 'react-router-dom';
 import useApi from '../../../hooks/useApi';
 import ProductDetailsLoader from './ProductDetailsLoader';
 
-import CartContext from '../../../context/CartContext';
+import { useCartContext } from '../../../context/CartContext';
 
 import './product-details.scss';
 
 const ProductDetails = () => {
   const { productId } = useParams();
-
-  const { cartItems, setCartItems } = useContext(CartContext);
-
-  const handleAddToCart = (currProduct) => {
-    setCartItems((prevItems) => {
-      let newCartItems = [...prevItems];
-      newCartItems.push(currProduct);
-      return newCartItems;
-    });
-  };
-
   const {
     data: product,
     loading,
@@ -27,6 +16,9 @@ const ProductDetails = () => {
   } = useApi({
     url: `https://fakestoreapi.com/products/${productId}`,
   });
+  const { cartItems, addItemToCart, removeItemFromCart } = useCartContext();
+
+  const isProductPresentInCart = cartItems.find(item => item.product.id === product.id);
 
   if (loading === true)
     return (
@@ -63,9 +55,15 @@ const ProductDetails = () => {
             <span>{product.rating?.rate}</span>
           </div>
           <div className="product-actions">
-            <button onClick={() => handleAddToCart(product)}>
-              Add To Cart
-            </button>
+            {isProductPresentInCart &&
+              <div>
+                <button onClick={() => removeItemFromCart(product)}>-</button>
+                <span className="spacing__quantity">{isProductPresentInCart.quantity}</span>
+                <button onClick={() => addItemToCart(product)}>+</button>
+              </div>}
+            {!isProductPresentInCart &&
+              <button onClick={() => addItemToCart(product)}>Add To Cart</button>
+            }
           </div>
         </div>
       </div>
