@@ -26,7 +26,7 @@ const ProductList = (props) => {
     );
 
   if (loadError === true) {
-    return <div className="no-items-overlay">Opps. Somehing went wrong</div>;
+    return <div className="no-items-overlay">Oops. Something went wrong</div>;
   }
 
   return (
