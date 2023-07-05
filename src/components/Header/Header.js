@@ -8,7 +8,7 @@ import './header.scss';
 const Header = (props) => {
   const { selectedCategory, setSelectedCategory } = props;
 
-  const { cartItems } = useCartContext();
+  const { cartItems, clearCart } = useCartContext();
 
   const { data: categoriesList } = useApi({
     url: 'https://fakestoreapi.com/products/categories',
@@ -48,7 +48,12 @@ const Header = (props) => {
       </div>
       <div className="cart-container">
         <i className="fa fa-shopping-cart"></i>
-        <span>{totalCartItems}</span>
+        {totalCartItems > 0 &&
+          <>
+            <span>{totalCartItems}</span>
+            <div className="clear-cart spacing__left" onClick={() => clearCart()}>Clear Cart</div>
+          </>}
+
       </div>
     </div>
   );

@@ -18,6 +18,7 @@
     i {
         z-index: 10;
         cursor: pointer;
+        margin-left: 5px;
     }
 
     span {
@@ -32,6 +33,10 @@
         border-radius: 50%;
         width: 20px;
         height: 20px;
+        cursor: pointer;
+    }
+
+    .clear-cart {
         cursor: pointer;
     }
 }
@@ -64,7 +69,7 @@
 }
 
 .header-item {
-    margin-right: 1rem;
+    margin-left: 2rem;
     cursor: pointer;
     color: white;
     text-transform: capitalize;
