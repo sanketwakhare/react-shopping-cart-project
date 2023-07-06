@@ -7,8 +7,8 @@ import Header from './components/Header/Header';
 import ProductList from './components/Products/ProductList';
 import ProductDetails from './components/Products/ProductDetails/ProductDetails';
 
-import CartContext from './context/CartContext';
-import CartContextProvider from './context/CartContext';
+import { Provider } from 'react-redux';
+import store from './store';
 
 export default function App() {
 
@@ -16,7 +16,8 @@ export default function App() {
 
   return (
     <div>
-      <CartContextProvider>
+      {/* redux provider */}
+      <Provider store={store}>
         <Header
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
@@ -38,7 +39,7 @@ export default function App() {
             <Route path="*" element={<NoItemsOverlay />}></Route>
           </Routes>
         </div>
-      </CartContextProvider>
+      </Provider>
     </div>
   );
 }
