@@ -2,29 +2,34 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import useApi from '../../hooks/useApi';
 
-import { useCartContext } from '../../context/CartContext';
 import './header.scss';
+import { useSelector, useDispatch } from 'react-redux';
+import { clearCartRedux } from '../../store/cart';
 
+// TODO: fix header style. should be responsive
 const Header = (props) => {
+
   const { selectedCategory, setSelectedCategory } = props;
-
-  const { cartItems, clearCart } = useCartContext();
-
+  const cartItems = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
   const { data: categoriesList } = useApi({
     url: 'https://fakestoreapi.com/products/categories',
   });
+  const categories = ['home'];
+  categories.push(...categoriesList);
+  const selectedItemClass = 'header-item header-item-selected';
+  const totalCartItems = cartItems.reduce((acc, item) => {
+    return acc + item.quantity
+  }, 0);
 
   const handleSelectedCategory = (category) => {
     setSelectedCategory(category);
   };
 
-  let categories = ['home'];
-  categories.push(...categoriesList);
-
-  const selectedItemClass = 'header-item header-item-selected';
-  const totalCartItems = cartItems.reduce((acc, item) => {
-    return acc + item.quantity
-  }, 0);
+  const handleClearCart = (event) => {
+    dispatch(clearCartRedux());
+    event.stopPropagation();
+  };
 
   return (
     <div className="header-container">
@@ -51,9 +56,8 @@ const Header = (props) => {
         {totalCartItems > 0 &&
           <>
             <span>{totalCartItems}</span>
-            <div className="clear-cart spacing__left" onClick={() => clearCart()}>Clear Cart</div>
+            <div className="clear-cart spacing__left" onClick={handleClearCart}>Clear Cart</div>
           </>}
-
       </div>
     </div>
   );
