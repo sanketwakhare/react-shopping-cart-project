@@ -4,19 +4,17 @@ import useApi from '../../hooks/useApi';
 import ProductListLoader from './ProductListLoader';
 
 import './product-list.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadProducts } from '../../store/product-list';
 
 const ProductList = (props) => {
   const { selectedCategory } = props;
+  const dispatch = useDispatch();
+  const { loading, loadError, data } = useSelector((state) => state.productList);
 
-  const allProductsApiURL = 'https://fakestoreapi.com/products';
-  const categoryWiseProductsApiURL = `https://fakestoreapi.com/products/category/${selectedCategory}`;
-
-  const { data, loading, loadError } = useApi({
-    url:
-      selectedCategory === 'home'
-        ? allProductsApiURL
-        : categoryWiseProductsApiURL,
-  });
+  useEffect(() => {
+    dispatch(loadProducts(selectedCategory));
+  }, [selectedCategory]);
 
   if (loading === true)
     return (
