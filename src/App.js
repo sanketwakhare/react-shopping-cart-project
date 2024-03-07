@@ -1,18 +1,14 @@
-import React, { useState } from 'react';
-import './style.scss';
-import { Routes, Route } from 'react-router-dom';
+import React, { useState } from "react";
+import "./style.scss";
 
-import NoItemsOverlay from './components/NoItemsOverlay/NoItemsOverlay';
-import Header from './components/Header/Header';
-import ProductList from './components/Products/ProductList';
-import ProductDetails from './components/Products/ProductDetails/ProductDetails';
+import Header from "./components/Header/Header";
 
-import { Provider } from 'react-redux';
-import store from './store';
+import { Provider } from "react-redux";
+import AppRoutes from "./routes/AppRoutes";
+import store from "./store";
 
 export default function App() {
-
-  const [selectedCategory, setSelectedCategory] = useState('home');
+  const [selectedCategory, setSelectedCategory] = useState("home");
 
   return (
     <div>
@@ -23,21 +19,7 @@ export default function App() {
           setSelectedCategory={setSelectedCategory}
         />
         <div className="main-container">
-          <Routes>
-            <Route
-              path=""
-              element={<ProductList selectedCategory="home" />}
-            ></Route>
-            <Route
-              path="category/:categoryId"
-              element={<ProductList selectedCategory={selectedCategory} />}
-            ></Route>
-            <Route
-              path="products/:productId"
-              element={<ProductDetails />}
-            ></Route>
-            <Route path="*" element={<NoItemsOverlay />}></Route>
-          </Routes>
+          <AppRoutes selectedCategory={selectedCategory} />
         </div>
       </Provider>
     </div>
