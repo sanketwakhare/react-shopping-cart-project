@@ -5,21 +5,28 @@ import ProductList from "../components/Products/ProductList";
 
 const AppRoutes = (props) => {
     const { selectedCategory } = props;
-    return (<Routes>
-        <Route
-            path=""
-            element={<ProductList selectedCategory="home" />}
-        ></Route>
-        <Route
-            path="category/:categoryId"
-            element={<ProductList selectedCategory={selectedCategory} />}
-        ></Route>
-        <Route
-            path="products/:productId"
-            element={<ProductDetails />}
-        ></Route>
-        <Route path="*" element={<NoItemsOverlay />}></Route>
-    </Routes>);
+    return (
+        <div className="main-container">
+            <Routes>
+                <Route
+                    path=""
+                    element={<ProductList selectedCategory="home" />}>
+                </Route>
+                <Route
+                    path="category/:categoryId"
+                    element={<ProductList selectedCategory={selectedCategory} />}>
+                </Route>
+                <Route
+                    path="products/:productId"
+                    element={<ProductDetails />}>
+                </Route>
+                <Route
+                    path="*"
+                    element={<NoItemsOverlay />}>
+                </Route>
+            </Routes>
+        </div>
+    );
 };
 
 export default AppRoutes;

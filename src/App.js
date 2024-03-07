@@ -18,9 +18,7 @@ export default function App() {
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
         />
-        <div className="main-container">
-          <AppRoutes selectedCategory={selectedCategory} />
-        </div>
+        <AppRoutes selectedCategory={selectedCategory} />
       </Provider>
     </div>
   );
