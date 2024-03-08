@@ -59,24 +59,22 @@ function Login() {
                 <div className="innerContainer">
                     <div className="sign-in-header">
                         <div>
-                            <i class="fas fa-arrow-circle-left fa-2x"></i>
+                            <i className="fas fa-arrow-circle-left fa-2x"></i>
                         </div>
                         <p>Sign In</p>
                     </div>
 
-                    <label for="email">Email<span required>*</span></label>
+                    <label htmlFor="email">Email<span required>*</span></label>
                     <input
                         type="email"
-                        id="lname"
                         name="email"
                         placeholder="enter email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
-                    <label for="password">Password<span required>*</span></label>
+                    <label htmlFor="password">Password<span required>*</span></label>
                     <input
                         type="password"
-                        id="lname"
                         name="password"
                         placeholder="enter password"
                         value={password}

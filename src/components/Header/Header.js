@@ -67,6 +67,15 @@ const Header = (props) => {
         >
           Login
         </Link>
+        <Link
+          to={"logout"}
+          className={
+            selectedCategory === "logout" ? selectedItemClass : "header-item"
+          }
+          onClick={() => handleSelectedCategory("logout")}
+        >
+          Logout
+        </Link>
       </div>
       <div className="cart-container">
         <i className="fa fa-shopping-cart"></i>

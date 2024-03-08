@@ -3,6 +3,7 @@ import NoItemsOverlay from "../components/NoItemsOverlay/NoItemsOverlay";
 import ProductDetails from "../components/Products/ProductDetails/ProductDetails";
 import ProductList from "../components/Products/ProductList";
 import Login from "../pages/login/Login";
+import Logout from "../pages/logout/Logout";
 import Signup from "../pages/signup/Signup";
 
 const AppRoutes = (props) => {
@@ -29,6 +30,10 @@ const AppRoutes = (props) => {
                 <Route
                     path="/login"
                     element={<Login />}>
+                </Route>
+                <Route
+                    path="/logout"
+                    element={<Logout />}>
                 </Route>
                 <Route
                     path="*"
