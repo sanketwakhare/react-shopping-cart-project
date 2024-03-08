@@ -1,36 +1,30 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./signup.scss";
+import "./login.scss";
 
-function Signup() {
+function Login() {
+    /*****data for you backend***/
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
 
     const [loading, setLoading] = useState(false);
     const [errMsg, setErrMsg] = useState("");
-    const [successMsg, setSuccessMsg] = useState(null);
-
     const navigate = useNavigate();
+
     const handleSubmit = async () => {
         try {
             setLoading(true);
             setErrMsg(null);
-            if (!email || !password || !confirmPassword) {
+            if (!email || !password) {
                 setLoading(false);
                 setErrMsg("please enter required fields");
                 return;
             }
-            if (password !== confirmPassword) {
-                setLoading(false);
-                setErrMsg("Password and confirm Password are not the same");
-                return;
-            }
-            const userDetails = {
-                email: email,
-                password: password,
+            let userDetails = {
+                email,
+                password,
             };
-            const response = await fetch("http://localhost:3000/api/auth/signup", {
+            const response = await fetch("http://localhost:3000/api/auth/login", {
                 method: "POST",
                 body: JSON.stringify(userDetails),
                 headers: {
@@ -43,35 +37,37 @@ function Signup() {
             } else if (response.ok === false) {
                 throw new Error(data.message);
             } else if (response.ok === true) {
-                setErrMsg(null);
-                setSuccessMsg(<>User <b>{email}</b> registered successfully. You can  <Link to="/login" className="link">
-                    <b>Login</b>
-                </Link> now. </>);
                 setEmail("");
                 setPassword("");
-                setConfirmPassword("");
+                navigate("/");
             }
-        } catch (error) {
-            setErrMsg(error.message);
+        } catch (err) {
+            setErrMsg(err.message);
         } finally {
             setLoading(false);
         }
     };
-
-    const signUpLabel = loading ? "Signing up..." : "Sign Up";
+    /**
+     * email, password -> verified
+     * protected Routes : profile , orders , -> need your verification -> JWT
+     *
+     * **/
+    const signInLabel = loading ? "Signing in..." : "Sign In";
     return (
-        <div className="sign-up-screen">
+        <div className="sign-in-screen">
             <div className="container">
                 <div className="innerContainer">
-                    <div className="sign-up-header">
+                    <div className="sign-in-header">
                         <div>
                             <i class="fas fa-arrow-circle-left fa-2x"></i>
                         </div>
-                        <p>Signup</p>
+                        <p>Sign In</p>
                     </div>
+
                     <label for="email">Email<span required>*</span></label>
                     <input
                         type="email"
+                        id="lname"
                         name="email"
                         placeholder="enter email"
                         value={email}
@@ -80,31 +76,22 @@ function Signup() {
                     <label for="password">Password<span required>*</span></label>
                     <input
                         type="password"
+                        id="lname"
                         name="password"
                         placeholder="enter password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    <label for="password">Confirm Password<span required>*</span></label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="confirmPassword"
-                        placeholder="enter same password"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                    />
-                    <Link to="/login" className="link">
-                        <span>Already have an account ?</span>
+                    <Link to="/signup" className="link">
+                        <span>Create a new account ?</span>
                     </Link>
                     <br />
-                    <input type="submit" value={signUpLabel} onClick={handleSubmit} />
+                    <input type="submit" value={signInLabel} onClick={handleSubmit} />
                     <div className={errMsg ? "errContainer" : ""}>{errMsg}</div>
-                    <div className={successMsg ? "successContainer" : ""}>{successMsg}</div>
                 </div>
             </div>
         </div>
     );
 }
 
-export default Signup;
+export default Login;

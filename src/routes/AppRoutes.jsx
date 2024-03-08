@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router";
 import NoItemsOverlay from "../components/NoItemsOverlay/NoItemsOverlay";
 import ProductDetails from "../components/Products/ProductDetails/ProductDetails";
 import ProductList from "../components/Products/ProductList";
+import Login from "../pages/login/Login";
 import Signup from "../pages/signup/Signup";
 
 const AppRoutes = (props) => {
@@ -27,7 +28,7 @@ const AppRoutes = (props) => {
                 </Route>
                 <Route
                     path="/login"
-                    element={<>Login Page</>}>
+                    element={<Login />}>
                 </Route>
                 <Route
                     path="*"

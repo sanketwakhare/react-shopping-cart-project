@@ -3,7 +3,7 @@
   cursor: pointer;
 }
 
-.sign-up-screen {
+.sign-in-screen {
   margin-top: 8rem;
   display: grid;
   place-items: center;
@@ -48,6 +48,10 @@
       margin-bottom: 10px;
     }
 
+    label {
+      font-size: 1.6rem;
+    }
+
     .innerContainer {
       border-radius: 5px;
       background-color: #fff;
@@ -70,7 +74,7 @@
         font-size: 14px;
       }
 
-      .sign-up-header {
+      .sign-in-header {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -87,18 +91,6 @@
         background-color: #fcdede;
         border: 1px solid #fcdede;
         color: rgb(222, 9, 9);
-      }
-
-      .successContainer {
-        margin-top: 5px;
-        border-radius: 5px;
-        padding: 20px;
-        max-width: 500px;
-        height: fit-content;
-        /* flex-grow: 1; */
-        background-color: #defce3;
-        border: 1px solid #defce3;
-        color: rgb(12, 116, 12);
       }
     }
   }
