@@ -1,11 +1,11 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import useApi from '../../../hooks/useApi';
+import React from "react";
+import { useParams } from "react-router-dom";
+import useApi from "../../../hooks/useApi";
 
-import AddToCart from '../../AddToCart/AddToCart';
-import ProductDetailsLoader from './ProductDetailsLoader';
+import AddToCart from "../../AddToCart/AddToCart";
+import ProductDetailsLoader from "./ProductDetailsLoader";
 
-import './product-details.scss';
+import "./product-details.scss";
 
 const ProductDetails = () => {
   const { productId } = useParams();

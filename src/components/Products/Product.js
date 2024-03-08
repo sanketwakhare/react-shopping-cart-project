@@ -1,14 +1,14 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
-import AddToCart from '../AddToCart/AddToCart';
+import AddToCart from "../AddToCart/AddToCart";
 
 const Product = (props) => {
   const { product } = props;
 
   return (
     <div className="product">
-      <Link to={`/products/${product.id}`}>
+      <Link to={`/products/${product._id}`}>
         <img src={product.image}></img>
       </Link>
       <div className="product-info">

@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import useApi from "../../hooks/useApi";
 
 import { useDispatch, useSelector } from "react-redux";
 import { clearCartRedux } from "../../store/cart";
@@ -11,11 +10,11 @@ const Header = (props) => {
   const { selectedCategory, setSelectedCategory } = props;
   const cartItems = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  const { data: categoriesList } = useApi({
-    url: "https://fakestoreapi.com/products/categories",
-  });
-  const categories = ["home"];
-  categories.push(...categoriesList);
+  // const { data: categoriesList } = useApi({
+  //   url: "https://fakestoreapi.com/products/categories",
+  // });
+  const categories = ["home", "electronics", "clothing"];
+  // categories.push(...categoriesList);
   const selectedItemClass = "header-item header-item-selected";
   const totalCartItems = cartItems.reduce((acc, item) => {
     return acc + item.quantity;

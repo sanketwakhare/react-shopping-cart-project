@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import Product from './Product';
-import useApi from '../../hooks/useApi';
-import ProductListLoader from './ProductListLoader';
+import React, { useEffect } from "react";
+import Product from "./Product";
+import ProductListLoader from "./ProductListLoader";
 
-import './product-list.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import { loadProducts } from '../../store/product-list';
+import { useDispatch, useSelector } from "react-redux";
+import { loadProducts } from "../../store/product-list";
+import NoItemsOverlay from "../NoItemsOverlay/NoItemsOverlay";
+import "./product-list.scss";
 
 const ProductList = (props) => {
   const { selectedCategory } = props;
   const dispatch = useDispatch();
-  const { loading, loadError, data } = useSelector((state) => state.productList);
+  const { loading, loadError, data } = useSelector(
+    (state) => state.productList
+  );
 
   useEffect(() => {
     dispatch(loadProducts(selectedCategory));
@@ -29,9 +31,10 @@ const ProductList = (props) => {
 
   return (
     <div className="products">
-      {data.map((product) => {
-        return <Product key={product.id} product={product} />;
+      {data?.map((product) => {
+        return <Product key={product._id} product={product} />;
       })}
+      {data.length === 0 && <NoItemsOverlay />}
     </div>
   );
 };
