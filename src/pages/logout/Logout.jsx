@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import UrlConfig from "../../utils/UrlConfig";
 import "./logout.scss";
 
 const Logout = () => {
@@ -7,7 +8,7 @@ const Logout = () => {
 
   useEffect(() => {
     const logout = async () => {
-      const response = await fetch("http://localhost:3000/api/auth/logout", {
+      const response = await fetch(UrlConfig.LOGOUT_URL, {
         method: "GET",
       });
       if (response.status) {

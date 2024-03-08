@@ -1,3 +1,5 @@
+import UrlConfig from "../utils/UrlConfig";
+
 const initialState = {
   data: [],
   loading: false,
@@ -33,8 +35,8 @@ const errorProductList = (payload) => {
 export const loadProducts = (category) => {
   return (dispatch) => {
     dispatch(initProductList());
-    const allProductsApiURL = "http://localhost:3000/api/products";
-    const categoryWiseProductsApiURL = `http://localhost:3000/api/products/search?filter={"category": "${category}"}`;
+    const allProductsApiURL = UrlConfig.ALL_PRODUCTS_URL;
+    const categoryWiseProductsApiURL = `${UrlConfig.SEARCH_PRODUCTS_URL}?filter={"category": "${category}"}`;
     const url =
       category === "home" ? allProductsApiURL : categoryWiseProductsApiURL;
     fetch(url)

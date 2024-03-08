@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import UrlConfig from "../../utils/UrlConfig";
 import "./login.scss";
 
 function Login() {
@@ -24,7 +25,8 @@ function Login() {
         email,
         password,
       };
-      const response = await fetch("http://localhost:3000/api/auth/login", {
+
+      const response = await fetch(UrlConfig.LOGIN_URL, {
         method: "POST",
         body: JSON.stringify(userDetails),
         headers: {
@@ -42,7 +44,7 @@ function Login() {
 
         // const token = response.headers.get("x-access-token");
 
-        await fetch("http://localhost:3000/api/auth/verifyToken", {
+        await fetch(UrlConfig.VERIFY_TOKEN_URL, {
           method: "GET",
           credentials: "same-origin",
           //   headers: {

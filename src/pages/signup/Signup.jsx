@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import UrlConfig from "../../utils/UrlConfig";
 import "./signup.scss";
 
 function Signup() {
@@ -30,7 +31,7 @@ function Signup() {
         email: email,
         password: password,
       };
-      const response = await fetch("http://localhost:3000/api/auth/signup", {
+      const response = await fetch(UrlConfig.SIGN_UP_URL, {
         method: "POST",
         body: JSON.stringify(userDetails),
         headers: {

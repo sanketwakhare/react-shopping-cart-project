@@ -5,12 +5,13 @@ import useApi from "../../../hooks/useApi";
 import AddToCart from "../../AddToCart/AddToCart";
 import ProductDetailsLoader from "./ProductDetailsLoader";
 
+import UrlConfig from "../../../utils/UrlConfig";
 import "./product-details.scss";
 
 const ProductDetails = () => {
   const { productId } = useParams();
   const { data, loading, loadError } = useApi({
-    url: `http://localhost:3000/api/products/${productId}`,
+    url: `${UrlConfig.PRODUCT_BY_ID_URL}/${productId}`,
   });
 
   const product = data?.data;
