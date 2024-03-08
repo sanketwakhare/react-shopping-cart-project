@@ -14,7 +14,7 @@ const Product = (props) => {
       <div className="product-info">
         <div className="product-title">{product.title}</div>
         <div className="product-actions">
-          <div className="product-price">$ {product.price}</div>
+          <div className="product-price">₹ {product.price}</div>
           <AddToCart product={product} />
         </div>
       </div>

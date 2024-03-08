@@ -9,13 +9,11 @@ import "./product-details.scss";
 
 const ProductDetails = () => {
   const { productId } = useParams();
-  const {
-    data: product,
-    loading,
-    loadError,
-  } = useApi({
-    url: `https://fakestoreapi.com/products/${productId}`,
+  const { data, loading, loadError } = useApi({
+    url: `http://localhost:3000/api/products/${productId}`,
   });
+
+  const product = data?.data;
 
   if (loading === true)
     return (
@@ -31,25 +29,25 @@ const ProductDetails = () => {
   return (
     <div className="product-details-container">
       <div className="product-details">
-        <img src={product.image} alt="product"></img>
+        <img src={product?.image} alt="product"></img>
         <div className="product-details__container">
           <div className="product-details__title">
-            <div>{product.title}</div>
+            <div>{product?.title}</div>
           </div>
           <div className="product-details__price">
-            <span>{product.price}</span>
+            <span>₹ {product?.price}</span>
           </div>
           <div className="product-details__description">
             <label>Description:</label>
-            <p>{product.description}</p>
+            <p>{product?.description}</p>
           </div>
           <div className="product-details__category">
             <label>Category:</label>
-            <span>{product.category}</span>
+            <span>{product?.category}</span>
           </div>
           <div className="product-details__ratings">
             <label>Ratings:</label>
-            <span>{product.rating?.rate}</span>
+            <span>{product?.rating?.rate}</span>
           </div>
           <div className="product-actions">
             <AddToCart product={product} />

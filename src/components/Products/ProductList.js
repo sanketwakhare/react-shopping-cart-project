@@ -34,7 +34,7 @@ const ProductList = (props) => {
       {data?.map((product) => {
         return <Product key={product._id} product={product} />;
       })}
-      {data.length === 0 && <NoItemsOverlay />}
+      {data?.length === 0 && <NoItemsOverlay />}
     </div>
   );
 };
