@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState } from 'react';
+// NOTE: this context is not being used in app, we are using redux store
+import React, { createContext, useContext, useState } from "react";
 
 const CartContext = createContext();
 
