@@ -26,6 +26,10 @@ const AppRoutes = (props) => {
                     element={<Signup />}>
                 </Route>
                 <Route
+                    path="/login"
+                    element={<>Login Page</>}>
+                </Route>
+                <Route
                     path="*"
                     element={<NoItemsOverlay />}>
                 </Route>
