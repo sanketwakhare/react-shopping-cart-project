@@ -4,7 +4,6 @@ import UrlConfig from "../../utils/UrlConfig";
 import "./login.scss";
 
 function Login() {
-  /*****data for you backend***/
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -59,11 +58,6 @@ function Login() {
       setLoading(false);
     }
   };
-  /**
-   * email, password -> verified
-   * protected Routes : profile , orders , -> need your verification -> JWT
-   *
-   * **/
   const signInLabel = loading ? "Signing in..." : "Sign In";
   return (
     <div className="sign-in-screen">
