@@ -11,7 +11,7 @@ import "./product-details.scss";
 const ProductDetails = () => {
   const { productId } = useParams();
   const { data, loading, loadError } = useApi({
-    url: `${UrlConfig.PRODUCT_BY_ID_URL}/${productId}`,
+    url: UrlConfig.PRODUCT_BY_ID_URL.replace(":productId", productId),
   });
 
   const product = data?.data;

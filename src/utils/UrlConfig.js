@@ -15,7 +15,7 @@ const UrlConfig = {
   // products
   ALL_PRODUCTS_URL: REACT_APP_BASE_URL + "/api/products",
   SEARCH_PRODUCTS_URL: REACT_APP_BASE_URL + "/api/products/search",
-  PRODUCT_BY_ID_URL: REACT_APP_BASE_URL + "/api/products",
+  PRODUCT_BY_ID_URL: REACT_APP_BASE_URL + "/api/products/:productId",
 };
 
 export default UrlConfig;
