@@ -29,7 +29,6 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-top: 20px;
   }
 
   input[type="submit"]:hover {
@@ -74,6 +73,12 @@
         justify-content: center;
         align-items: center;
         margin-bottom: 20px;
+      }
+
+      .sign-up-actions-container {
+        display: flex;
+        gap: 20px;
+        align-items: center;
       }
 
       .errContainer {

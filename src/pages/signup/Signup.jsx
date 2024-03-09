@@ -106,11 +106,15 @@ function Signup() {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
-          <Link to="/login" className="link">
-            <span>Already have an account ?</span>
-          </Link>
-          <br />
-          <input type="submit" value={signUpLabel} onClick={handleSubmit} />
+          <div className="sign-up-actions-container">
+            <input type="submit" value={signUpLabel} onClick={handleSubmit} />
+            <span>
+              Already have an account?
+              <Link to="/login" className="link">
+                <span> Sign In</span>
+              </Link>
+            </span>
+          </div>
           <div className={errMsg ? "errContainer" : ""}>{errMsg}</div>
           <div className={successMsg ? "successContainer" : ""}>
             {successMsg}

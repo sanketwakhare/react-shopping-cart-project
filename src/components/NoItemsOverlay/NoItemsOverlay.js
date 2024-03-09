@@ -1,8 +1,8 @@
-import React from 'react';
-import './no-items-overlay.scss';
+import React from "react";
+import "./no-items-overlay.scss";
 
 const NoItemsOverlay = () => {
-  return <div className="no-items-container">No Items to show</div>;
+  return <div className="no-items-container">Page Not Found</div>;
 };
 
 export default NoItemsOverlay;

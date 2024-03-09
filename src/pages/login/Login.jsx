@@ -69,7 +69,6 @@ function Login() {
             </div>
             <p>Sign In</p>
           </div>
-
           <label htmlFor="email">
             Email<span required>*</span>
           </label>
@@ -90,11 +89,20 @@ function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Link to="/signup" className="link">
-            <span>Create a new account ?</span>
-          </Link>
+          <div className="sign-in-actions-container">
+            <input type="submit" value={signInLabel} onClick={handleSubmit} />
+            <Link to="/forgot-password" className="link">
+              <span>Forgot password?</span>
+            </Link>
+          </div>
           <br />
-          <input type="submit" value={signInLabel} onClick={handleSubmit} />
+          <span>
+            Don't have an account?
+            <Link to="/signup" className="link">
+              <span> Sign Up</span>
+            </Link>
+          </span>
+          <br />
           <div className={errMsg ? "errContainer" : ""}>{errMsg}</div>
         </div>
       </div>
