@@ -71,10 +71,7 @@ function Signup() {
       <div className="container">
         <div className="innerContainer">
           <div className="sign-up-header">
-            <div>
-              <i className="fas fa-arrow-circle-left fa-2x"></i>
-            </div>
-            <p>Signup</p>
+            <p>Sign up</p>
           </div>
           <label htmlFor="email">
             Email<span required>*</span>
@@ -102,7 +99,7 @@ function Signup() {
           <input
             type="password"
             name="confirmPassword"
-            placeholder="enter same password"
+            placeholder="enter password again"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />

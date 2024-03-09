@@ -64,10 +64,7 @@ function Login() {
       <div className="container">
         <div className="innerContainer">
           <div className="sign-in-header">
-            <div>
-              <i className="fas fa-arrow-circle-left fa-2x"></i>
-            </div>
-            <p>Sign In</p>
+            <p>Sign in</p>
           </div>
           <label htmlFor="email">
             Email<span required>*</span>

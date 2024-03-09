@@ -55,7 +55,7 @@ const Header = (props) => {
           }
           onClick={() => handleSelectedCategory("signup")}
         >
-          Signup
+          Sign up
         </Link>
         <Link
           to={"login"}
@@ -64,7 +64,7 @@ const Header = (props) => {
           }
           onClick={() => handleSelectedCategory("login")}
         >
-          Login
+          Sign in
         </Link>
         <Link
           to={"logout"}

@@ -10,6 +10,7 @@
   input[type="text"],
   input[type="email"],
   input[type="password"],
+  input[type="number"],
   select,
   textarea {
     width: 100%;
@@ -46,10 +47,6 @@
       margin-bottom: 10px;
     }
 
-    label {
-      font-size: 1.6rem;
-    }
-
     .innerContainer {
       border-radius: 5px;
       background-color: #fff;
@@ -59,11 +56,9 @@
       border: 2px solid #ccc;
 
       label {
-        font-size: 1.6rem;
         span[required] {
-          font-size: 1.6rem;
           color: red;
-          vertical-align: baseline;
+          vertical-align: super;
           margin-left: 5px;
         }
       }
@@ -74,9 +69,17 @@
 
       .sign-in-header {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         margin-bottom: 20px;
+        p {
+          font-size: 2rem;
+        }
+        label {
+          font-size: 1rem;
+          color: #1d3557;
+        }
       }
 
       .sign-in-actions-container {
@@ -86,7 +89,7 @@
       }
 
       .errContainer {
-        margin-top: 5px;
+        margin-top: 1rem;
         border-radius: 5px;
         padding: 20px;
         max-width: 500px;
@@ -95,6 +98,19 @@
         background-color: #fcdede;
         border: 1px solid #fcdede;
         color: rgb(222, 9, 9);
+      }
+
+      .successContainer {
+        margin-top: 1rem;
+        border-radius: 5px;
+        padding: 20px;
+        max-width: 500px;
+        height: fit-content;
+        /* flex-grow: 1; */
+        background-color: #defce3;
+        border: 1px solid #defce3;
+        color: rgb(12, 116, 12);
+        text-align: center;
       }
     }
   }
