@@ -7,6 +7,11 @@ const UrlConfig = {
   LOGOUT_URL: REACT_APP_BASE_URL + "/api/auth/logout",
   VERIFY_TOKEN_URL: REACT_APP_BASE_URL + "/api/auth/verifyToken",
 
+  // forgot password
+  FORGOT_PASSWORD_URL: REACT_APP_BASE_URL + "/api/auth/forgotPassword",
+  VALIDATE_OTP_URL: REACT_APP_BASE_URL + "/api/auth/validateOtp/:userId",
+  RESET_PASSWORD_URL: REACT_APP_BASE_URL + "/api/auth/resetPassword/:userId",
+
   // products
   ALL_PRODUCTS_URL: REACT_APP_BASE_URL + "/api/products",
   SEARCH_PRODUCTS_URL: REACT_APP_BASE_URL + "/api/products/search",

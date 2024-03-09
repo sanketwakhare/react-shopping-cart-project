@@ -47,16 +47,15 @@ function Signup() {
         setErrMsg(null);
         setSuccessMsg(
           <>
-            User <b>{email}</b> registered successfully. You can{" "}
-            <Link to="/login" className="link">
-              <b>Login</b>
-            </Link>{" "}
-            now.{" "}
+            User <b>{email}</b> registered successfully.
           </>
         );
         setEmail("");
         setPassword("");
         setConfirmPassword("");
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
       }
     } catch (error) {
       setErrMsg(error.message);

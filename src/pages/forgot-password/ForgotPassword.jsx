@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import UrlConfig from "../../utils/UrlConfig";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -9,8 +10,42 @@ const ForgotPassword = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
-    navigate("/verify-forgot-password-otp", { state: { email } });
+    try {
+      setLoading(true);
+      setErrMsg(null);
+      if (!email) {
+        setLoading(false);
+        setErrMsg("please enter required fields");
+        return;
+      }
+
+      const emailDetails = {
+        email: email,
+      };
+      const response = await fetch(UrlConfig.FORGOT_PASSWORD_URL, {
+        method: "POST",
+        body: JSON.stringify(emailDetails),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      if (data.errors) {
+        throw new Error(data.errors[0].msg);
+      } else if (response.ok === false) {
+        throw new Error(data.message);
+      } else if (response.ok === true) {
+        const { userId } = data;
+        navigate("/verify-forgot-password-otp", { state: { email, userId } });
+      }
+    } catch (err) {
+      setErrMsg(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
+
+  const sendOtpBtnLabel = loading ? "Sending OTP..." : "Send OTP";
 
   return (
     <div className="sign-in-screen">
@@ -31,7 +66,11 @@ const ForgotPassword = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
           <div className="sign-in-actions-container">
-            <input type="submit" value="Receive OTP" onClick={handleSubmit} />
+            <input
+              type="submit"
+              value={sendOtpBtnLabel}
+              onClick={handleSubmit}
+            />
           </div>
           <div className={errMsg ? "errContainer" : ""}>{errMsg}</div>
         </div>
