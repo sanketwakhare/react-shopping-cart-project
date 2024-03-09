@@ -15,7 +15,7 @@ const ForgotPassword = () => {
       setErrMsg(null);
       if (!email) {
         setLoading(false);
-        setErrMsg("please enter required fields");
+        setErrMsg("Please provide required fields");
         return;
       }
 

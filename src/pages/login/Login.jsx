@@ -17,7 +17,7 @@ function Login() {
       setErrMsg(null);
       if (!email || !password) {
         setLoading(false);
-        setErrMsg("please enter required fields");
+        setErrMsg("Please provide required fields");
         return;
       }
       let userDetails = {

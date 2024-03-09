@@ -19,7 +19,7 @@ function Signup() {
       setErrMsg(null);
       if (!email || !password || !confirmPassword) {
         setLoading(false);
-        setErrMsg("please enter required fields");
+        setErrMsg("Please provide required fields");
         return;
       }
       if (password !== confirmPassword) {

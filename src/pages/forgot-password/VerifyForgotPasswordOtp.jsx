@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import UrlConfig from "../../utils/UrlConfig";
 
-const VerifyForgotPasswordOtp = (props) => {
+const VerifyForgotPasswordOtp = () => {
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
   const [errMsg, setErrMsg] = useState("");
@@ -18,7 +18,7 @@ const VerifyForgotPasswordOtp = (props) => {
       setErrMsg(null);
       if (!otp) {
         setLoading(false);
-        setErrMsg("please enter required fields");
+        setErrMsg("Please provide required fields");
         return;
       }
 
@@ -64,8 +64,8 @@ const VerifyForgotPasswordOtp = (props) => {
             <p>Verification required</p>
             <label>
               To continue, complete this verification step. We've sent an OTP to
-              the email {email ?? "no email provided"}. Please enter it below to
-              complete verification.
+              the email <span className="strong">{email}</span>. Please enter it
+              below to complete verification.
             </label>
           </div>
           <label htmlFor="otp">
