@@ -10,7 +10,11 @@ const useApi = (props) => {
     setLoading(true);
     setLoadError(null);
 
-    fetch(url)
+    fetch(url, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    })
       .then((res) => res.json())
       .then((json) => {
         setData(json);

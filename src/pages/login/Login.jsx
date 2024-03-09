@@ -40,16 +40,9 @@ function Login() {
       } else if (response.ok === true) {
         setEmail("");
         setPassword("");
+        const token = data?.token;
+        localStorage.setItem("token", token);
 
-        // const token = response.headers.get("x-access-token");
-
-        await fetch(UrlConfig.VERIFY_TOKEN_URL, {
-          method: "GET",
-          credentials: "same-origin",
-          //   headers: {
-          //     "x-access-token": token,
-          //   },
-        });
         navigate("/");
       }
     } catch (err) {

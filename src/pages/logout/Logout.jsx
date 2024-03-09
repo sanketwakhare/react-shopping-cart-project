@@ -10,11 +10,16 @@ const Logout = () => {
     const logout = async () => {
       const response = await fetch(UrlConfig.LOGOUT_URL, {
         method: "GET",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
       });
-      if (response.status) {
+      if (response.ok) {
         const data = await response.json();
         setSuccessMsg(data.message);
         setErrMsg(null);
+        // clear token from localStorage
+        localStorage.removeItem("token");
       } else {
         setErrMsg("Error logging out");
         setSuccessMsg(null);

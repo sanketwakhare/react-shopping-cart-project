@@ -39,7 +39,11 @@ export const loadProducts = (category) => {
     const categoryWiseProductsApiURL = `${UrlConfig.SEARCH_PRODUCTS_URL}?filter={"category": "${category}"}`;
     const url =
       category === "home" ? allProductsApiURL : categoryWiseProductsApiURL;
-    fetch(url)
+    fetch(url, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         dispatch(successProductList(data.data));
