@@ -55,6 +55,10 @@
       height: fit-content;
       border: 2px solid #ccc;
 
+      form {
+        margin: 0;
+      }
+
       label {
         span[required] {
           color: red;

@@ -97,7 +97,6 @@ function Login(props) {
               <span> Sign up</span>
             </Link>
           </span>
-          <br />
           <div className={errMsg ? "errContainer" : ""}>{errMsg}</div>
         </div>
       </div>
