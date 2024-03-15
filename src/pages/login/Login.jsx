@@ -60,7 +60,10 @@ function Login(props) {
       <div className="container">
         <div className="innerContainer">
           <div className="sign-in-header">
-            <p>Sign in</p>
+            <p>Continue Shopping</p>
+            <label className="centered-text">
+              Enjoy a personalized shopping experience with every sign-in.
+            </label>
           </div>
           <label htmlFor="email">
             Email<span required>*</span>

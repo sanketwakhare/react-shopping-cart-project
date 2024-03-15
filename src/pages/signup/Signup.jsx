@@ -71,7 +71,10 @@ function Signup() {
       <div className="container">
         <div className="innerContainer">
           <div className="sign-up-header">
-            <p>Sign up</p>
+            <p>Create Account</p>
+            <label className="centered-text">
+              Join now and elevate your shopping experience.
+            </label>
           </div>
           <form onSubmit={handleSubmit}>
             <label htmlFor="email">
