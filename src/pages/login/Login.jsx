@@ -92,9 +92,9 @@ function Login(props) {
           </form>
           <br />
           <span>
-            Don't have an account?
+            <label>Don't have an account? </label>
             <Link to="/signup" className="link">
-              <span> Sign up</span>
+              <span>Sign up</span>
             </Link>
           </span>
           <div className={errMsg ? "errContainer" : ""}>{errMsg}</div>

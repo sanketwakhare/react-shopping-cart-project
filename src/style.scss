@@ -23,6 +23,17 @@ p {
   padding: 1rem;
 }
 
-.spacing__left {
-  margin-left: 20px;
+.link {
+  text-decoration: none;
+  cursor: pointer;
+  color: darkblue;
 }
+
+.link:hover {
+  color: #003366;
+  text-decoration: underline;
+}
+
+// .link:active {
+//   color: orange;
+// }

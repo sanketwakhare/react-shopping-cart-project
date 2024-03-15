@@ -107,9 +107,9 @@ function Signup() {
             <div className="sign-up-actions-container">
               <input type="submit" value={signUpLabel} />
               <span>
-                Already have an account?
+                <label>Already have an account? </label>
                 <Link to="/login" className="link">
-                  <span> Sign in</span>
+                  <span>Sign in</span>
                 </Link>
               </span>
             </div>

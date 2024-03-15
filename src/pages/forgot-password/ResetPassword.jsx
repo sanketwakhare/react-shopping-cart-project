@@ -98,9 +98,9 @@ const ResetPassword = (props) => {
             <div className="sign-in-actions-container">
               <input type="submit" value={resetPasswordBtnLabel} />
               <span>
-                Back to
+                <label>Back to </label>
                 <Link to="/login" className="link">
-                  <span> Sign in</span>
+                  <span>Sign in</span>
                 </Link>
               </span>
             </div>

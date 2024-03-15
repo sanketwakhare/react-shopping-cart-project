@@ -39,11 +39,11 @@ const Header = ({ isLoggedIn, handleLogin, handleLogout }) => {
         ) : (
           // Display content for non-logged-in users
           <>
-            <NavLink to="signup" className="nav-link">
-              Sign up
-            </NavLink>
             <NavLink to="login" className="nav-link">
               Sign in
+            </NavLink>
+            <NavLink to="signup" className="nav-link">
+              Sign up
             </NavLink>
           </>
         )}

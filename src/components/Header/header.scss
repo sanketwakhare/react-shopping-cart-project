@@ -5,8 +5,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background-color: #333;
-  color: #fff;
+  background-color: darkblue;
+  color: white;
 }
 
 .logo {
@@ -22,19 +22,15 @@
 .nav-link {
   cursor: pointer;
   padding: 8px;
-  color: #fff;
+  color: white;
   text-decoration: none;
 }
 
-// .nav-link:hover {
-//   text-decoration: underline;
-// }
-
-.logout-button {
-  cursor: pointer;
-  padding: 8px;
-  color: #fff;
-  background-color: #f00;
-  border: none;
-  border-radius: 5px;
+.nav-link:hover {
+  color: #ddd;
+  text-decoration: underline;
 }
+
+// .nav-link:active {
+//   color: red;
+// }

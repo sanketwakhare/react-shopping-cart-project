@@ -1,8 +1,3 @@
-.link {
-  text-decoration: none;
-  cursor: pointer;
-}
-
 .sign-in-screen {
   display: grid;
   place-items: center;
@@ -25,7 +20,7 @@
   }
 
   input[type="submit"] {
-    background-color: rgb(35, 32, 204);
+    background-color: darkblue;
     color: white;
     padding: 12px 20px;
     border: none;
@@ -34,7 +29,7 @@
   }
 
   input[type="submit"]:hover {
-    background-color: #1d3557;
+    background-color: #0000ab;
   }
 
   .container {
