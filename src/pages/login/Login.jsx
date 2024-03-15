@@ -12,7 +12,8 @@ function Login(props) {
   const [errMsg, setErrMsg] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
       setLoading(true);
       setErrMsg(null);
@@ -64,29 +65,31 @@ function Login(props) {
           <label htmlFor="email">
             Email<span required>*</span>
           </label>
-          <input
-            type="email"
-            name="email"
-            placeholder="enter email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <label htmlFor="password">
-            Password<span required>*</span>
-          </label>
-          <input
-            type="password"
-            name="password"
-            placeholder="enter password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <div className="sign-in-actions-container">
-            <input type="submit" value={signInLabel} onClick={handleSubmit} />
-            <Link to="/forgot-password" className="link">
-              <span>Forgot password?</span>
-            </Link>
-          </div>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="email"
+              name="email"
+              placeholder="enter email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <label htmlFor="password">
+              Password<span required>*</span>
+            </label>
+            <input
+              type="password"
+              name="password"
+              placeholder="enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <div className="sign-in-actions-container">
+              <input type="submit" value={signInLabel} />
+              <Link to="/forgot-password" className="link">
+                <span>Forgot password?</span>
+              </Link>
+            </div>
+          </form>
           <br />
           <span>
             Don't have an account?

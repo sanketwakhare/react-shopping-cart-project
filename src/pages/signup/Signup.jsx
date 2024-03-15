@@ -13,7 +13,8 @@ function Signup() {
   const [successMsg, setSuccessMsg] = useState(null);
 
   const navigate = useNavigate();
-  const handleSubmit = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
       setLoading(true);
       setErrMsg(null);
@@ -72,45 +73,47 @@ function Signup() {
           <div className="sign-up-header">
             <p>Sign up</p>
           </div>
-          <label htmlFor="email">
-            Email<span required>*</span>
-          </label>
-          <input
-            type="email"
-            name="email"
-            placeholder="enter email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <label htmlFor="password">
-            Password<span required>*</span>
-          </label>
-          <input
-            type="password"
-            name="password"
-            placeholder="enter password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <label htmlFor="password">
-            Confirm Password<span required>*</span>
-          </label>
-          <input
-            type="password"
-            name="confirmPassword"
-            placeholder="enter password again"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-          <div className="sign-up-actions-container">
-            <input type="submit" value={signUpLabel} onClick={handleSubmit} />
-            <span>
-              Already have an account?
-              <Link to="/login" className="link">
-                <span> Sign In</span>
-              </Link>
-            </span>
-          </div>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="email">
+              Email<span required>*</span>
+            </label>
+            <input
+              type="email"
+              name="email"
+              placeholder="enter email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <label htmlFor="password">
+              Password<span required>*</span>
+            </label>
+            <input
+              type="password"
+              name="password"
+              placeholder="enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <label htmlFor="password">
+              Confirm Password<span required>*</span>
+            </label>
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="enter password again"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+            <div className="sign-up-actions-container">
+              <input type="submit" value={signUpLabel} />
+              <span>
+                Already have an account?
+                <Link to="/login" className="link">
+                  <span> Sign In</span>
+                </Link>
+              </span>
+            </div>
+          </form>
           <div className={errMsg ? "errContainer" : ""}>{errMsg}</div>
           <div className={successMsg ? "successContainer" : ""}>
             {successMsg}
