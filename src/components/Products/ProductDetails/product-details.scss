@@ -1,7 +1,6 @@
 .product-details-container {
   display: flex;
   justify-content: center;
-  margin: 1rem;
 
   .product-details {
     display: flex;
@@ -90,28 +89,6 @@
           box-shadow: 0 5px white;
           transform: translateY(2px);
         }
-      }
-    }
-  }
-
-  @media (max-width: 500px) {
-    .product-details {
-      display: flex;
-      padding: 2rem;
-      column-gap: 5rem;
-      width: 100%;
-      flex-wrap: wrap;
-      row-gap: 1rem;
-
-      a {
-        text-decoration: none;
-      }
-
-      img {
-        height: 300px;
-        width: 300px;
-        display: flex;
-        align-self: flex-start;
       }
     }
   }
