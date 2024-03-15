@@ -54,7 +54,7 @@ function Login(props) {
       setLoading(false);
     }
   };
-  const signInLabel = loading ? "Signing in..." : "Sign In";
+  const signInLabel = loading ? "Signing in..." : "Sign in";
   return (
     <div className="sign-in-screen">
       <div className="container">
@@ -94,7 +94,7 @@ function Login(props) {
           <span>
             Don't have an account?
             <Link to="/signup" className="link">
-              <span> Sign Up</span>
+              <span> Sign up</span>
             </Link>
           </span>
           <br />

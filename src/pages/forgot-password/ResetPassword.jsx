@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import UrlConfig from "../../utils/UrlConfig";
 
 const ResetPassword = (props) => {
@@ -13,7 +13,8 @@ const ResetPassword = (props) => {
   const location = useLocation();
   const { userId } = location?.state;
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
       setLoading(true);
       setErrMsg(null);
@@ -73,33 +74,37 @@ const ResetPassword = (props) => {
             <p>Create new password</p>
             <label>We'll ask for this password whenever you sign in.</label>
           </div>
-          <label htmlFor="password">
-            New Password<span required>*</span>
-          </label>
-          <input
-            type="password"
-            name="password"
-            placeholder="enter password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <label htmlFor="confirm-password">
-            Confirm Password<span required>*</span>
-          </label>
-          <input
-            type="password"
-            name="confirm-password"
-            placeholder="enter password again"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-          <div className="sign-in-actions-container">
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="password">
+              New Password<span required>*</span>
+            </label>
             <input
-              type="submit"
-              value={resetPasswordBtnLabel}
-              onClick={handleSubmit}
+              type="password"
+              name="password"
+              placeholder="enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
-          </div>
+            <label htmlFor="confirm-password">
+              Confirm Password<span required>*</span>
+            </label>
+            <input
+              type="password"
+              name="confirm-password"
+              placeholder="enter password again"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+            <div className="sign-in-actions-container">
+              <input type="submit" value={resetPasswordBtnLabel} />
+              <span>
+                Back to
+                <Link to="/login" className="link">
+                  <span> Sign in</span>
+                </Link>
+              </span>
+            </div>
+          </form>
           <div className={errMsg ? "errContainer" : ""}>{errMsg}</div>
           {successMsg && (
             <div className="successContainer">Password reset successfully.</div>

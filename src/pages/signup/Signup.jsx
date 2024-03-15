@@ -65,7 +65,7 @@ function Signup() {
     }
   };
 
-  const signUpLabel = loading ? "Signing up..." : "Sign Up";
+  const signUpLabel = loading ? "Signing up..." : "Sign up";
   return (
     <div className="sign-up-screen">
       <div className="container">
@@ -109,7 +109,7 @@ function Signup() {
               <span>
                 Already have an account?
                 <Link to="/login" className="link">
-                  <span> Sign In</span>
+                  <span> Sign in</span>
                 </Link>
               </span>
             </div>

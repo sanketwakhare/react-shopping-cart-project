@@ -8,7 +8,7 @@ const Header = ({ isLoggedIn, handleLogin, handleLogout }) => {
     <div className="header">
       <div className="logo">
         <NavLink to="/" key="home" className="nav-link">
-          <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+          <i className="fa fa-shopping-bag" aria-hidden="true"></i>
         </NavLink>
       </div>
       <div className="nav">

@@ -6,6 +6,7 @@
 .sign-in-screen {
   display: grid;
   place-items: center;
+  width: 400px;
 
   input[type="text"],
   input[type="email"],
@@ -51,7 +52,6 @@
       border-radius: 5px;
       background-color: #fff;
       padding: 20px;
-      max-width: 500px;
       height: fit-content;
       border: 2px solid #ccc;
 
@@ -96,9 +96,7 @@
         margin-top: 1rem;
         border-radius: 5px;
         padding: 20px;
-        max-width: 500px;
         height: fit-content;
-        /* flex-grow: 1; */
         background-color: #fcdede;
         border: 1px solid #fcdede;
         color: rgb(222, 9, 9);
@@ -108,9 +106,7 @@
         margin-top: 1rem;
         border-radius: 5px;
         padding: 20px;
-        max-width: 500px;
         height: fit-content;
-        /* flex-grow: 1; */
         background-color: #defce3;
         border: 1px solid #defce3;
         color: rgb(12, 116, 12);

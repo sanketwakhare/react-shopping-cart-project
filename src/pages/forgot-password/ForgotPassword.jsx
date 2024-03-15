@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 import UrlConfig from "../../utils/UrlConfig";
 
 const ForgotPassword = () => {
@@ -9,7 +10,8 @@ const ForgotPassword = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
       setLoading(true);
       setErrMsg(null);
@@ -55,23 +57,27 @@ const ForgotPassword = () => {
             <p>Password assistance</p>
             <label>Enter the email address associated with your account.</label>
           </div>
-          <label htmlFor="email">
-            Email<span required>*</span>
-          </label>
-          <input
-            type="email"
-            name="email"
-            placeholder="enter email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <div className="sign-in-actions-container">
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="email">
+              Email<span required>*</span>
+            </label>
             <input
-              type="submit"
-              value={sendOtpBtnLabel}
-              onClick={handleSubmit}
+              type="email"
+              name="email"
+              placeholder="enter email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
-          </div>
+            <div className="sign-in-actions-container">
+              <input type="submit" value={sendOtpBtnLabel} />
+              <span>
+                Back to
+                <Link to="/login" className="link">
+                  <span> Sign in</span>
+                </Link>
+              </span>
+            </div>
+          </form>
           <div className={errMsg ? "errContainer" : ""}>{errMsg}</div>
         </div>
       </div>

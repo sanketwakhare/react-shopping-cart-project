@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 import UrlConfig from "../../utils/UrlConfig";
 
 const VerifyForgotPasswordOtp = () => {
@@ -12,7 +13,8 @@ const VerifyForgotPasswordOtp = () => {
   const location = useLocation();
   const { email, userId } = location?.state;
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
       setLoading(true);
       setErrMsg(null);
@@ -68,25 +70,29 @@ const VerifyForgotPasswordOtp = () => {
               below to complete verification.
             </label>
           </div>
-          <label htmlFor="otp">
-            Enter OTP<span required>*</span>
-          </label>
-          <input
-            type="number"
-            name="otp"
-            placeholder="OTP"
-            value={otp}
-            minLength={6}
-            maxLength={6}
-            onChange={(e) => setOtp(e.target.value)}
-          />
-          <div className="sign-in-actions-container">
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="otp">
+              Enter OTP<span required>*</span>
+            </label>
             <input
-              type="submit"
-              value={verifyOtpBtnLabel}
-              onClick={handleSubmit}
+              type="number"
+              name="otp"
+              placeholder="OTP"
+              value={otp}
+              minLength={6}
+              maxLength={6}
+              onChange={(e) => setOtp(e.target.value)}
             />
-          </div>
+            <div className="sign-in-actions-container">
+              <input type="submit" value={verifyOtpBtnLabel} />
+              <span>
+                Back to
+                <Link to="/login" className="link">
+                  <span> Sign in</span>
+                </Link>
+              </span>
+            </div>
+          </form>
           <div className={errMsg ? "errContainer" : ""}>{errMsg}</div>
           {successMsg && <div className="successContainer">OTP verified</div>}
         </div>
