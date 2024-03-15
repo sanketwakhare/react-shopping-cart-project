@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import UrlConfig from "../../utils/UrlConfig";
 import "./logout.scss";
 
-const Logout = () => {
+const Logout = (props) => {
+  const navigate = useNavigate();
+  const { handleSetLogin } = props;
   const [successMessage, setSuccessMsg] = useState(null);
   const [errMessage, setErrMsg] = useState(null);
 
@@ -20,6 +23,9 @@ const Logout = () => {
         setErrMsg(null);
         // clear token from localStorage
         localStorage.removeItem("token");
+        handleSetLogin(false);
+        navigate("/", { replace: true, state: null });
+        window.location.replace("/");
       } else {
         setErrMsg("Error logging out");
         setSuccessMsg(null);

@@ -9,6 +9,11 @@ import store from "./store";
 
 export default function App() {
   const [selectedCategory, setSelectedCategory] = useState("home");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleSetLogin = (value) => {
+    setIsLoggedIn(() => value);
+  };
 
   return (
     <div>
@@ -17,8 +22,12 @@ export default function App() {
         <Header
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
+          isLoggedIn={isLoggedIn}
         />
-        <AppRoutes selectedCategory={selectedCategory} />
+        <AppRoutes
+          selectedCategory={selectedCategory}
+          handleSetLogin={handleSetLogin}
+        />
       </Provider>
     </div>
   );

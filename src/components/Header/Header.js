@@ -1,89 +1,50 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-import { useDispatch, useSelector } from "react-redux";
-import { clearCartRedux } from "../../store/cart";
+import { NavLink } from "react-router-dom";
 import "./header.scss";
 
-// TODO: fix header style. should be responsive
-const Header = (props) => {
-  const { selectedCategory, setSelectedCategory } = props;
-  const cartItems = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
-  // const { data: categoriesList } = useApi({
-  //   url: "https://fakestoreapi.com/products/categories",
-  // });
-  const categories = ["home", "electronics", "clothing"];
-  // categories.push(...categoriesList);
-  const selectedItemClass = "header-item header-item-selected";
-  const totalCartItems = cartItems.reduce((acc, item) => {
-    return acc + item.quantity;
-  }, 0);
-
-  const handleSelectedCategory = (category) => {
-    setSelectedCategory(category);
-  };
-
-  const handleClearCart = (event) => {
-    dispatch(clearCartRedux());
-    event.stopPropagation();
-  };
-
+const Header = ({ isLoggedIn, handleLogin, handleLogout }) => {
   return (
-    <div className="header-container">
-      <div className="header-items">
-        {categories.map((category) => {
-          return (
-            <Link
-              to={category === "home" ? "" : `category/${category}`}
-              key={category}
-              className={
-                selectedCategory === category
-                  ? selectedItemClass
-                  : "header-item"
-              }
-              onClick={() => handleSelectedCategory(category)}
-            >
-              {category}
-            </Link>
-          );
-        })}
-        <Link
-          to={"signup"}
-          className={
-            selectedCategory === "signup" ? selectedItemClass : "header-item"
-          }
-          onClick={() => handleSelectedCategory("signup")}
-        >
-          Sign up
-        </Link>
-        <Link
-          to={"login"}
-          className={
-            selectedCategory === "login" ? selectedItemClass : "header-item"
-          }
-          onClick={() => handleSelectedCategory("login")}
-        >
-          Sign in
-        </Link>
-        <Link
-          to={"logout"}
-          className={
-            selectedCategory === "logout" ? selectedItemClass : "header-item"
-          }
-          onClick={() => handleSelectedCategory("logout")}
-        >
-          Logout
-        </Link>
+    <div className="header">
+      <div className="logo">
+        <NavLink to="/" key="home" className="nav-link">
+          <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+        </NavLink>
       </div>
-      <div className="cart-container">
-        <i className="fa fa-shopping-cart"></i>
-        {totalCartItems > 0 && (
+      <div className="nav">
+        {isLoggedIn ? (
+          // Display content for logged-in users
           <>
-            <span>{totalCartItems}</span>
-            <div className="clear-cart spacing__left" onClick={handleClearCart}>
-              Clear Cart
-            </div>
+            <NavLink
+              to="/category/electronics"
+              key="electronics"
+              className="nav-link"
+            >
+              Electronics
+            </NavLink>
+            <NavLink
+              to="/category/clothing"
+              key="clothing"
+              className="nav-link"
+            >
+              Clothing
+            </NavLink>
+            <NavLink to="/cart" key="cart" className="nav-link">
+              Cart
+            </NavLink>
+            <NavLink to="/logout" key="logout" className="nav-link">
+              Logout
+            </NavLink>
+          </>
+        ) : (
+          // Display content for non-logged-in users
+          <>
+            <NavLink to="signup" className="nav-link">
+              Sign up
+            </NavLink>
+            <NavLink to="login" className="nav-link">
+              Sign in
+            </NavLink>
           </>
         )}
       </div>

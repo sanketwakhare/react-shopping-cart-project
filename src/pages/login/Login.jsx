@@ -3,7 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import UrlConfig from "../../utils/UrlConfig";
 import "./login.scss";
 
-function Login() {
+function Login(props) {
+  const { handleSetLogin } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -42,6 +43,7 @@ function Login() {
         setPassword("");
         const token = data?.token;
         localStorage.setItem("token", token);
+        handleSetLogin(true);
 
         navigate("/");
       }
