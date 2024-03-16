@@ -20,11 +20,17 @@ const Header = ({ isLoggedIn, handleLogin, handleLogout }) => {
         >
           Electronics
         </NavLink>
-        <NavLink to="/category/clothing" key="clothing" className="nav-link">
-          Clothing
+        <NavLink
+          to="/category/men's clothing"
+          key="men's clothing"
+          className="nav-link"
+        >
+          Men's Clothing
         </NavLink>
       </div>
-      <Search />
+      <div>
+        <Search />
+      </div>
       <div className="nav">
         {isLoggedIn ? (
           // Display content for logged-in users

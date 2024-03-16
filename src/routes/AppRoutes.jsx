@@ -23,7 +23,7 @@ const AppRoutes = (props) => {
         <Route path="search" element={<ProductListSearchPage />}></Route>
         <Route
           path="category/:categoryId"
-          element={<ProductList selectedCategory={selectedCategory} />}
+          element={<ProductListSearchPage />}
         ></Route>
         <Route path="products/:productId" element={<ProductDetails />}></Route>
         <Route path="/signup" element={<Signup />}></Route>

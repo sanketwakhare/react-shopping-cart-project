@@ -3,14 +3,24 @@ import Product from "./Product";
 import ProductListLoader from "./ProductListLoader";
 
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router";
+import { useLocation, useParams } from "react-router";
 import { searchProducts } from "../../store/product-list";
 import NoItemsOverlay from "../NoItemsOverlay/NoItemsOverlay";
 import "./product-list.scss";
 
-const ProductListSearchPage = (props) => {
+const ProductListSearchPage = () => {
+  // read url params
+  const params = useParams();
+  let categoryFilter = null;
+  if (params?.categoryId) {
+    categoryFilter = {
+      category: params.categoryId ?? "",
+    };
+  }
+
+  // read location state
   const location = useLocation();
-  const { searchString } = location?.state;
+  const { searchString = "" } = location?.state ?? {};
 
   const dispatch = useDispatch();
   const { loading, loadError, data } = useSelector(
@@ -18,11 +28,13 @@ const ProductListSearchPage = (props) => {
   );
 
   useEffect(() => {
-    const filters = {
+    let filters = { ...categoryFilter };
+    const searchParams = {
       freeTextPhrase: searchString,
+      filter: filters,
     };
-    dispatch(searchProducts(filters));
-  }, [searchString]);
+    dispatch(searchProducts(searchParams));
+  }, [searchString, location]);
 
   if (loading === true) return <ProductListLoader cardCount={12} />;
 

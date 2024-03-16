@@ -1,3 +1,4 @@
+import _ from "underscore";
 import UrlConfig from "../utils/UrlConfig";
 
 const initialState = {
@@ -54,13 +55,28 @@ export const loadProducts = (category) => {
   };
 };
 
-export const searchProducts = (filters) => {
-  if (!filters) return;
+export const searchProducts = (searchParams) => {
+  if (!searchParams) return;
 
-  const _filters = JSON.stringify(filters);
+  const { filter, freeTextPhrase } = searchParams;
+  const filterString = !_.isEmpty(filter) ? JSON.stringify(filter) : "";
+  const params = [
+    { name: "filter", value: filterString },
+    { name: "freeTextPhrase", value: freeTextPhrase },
+  ];
+
+  const paramStringArray = [];
+  params.forEach((param) => {
+    if (!_.isEmpty(param.value)) {
+      paramStringArray.push(`${param.name}=${param.value}`);
+    }
+  });
+
+  const paramsString = paramStringArray.join("&");
+
   return (dispatch) => {
     dispatch(initProductList());
-    const url = `${UrlConfig.SEARCH_PRODUCTS_URL}?filter=${_filters}`;
+    const url = `${UrlConfig.SEARCH_PRODUCTS_URL}?${paramsString}`;
     fetch(url, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
