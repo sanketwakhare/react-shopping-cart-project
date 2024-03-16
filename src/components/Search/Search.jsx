@@ -9,14 +9,13 @@ const Search = () => {
     event.preventDefault();
     const searchString = event?.target[0]?.value;
     if (!searchString) return;
-    console.log("search clicked");
     navigate("search", { state: { searchString } });
   };
 
   return (
     <form onSubmit={handleSubmit} className="search-container">
       <input type="text" name="global-search" placeholder="search products" />
-      <input type="submit" value="Search" />
+      <input type="submit" value="Search"></input>
     </form>
   );
 };
