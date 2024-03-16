@@ -54,13 +54,13 @@ export const loadProducts = (category) => {
   };
 };
 
-export const searchProducts = (searchString) => {
-  if (!searchString) return;
+export const searchProducts = (filters) => {
+  if (!filters) return;
 
-  const filters = JSON.stringify({ freeTextPhrase: searchString });
+  const _filters = JSON.stringify(filters);
   return (dispatch) => {
     dispatch(initProductList());
-    const url = `${UrlConfig.SEARCH_PRODUCTS_URL}?filter=${filters}`;
+    const url = `${UrlConfig.SEARCH_PRODUCTS_URL}?filter=${_filters}`;
     fetch(url, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),

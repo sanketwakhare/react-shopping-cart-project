@@ -18,7 +18,10 @@ const ProductListSearchPage = (props) => {
   );
 
   useEffect(() => {
-    dispatch(searchProducts(searchString));
+    const filters = {
+      freeTextPhrase: searchString,
+    };
+    dispatch(searchProducts(filters));
   }, [searchString]);
 
   if (loading === true) return <ProductListLoader cardCount={12} />;
