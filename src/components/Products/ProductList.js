@@ -18,12 +18,7 @@ const ProductList = (props) => {
     dispatch(loadProducts(selectedCategory));
   }, [selectedCategory]);
 
-  if (loading === true)
-    return (
-      <div className="center">
-        <ProductListLoader cardCount={6} />
-      </div>
-    );
+  if (loading === true) return <ProductListLoader cardCount={12} />;
 
   if (loadError === true) {
     return <div className="no-items-overlay">Oops. Something went wrong</div>;
