@@ -29,7 +29,7 @@ const accountDropdownInfo = {
     { title: "Orders", to: "/orders" },
     { title: "Sign out", to: "/logout" },
   ],
-  startFrom: "right",
+  startFrom: "left",
 };
 
 const Header = ({ isLoggedIn, handleLogin, handleLogout }) => {
@@ -50,10 +50,10 @@ const Header = ({ isLoggedIn, handleLogin, handleLogout }) => {
         {isLoggedIn ? (
           // Display content for logged-in users
           <>
+            <DropdownMenu info={accountDropdownInfo} />
             <NavLink to="/cart" key="cart" className="nav-link">
               Cart
             </NavLink>
-            <DropdownMenu info={accountDropdownInfo} />
           </>
         ) : (
           // Display content for non-logged-in users
