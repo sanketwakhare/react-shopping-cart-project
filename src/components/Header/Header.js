@@ -1,33 +1,36 @@
 import React from "react";
 
 import { NavLink } from "react-router-dom";
+import Search from "../Search/Search";
 import "./header.scss";
 
 const Header = ({ isLoggedIn, handleLogin, handleLogout }) => {
   return (
     <div className="header">
-      <div className="logo">
-        <NavLink to="/" key="home" className="nav-link">
-          <i className="fa fa-shopping-bag" aria-hidden="true"></i>
+      <div className="nav">
+        <div className="logo">
+          <NavLink to="/" key="home" className="nav-link">
+            <i className="fa fa-shopping-bag" aria-hidden="true"></i>
+          </NavLink>
+        </div>
+        <NavLink
+          to="/category/electronics"
+          key="electronics"
+          className="nav-link"
+        >
+          Electronics
+        </NavLink>
+        <NavLink to="/category/clothing" key="clothing" className="nav-link">
+          Clothing
         </NavLink>
       </div>
+      <Search />
       <div className="nav">
         {isLoggedIn ? (
           // Display content for logged-in users
           <>
-            <NavLink
-              to="/category/electronics"
-              key="electronics"
-              className="nav-link"
-            >
-              Electronics
-            </NavLink>
-            <NavLink
-              to="/category/clothing"
-              key="clothing"
-              className="nav-link"
-            >
-              Clothing
+            <NavLink to="/orders" key="orders" className="nav-link">
+              Orders
             </NavLink>
             <NavLink to="/cart" key="cart" className="nav-link">
               Cart
