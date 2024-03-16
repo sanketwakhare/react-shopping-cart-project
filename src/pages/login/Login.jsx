@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import UrlConfig from "../../utils/UrlConfig";
-import "./login.scss";
 
 function Login(props) {
   const { handleSetLogin } = props;
@@ -56,10 +55,10 @@ function Login(props) {
   };
   const signInLabel = loading ? "Signing in..." : "Sign in";
   return (
-    <div className="sign-in-screen">
+    <div className="form-screen">
       <div className="container">
         <div className="innerContainer">
-          <div className="sign-in-header">
+          <div className="form-header">
             <p>Continue Shopping</p>
             <label className="centered-text">
               Enjoy a personalized shopping experience with every sign-in.
@@ -86,7 +85,7 @@ function Login(props) {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <div className="sign-in-actions-container">
+            <div className="form-actions-container">
               <input type="submit" value={signInLabel} />
               <Link to="/forgot-password" className="link">
                 <span>Forgot password?</span>
@@ -100,7 +99,7 @@ function Login(props) {
               <span>Sign up</span>
             </Link>
           </span>
-          <div className={errMsg ? "errContainer" : ""}>{errMsg}</div>
+          <div className={errMsg ? "error-container" : ""}>{errMsg}</div>
         </div>
       </div>
     </div>

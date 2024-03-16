@@ -1,11 +1,13 @@
-.sign-up-screen {
+.form-screen {
   display: grid;
   place-items: center;
   width: 400px;
+  margin-top: 2rem;
 
   input[type="text"],
   input[type="email"],
   input[type="password"],
+  input[type="number"],
   select,
   textarea {
     width: 100%;
@@ -46,6 +48,7 @@
       padding: 20px;
       height: fit-content;
       border: 1px solid #ddd;
+      box-shadow: 0 4px 8px #0000001a;
 
       form {
         margin: 0;
@@ -63,7 +66,7 @@
         font-size: 14px;
       }
 
-      .sign-up-header {
+      .form-header {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -76,33 +79,15 @@
           font-size: 14px;
           color: #1d3557;
         }
+        .strong {
+          font-weight: 600;
+        }
       }
 
-      .sign-up-actions-container {
+      .form-actions-container {
         display: flex;
         gap: 20px;
         align-items: center;
-      }
-
-      .errContainer {
-        margin-top: 1rem;
-        border-radius: 5px;
-        padding: 20px;
-        height: fit-content;
-        background-color: #fcdede;
-        border: 1px solid #fcdede;
-        color: rgb(222, 9, 9);
-      }
-
-      .successContainer {
-        margin-top: 5px;
-        border-radius: 5px;
-        padding: 20px;
-        height: fit-content;
-        /* flex-grow: 1; */
-        background-color: #defce3;
-        border: 1px solid #defce3;
-        color: rgb(12, 116, 12);
       }
     }
   }

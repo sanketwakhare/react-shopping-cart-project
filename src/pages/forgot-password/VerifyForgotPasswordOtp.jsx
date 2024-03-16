@@ -59,10 +59,10 @@ const VerifyForgotPasswordOtp = () => {
   const verifyOtpBtnLabel = loading ? "Verifying OTP..." : "Verify OTP";
 
   return (
-    <div className="sign-in-screen">
+    <div className="form-screen">
       <div className="container">
         <div className="innerContainer">
-          <div className="sign-in-header">
+          <div className="form-header">
             <p>Verification required</p>
             <label>
               To continue, complete this verification step. We've sent an OTP to
@@ -83,7 +83,7 @@ const VerifyForgotPasswordOtp = () => {
               maxLength={6}
               onChange={(e) => setOtp(e.target.value)}
             />
-            <div className="sign-in-actions-container">
+            <div className="form-actions-container">
               <input type="submit" value={verifyOtpBtnLabel} />
               <span>
                 <label>Back to </label>
@@ -93,8 +93,8 @@ const VerifyForgotPasswordOtp = () => {
               </span>
             </div>
           </form>
-          <div className={errMsg ? "errContainer" : ""}>{errMsg}</div>
-          {successMsg && <div className="successContainer">OTP verified</div>}
+          <div className={errMsg ? "error-container" : ""}>{errMsg}</div>
+          {successMsg && <div className="success-container">OTP verified</div>}
         </div>
       </div>
     </div>

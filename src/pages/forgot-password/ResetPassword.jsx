@@ -67,10 +67,10 @@ const ResetPassword = (props) => {
     : "Reset Password";
 
   return (
-    <div className="sign-in-screen">
+    <div className="form-screen">
       <div className="container">
         <div className="innerContainer">
-          <div className="sign-in-header">
+          <div className="form-header">
             <p>Create new password</p>
             <label>We'll ask for this password whenever you sign in.</label>
           </div>
@@ -95,7 +95,7 @@ const ResetPassword = (props) => {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
-            <div className="sign-in-actions-container">
+            <div className="form-actions-container">
               <input type="submit" value={resetPasswordBtnLabel} />
               <span>
                 <label>Back to </label>
@@ -105,9 +105,11 @@ const ResetPassword = (props) => {
               </span>
             </div>
           </form>
-          <div className={errMsg ? "errContainer" : ""}>{errMsg}</div>
+          <div className={errMsg ? "error-container" : ""}>{errMsg}</div>
           {successMsg && (
-            <div className="successContainer">Password reset successfully.</div>
+            <div className="success-container">
+              Password reset successfully.
+            </div>
           )}
         </div>
       </div>

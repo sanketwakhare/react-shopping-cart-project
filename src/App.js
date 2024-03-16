@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "./style.scss";
+import "./styles/form.scss";
+import "./styles/style.scss";
 
 import Header from "./components/Header/Header";
 

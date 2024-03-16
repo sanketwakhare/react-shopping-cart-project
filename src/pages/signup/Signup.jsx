@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import UrlConfig from "../../utils/UrlConfig";
-import "./signup.scss";
 
 function Signup() {
   const [email, setEmail] = useState("");
@@ -67,10 +66,10 @@ function Signup() {
 
   const signUpLabel = loading ? "Signing up..." : "Sign up";
   return (
-    <div className="sign-up-screen">
+    <div className="form-screen">
       <div className="container">
         <div className="innerContainer">
-          <div className="sign-up-header">
+          <div className="form-header">
             <p>Create Account</p>
             <label className="centered-text">
               Join now and elevate your shopping experience.
@@ -107,7 +106,7 @@ function Signup() {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
-            <div className="sign-up-actions-container">
+            <div className="form-actions-container">
               <input type="submit" value={signUpLabel} />
               <span>
                 <label>Already have an account? </label>
@@ -117,8 +116,8 @@ function Signup() {
               </span>
             </div>
           </form>
-          <div className={errMsg ? "errContainer" : ""}>{errMsg}</div>
-          <div className={successMsg ? "successContainer" : ""}>
+          <div className={errMsg ? "error-container" : ""}>{errMsg}</div>
+          <div className={successMsg ? "success-container" : ""}>
             {successMsg}
           </div>
         </div>

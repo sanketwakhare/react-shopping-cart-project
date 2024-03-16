@@ -50,10 +50,10 @@ const ForgotPassword = () => {
   const sendOtpBtnLabel = loading ? "Sending OTP..." : "Send OTP";
 
   return (
-    <div className="sign-in-screen">
+    <div className="form-screen">
       <div className="container">
         <div className="innerContainer">
-          <div className="sign-in-header">
+          <div className="form-header">
             <p>Password assistance</p>
             <label>Enter the email address associated with your account.</label>
           </div>
@@ -68,7 +68,7 @@ const ForgotPassword = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <div className="sign-in-actions-container">
+            <div className="form-actions-container">
               <input type="submit" value={sendOtpBtnLabel} />
               <span>
                 <label>Back to </label>
@@ -78,7 +78,7 @@ const ForgotPassword = () => {
               </span>
             </div>
           </form>
-          <div className={errMsg ? "errContainer" : ""}>{errMsg}</div>
+          <div className={errMsg ? "error-container" : ""}>{errMsg}</div>
         </div>
       </div>
     </div>
