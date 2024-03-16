@@ -1,6 +1,7 @@
 import React from "react";
 
 import { NavLink } from "react-router-dom";
+import DropdownMenu from "../../ui-components/DropdownMenu/DropdownMenu";
 import Search from "../Search/Search";
 import "./header.scss";
 
@@ -27,6 +28,7 @@ const Header = ({ isLoggedIn, handleLogin, handleLogout }) => {
         >
           Men's Clothing
         </NavLink>
+        <DropdownMenu />
       </div>
       <div>
         <Search />
