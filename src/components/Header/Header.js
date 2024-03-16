@@ -5,6 +5,33 @@ import DropdownMenu from "../../ui-components/DropdownMenu/DropdownMenu";
 import Search from "../Search/Search";
 import "./header.scss";
 
+// categories menu configuration
+const categoriesDropdownInfo = {
+  mainMenu: {
+    title: "Categories",
+  },
+  menuItems: [
+    { title: "Electronics", to: "/category/electronics" },
+    { title: "Men's Clothing", to: "/category/men's clothing" },
+    { title: "Women's Clothing", to: "/category/women's clothing" },
+    { title: "Jewelery", to: "/category/jewelery" },
+  ],
+  startFrom: "left",
+};
+
+// account menu configuration
+const accountDropdownInfo = {
+  mainMenu: {
+    title: "Account",
+  },
+  menuItems: [
+    { title: "Profile", to: "/profile" },
+    { title: "Orders", to: "/orders" },
+    { title: "Sign out", to: "/logout" },
+  ],
+  startFrom: "right",
+};
+
 const Header = ({ isLoggedIn, handleLogin, handleLogout }) => {
   return (
     <div className="header">
@@ -14,21 +41,7 @@ const Header = ({ isLoggedIn, handleLogin, handleLogout }) => {
             <i className="fa fa-shopping-bag" aria-hidden="true"></i>
           </NavLink>
         </div>
-        <NavLink
-          to="/category/electronics"
-          key="electronics"
-          className="nav-link"
-        >
-          Electronics
-        </NavLink>
-        <NavLink
-          to="/category/men's clothing"
-          key="men's clothing"
-          className="nav-link"
-        >
-          Men's Clothing
-        </NavLink>
-        <DropdownMenu />
+        <DropdownMenu info={categoriesDropdownInfo} />
       </div>
       <div>
         <Search />
@@ -37,15 +50,10 @@ const Header = ({ isLoggedIn, handleLogin, handleLogout }) => {
         {isLoggedIn ? (
           // Display content for logged-in users
           <>
-            <NavLink to="/orders" key="orders" className="nav-link">
-              Orders
-            </NavLink>
             <NavLink to="/cart" key="cart" className="nav-link">
               Cart
             </NavLink>
-            <NavLink to="/logout" key="logout" className="nav-link">
-              Logout
-            </NavLink>
+            <DropdownMenu info={accountDropdownInfo} />
           </>
         ) : (
           // Display content for non-logged-in users

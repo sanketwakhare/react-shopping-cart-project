@@ -1,33 +1,46 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./dropdown-menu.scss";
 
-const DropdownMenu = () => {
+const DropdownMenu = ({ info }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (!event.target.closest(".dropdown")) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("click", handleOutsideClick);
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, []);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
+  const menuItems = info?.menuItems.map((category, index) => (
+    <Link key={index} to={category.to} className="dropdown-item">
+      {category.title}
+    </Link>
+  ));
+
+  const dropdownMenuClasses = ["dropdown-menu"];
+  const startFromClass =
+    info?.startFrom === "left" ? "left-started" : "right-started";
+  dropdownMenuClasses.push(startFromClass);
+  const dropdownMenuClassNames = dropdownMenuClasses.join(" ");
+
   return (
     <div className={`dropdown ${isOpen ? "open" : ""}`}>
       <div onClick={toggleMenu} className="dropdown-toggle">
-        Categories
+        {info?.mainMenu?.title}
       </div>
       {isOpen && (
-        <div className="dropdown-menu" onClick={toggleMenu}>
-          <Link to="/category/electronics" className="dropdown-item">
-            Electronics
-          </Link>
-          <Link to="/category/men's clothing" className="dropdown-item">
-            Men's Clothing
-          </Link>
-          <Link to="/category/women's clothing" className="dropdown-item">
-            Women's Clothing
-          </Link>
-          <Link to="/category/jewelery" className="dropdown-item">
-            Jewelery
-          </Link>
+        <div className={dropdownMenuClassNames} onClick={toggleMenu}>
+          {menuItems}
         </div>
       )}
     </div>
