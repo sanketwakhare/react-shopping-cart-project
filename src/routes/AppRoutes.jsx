@@ -1,7 +1,8 @@
 import { Route, Routes } from "react-router";
-import NoItemsOverlay from "../components/NoItemsOverlay/NoItemsOverlay";
+import PageNotFound from "../components/PageNotFound/PageNotFound";
 import ProductDetails from "../components/Products/ProductDetails/ProductDetails";
 import ProductList from "../components/Products/ProductList";
+import ProductListSearchPage from "../components/Products/ProductListSearchPage";
 import ForgotPassword from "../pages/forgot-password/ForgotPassword";
 import ResetPassword from "../pages/forgot-password/ResetPassword";
 import VerifyForgotPasswordOtp from "../pages/forgot-password/VerifyForgotPasswordOtp";
@@ -19,6 +20,7 @@ const AppRoutes = (props) => {
           path=""
           element={<ProductList selectedCategory="home" />}
         ></Route>
+        <Route path="search" element={<ProductListSearchPage />}></Route>
         <Route
           path="category/:categoryId"
           element={<ProductList selectedCategory={selectedCategory} />}
@@ -39,7 +41,7 @@ const AppRoutes = (props) => {
           element={<VerifyForgotPasswordOtp />}
         ></Route>
         <Route path="/reset-password" element={<ResetPassword />}></Route>
-        <Route path="*" element={<NoItemsOverlay />}></Route>
+        <Route path="*" element={<PageNotFound />}></Route>
       </Routes>
     </div>
   );

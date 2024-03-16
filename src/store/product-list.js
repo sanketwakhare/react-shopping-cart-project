@@ -54,6 +54,28 @@ export const loadProducts = (category) => {
   };
 };
 
+export const searchProducts = (searchString) => {
+  if (!searchString) return;
+
+  const filters = JSON.stringify({ freeTextPhrase: searchString });
+  return (dispatch) => {
+    dispatch(initProductList());
+    const url = `${UrlConfig.SEARCH_PRODUCTS_URL}?filter=${filters}`;
+    fetch(url, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch(successProductList(data.data));
+      })
+      .catch((err) => {
+        dispatch(errorProductList(err));
+      });
+  };
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case PRODUCT_LIST_INIT: {
