@@ -34,15 +34,20 @@ const DropdownMenu = ({ info }) => {
   const dropdownMenuClassNames = dropdownMenuClasses.join(" ");
 
   return (
-    <div className={`dropdown ${isOpen ? "open" : ""}`}>
-      <div onClick={toggleMenu} className="dropdown-toggle">
-        {info?.mainMenu?.title}
-      </div>
-      {isOpen && (
-        <div className={dropdownMenuClassNames} onClick={toggleMenu}>
-          {menuItems}
+    <div className="dropdown-container">
+      <div className={`dropdown ${isOpen ? "open" : ""}`}>
+        <div onClick={toggleMenu} className="dropdown-toggle">
+          {info?.mainMenu?.title}
         </div>
-      )}
+        {isOpen && (
+          <>
+            <div className="backdrop" onClick={toggleMenu}></div>
+            <div className={dropdownMenuClassNames} onClick={toggleMenu}>
+              {menuItems}
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 };
