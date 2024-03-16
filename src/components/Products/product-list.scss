@@ -1,9 +1,8 @@
 .products {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  column-gap: 1rem;
-  row-gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+  width: 100%;
 
   a {
     text-decoration: none;
@@ -11,7 +10,6 @@
 }
 
 .product {
-  width: 220px;
   border: 1px solid #e2e2e2;
   border-radius: 4px;
   display: flex;
@@ -19,6 +17,7 @@
   padding: 1rem;
   justify-content: space-between;
   row-gap: 10px;
+  align-items: center;
 
   a {
     cursor: pointer;
@@ -36,16 +35,19 @@
     row-gap: 10px;
     flex-wrap: nowrap;
     align-items: center;
-
-    height: 150px;
-    width: 220px;
-    justify-content: flex-end;
+    height: 5rem;
+    width: 100%;
+    justify-content: space-between;
 
     .product-title {
       color: #635c5c;
-      display: flex;
-      justify-content: center;
       font-weight: bold;
+      width: 100%;
+      cursor: default;
+    }
+
+    .product-title:hover .tooltip-text {
+      display: block;
     }
 
     .product-price {

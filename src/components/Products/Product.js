@@ -12,7 +12,10 @@ const Product = (props) => {
         <img src={product.image}></img>
       </Link>
       <div className="product-info">
-        <div className="product-title">{product.title}</div>
+        <div className="product-title ellipsis-2-lines">
+          {product.title}
+          <span className="tooltip-text">{product.title}</span>
+        </div>
         <div className="product-actions">
           <div className="product-price">₹ {product.price}</div>
           <AddToCart product={product} />
