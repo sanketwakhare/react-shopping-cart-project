@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UrlConfig from "../../utils/UrlConfig";
-import "./logout.scss";
 
 const Logout = (props) => {
   const navigate = useNavigate();
