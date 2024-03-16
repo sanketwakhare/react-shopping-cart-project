@@ -33,13 +33,10 @@ const errorProductList = (payload) => {
   };
 };
 
-export const loadProducts = (category) => {
+export const loadProducts = () => {
   return (dispatch) => {
     dispatch(initProductList());
-    const allProductsApiURL = UrlConfig.ALL_PRODUCTS_URL;
-    const categoryWiseProductsApiURL = `${UrlConfig.SEARCH_PRODUCTS_URL}?filter={"category": "${category}"}`;
-    const url =
-      category === "home" ? allProductsApiURL : categoryWiseProductsApiURL;
+    const url = UrlConfig.ALL_PRODUCTS_URL;
     fetch(url, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),

@@ -8,15 +8,14 @@ import NoItemsOverlay from "../NoItemsOverlay/NoItemsOverlay";
 import "./product-list.scss";
 
 const ProductList = (props) => {
-  const { selectedCategory } = props;
   const dispatch = useDispatch();
   const { loading, loadError, data } = useSelector(
     (state) => state.productList
   );
 
   useEffect(() => {
-    dispatch(loadProducts(selectedCategory));
-  }, [selectedCategory]);
+    dispatch(loadProducts());
+  }, []);
 
   if (loading === true) return <ProductListLoader cardCount={12} />;
 

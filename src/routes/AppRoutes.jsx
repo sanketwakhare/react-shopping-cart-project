@@ -11,15 +11,12 @@ import Logout from "../pages/logout/Logout";
 import Signup from "../pages/signup/Signup";
 
 const AppRoutes = (props) => {
-  const { selectedCategory, handleSetLogin } = props;
+  const { handleSetLogin } = props;
 
   return (
     <div className="main-container">
       <Routes>
-        <Route
-          path=""
-          element={<ProductList selectedCategory="home" />}
-        ></Route>
+        <Route path="" element={<ProductList />}></Route>
         <Route path="search" element={<ProductListSearchPage />}></Route>
         <Route
           path="category/:categoryId"
