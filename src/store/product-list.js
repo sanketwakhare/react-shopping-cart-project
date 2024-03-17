@@ -55,20 +55,41 @@ export const loadProducts = () => {
 export const searchProducts = (searchParams) => {
   if (!searchParams) return;
 
-  const { filter, freeTextPhrase } = searchParams;
+  const { filter, freeTextPhrase, select, page, limit, sort, order } =
+    searchParams;
+
+  // convert filter object to string
   const filterString = !_.isEmpty(filter) ? JSON.stringify(filter) : "";
+
+  // build request params
   const params = [
     { name: "filter", value: filterString },
     { name: "freeTextPhrase", value: freeTextPhrase },
+    { name: "select", value: (select ?? []).join(" ") },
+    { name: "page", value: page ?? 1 },
+    { name: "limit", value: limit ?? 10 },
+    { name: "sort", value: sort },
+    { name: "order", value: order },
   ];
-
   const paramStringArray = [];
   params.forEach((param) => {
-    if (!_.isEmpty(param.value)) {
+    if (
+      _.isArray(param.value) ||
+      _.isObject(param.value) ||
+      !_.isEmpty(param.value)
+    ) {
+      paramStringArray.push(`${param.name}=${param.value}`);
+    } else if (
+      !_.isNull(param.value) &&
+      !_.isUndefined(param.value) &&
+      param.value !== ""
+    ) {
       paramStringArray.push(`${param.name}=${param.value}`);
     }
+    // if (!_.isEmpty(param.value) || !_.isUndefined(param.value)) {
+    //   paramStringArray.push(`${param.name}=${param.value}`);
+    // }
   });
-
   const paramsString = paramStringArray.join("&");
 
   return (dispatch) => {

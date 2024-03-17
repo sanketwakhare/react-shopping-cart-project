@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router";
 import PageNotFound from "../components/PageNotFound/PageNotFound";
 import ProductDetails from "../components/Products/ProductDetails/ProductDetails";
-import ProductList from "../components/Products/ProductList";
 import ProductListSearchPage from "../components/Products/ProductListSearchPage";
 import ForgotPassword from "../pages/forgot-password/ForgotPassword";
 import ResetPassword from "../pages/forgot-password/ResetPassword";
@@ -16,7 +15,7 @@ const AppRoutes = (props) => {
   return (
     <div className="main-container">
       <Routes>
-        <Route path="" element={<ProductList />}></Route>
+        <Route path="" element={<ProductListSearchPage />}></Route>
         <Route path="search" element={<ProductListSearchPage />}></Route>
         <Route
           path="category/:categoryId"
