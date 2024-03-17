@@ -8,7 +8,18 @@ import { searchProducts } from "../../store/product-list";
 import NoItemsOverlay from "../NoItemsOverlay/NoItemsOverlay";
 import "./product-list.scss";
 
-const ProductListSearchPage = () => {
+const selectFields = [
+  "_id",
+  "title",
+  "price",
+  "description",
+  "category",
+  "image",
+];
+
+const ProductListSearchPage = (props) => {
+  const { page, limit, sort, order } = props;
+
   // read url params
   const params = useParams();
   let categoryFilter = null;
@@ -32,6 +43,11 @@ const ProductListSearchPage = () => {
     const searchParams = {
       freeTextPhrase: searchString,
       filter: filters,
+      select: selectFields,
+      page,
+      limit,
+      sort,
+      order,
     };
     dispatch(searchProducts(searchParams));
   }, [searchString, location]);

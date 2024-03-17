@@ -7,7 +7,7 @@ const Search = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const searchString = event?.target[0]?.value;
+    const searchString = event?.target[0]?.value?.trim();
     if (!searchString) return;
     navigate("search", { state: { searchString } });
   };
