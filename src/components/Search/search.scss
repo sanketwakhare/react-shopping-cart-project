@@ -26,4 +26,22 @@
     border-radius: 20px;
     cursor: pointer;
   }
+
+  .search-input {
+    padding-right: 3rem !important;
+  }
+
+  .clear-search {
+    all: unset;
+    position: relative;
+    margin-left: -2rem;
+    margin-right: 2rem;
+    border-radius: 50%;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  .show-clear-search {
+    color: grey;
+  }
 }
