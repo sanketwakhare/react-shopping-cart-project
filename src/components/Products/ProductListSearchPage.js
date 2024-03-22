@@ -19,7 +19,7 @@ const selectFields = [
 
 const defaultSearchOptions = {
   page: 1,
-  limit: 10,
+  limit: 5,
   sort: undefined,
   order: "asc",
   freeTextPhrase: "",
@@ -95,23 +95,25 @@ const ProductListSearchPage = (props) => {
             return <Product key={product._id} product={product} />;
           })}
       </div>
-      <div className="pagination-controls">
-        <button
-          onClick={() => onPageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </button>
-        <span>
-          {currentPage} / {totalPages}
-        </span>
-        <button
-          onClick={() => onPageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-        >
-          Next
-        </button>
-      </div>
+      {totalPages > 1 && (
+        <div className="pagination-controls">
+          <button
+            onClick={() => onPageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          <span>
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            onClick={() => onPageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        </div>
+      )}
       {prodData?.length === 0 && <NoItemsOverlay />}
     </div>
   );
