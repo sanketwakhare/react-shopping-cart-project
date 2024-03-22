@@ -11,7 +11,7 @@ const ProductListLoader = (props) => {
         <ContentLoader
           speed={1}
           width={220}
-          height={380}
+          height={310}
           viewBox="0 0 220 380"
           backgroundColor="#f3f3f3"
           foregroundColor="#ecebeb"

@@ -82,7 +82,7 @@ const ProductListSearchPage = (props) => {
     dispatch(searchProducts(searchParams));
   }, [location, currentPage]);
 
-  if (loading === true) return <ProductListLoader cardCount={12} />;
+  if (loading === true) return <ProductListLoader cardCount={10} />;
 
   if (loadError === true) {
     return <div className="no-items-overlay">Oops. Something went wrong</div>;
