@@ -5,6 +5,7 @@ import ProductListLoader from "./ProductListLoader";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams } from "react-router";
 import { searchProducts } from "../../store/product-list";
+import Pagination from "../../ui-components/Pagination/Pagination";
 import NoItemsOverlay from "../NoItemsOverlay/NoItemsOverlay";
 import "./product-list.scss";
 
@@ -19,7 +20,7 @@ const selectFields = [
 
 const defaultSearchOptions = {
   page: 1,
-  limit: 5,
+  limit: 10,
   sort: undefined,
   order: "asc",
   freeTextPhrase: "",
@@ -95,25 +96,12 @@ const ProductListSearchPage = (props) => {
             return <Product key={product._id} product={product} />;
           })}
       </div>
-      {totalPages > 1 && (
-        <div className="pagination-controls">
-          <button
-            onClick={() => onPageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
-            Previous
-          </button>
-          <span>
-            Page {currentPage} of {totalPages}
-          </span>
-          <button
-            onClick={() => onPageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
-          >
-            Next
-          </button>
-        </div>
-      )}
+      <Pagination
+        page={currentPage}
+        totalCount={totalCount}
+        limit={currLimit}
+        onPageChangeCb={onPageChange}
+      />
       {prodData?.length === 0 && <NoItemsOverlay />}
     </div>
   );
