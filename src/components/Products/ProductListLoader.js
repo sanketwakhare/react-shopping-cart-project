@@ -32,10 +32,12 @@ const ProductListLoader = (props) => {
   }
 
   return (
-    <div className="products">
-      {productList.map((pItem) => {
-        return pItem;
-      })}
+    <div className="products-container">
+      <div className="products">
+        {productList.map((pItem) => {
+          return pItem;
+        })}
+      </div>
     </div>
   );
 };

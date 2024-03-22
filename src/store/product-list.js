@@ -102,7 +102,7 @@ export const searchProducts = (searchParams) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        dispatch(successProductList(data.data));
+        dispatch(successProductList(data));
       })
       .catch((err) => {
         dispatch(errorProductList(err));
