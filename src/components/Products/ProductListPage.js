@@ -27,7 +27,7 @@ const defaultSearchOptions = {
   filter: undefined,
 };
 
-const ProductListSearchPage = (props) => {
+const ProductListPage = (props) => {
   const {
     page = defaultSearchOptions.page,
     limit = defaultSearchOptions.limit,
@@ -107,4 +107,4 @@ const ProductListSearchPage = (props) => {
   );
 };
 
-export default ProductListSearchPage;
+export default ProductListPage;
