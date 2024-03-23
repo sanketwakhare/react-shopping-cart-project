@@ -1,7 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { isEmpty } from "underscore";
 import AddToCart from "../../components/AddToCart/AddToCart";
+import { removeProductFromCartAction } from "../../store/cart";
 import { formatPrice } from "../../utils/Utils";
 import "./cart-page.scss";
 
@@ -27,6 +29,10 @@ const CartPage = () => {
     return acc;
   }, 0);
 
+  const handleDeleteProductFromCart = (productId) => {
+    dispatch(removeProductFromCartAction(productId));
+  };
+
   return (
     <>
       {!isEmpty(cartItems) && (
@@ -50,6 +56,16 @@ const CartPage = () => {
                       <div className="quantity">
                         <div className="qty-label">Quantity:</div>
                         <AddToCart product={cartItem?.product} />
+                      </div>
+                      <div className="actions">
+                        <Link
+                          className="link"
+                          onClick={() =>
+                            handleDeleteProductFromCart(cartItem?.product?._id)
+                          }
+                        >
+                          Delete
+                        </Link>
                       </div>
                     </div>
                     <div className="item-price-section">
