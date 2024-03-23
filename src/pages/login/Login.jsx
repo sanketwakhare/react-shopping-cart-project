@@ -1,15 +1,16 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { storeAuthUserInfo } from "../../store/auth";
 import UrlConfig from "../../utils/UrlConfig";
 
 function Login(props) {
-  const { handleSetLogin } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [loading, setLoading] = useState(false);
   const [errMsg, setErrMsg] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -43,7 +44,14 @@ function Login(props) {
         setPassword("");
         const token = data?.token;
         localStorage.setItem("token", token);
-        handleSetLogin(true);
+
+        dispatch(
+          storeAuthUserInfo({
+            user: { email: email },
+            token: token,
+            isLoggedIn: true,
+          })
+        );
 
         navigate("/");
       }

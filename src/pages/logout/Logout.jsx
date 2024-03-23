@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { clearAuthUserInfo } from "../../store/auth";
 import UrlConfig from "../../utils/UrlConfig";
 
-const Logout = (props) => {
+const Logout = () => {
   const navigate = useNavigate();
-  const { handleSetLogin } = props;
+  const dispatch = useDispatch();
   const [successMessage, setSuccessMsg] = useState(null);
   const [errMessage, setErrMsg] = useState(null);
 
@@ -25,7 +27,7 @@ const Logout = (props) => {
       } finally {
         // clear token from localStorage
         localStorage.removeItem("token");
-        handleSetLogin(false);
+        dispatch(clearAuthUserInfo());
         navigate("/", { replace: true, state: null });
         window.location.replace("/");
       }

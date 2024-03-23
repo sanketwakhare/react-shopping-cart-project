@@ -44,7 +44,7 @@ const CartPage = () => {
                     <div className="item-details">
                       <div className="title">{cartItem?.product?.title}</div>
                       <div className="note">
-                        <i class="fas fa-truck"></i>
+                        <i className="fas fa-truck"></i>
                         <span>Eligible for FREE Shipping</span>
                       </div>
                       <div className="quantity">
