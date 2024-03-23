@@ -9,7 +9,7 @@ const AddToCart = (props) => {
   const cartItems = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const isProductPresentInCart = cartItems.find(
-    (item) => item.product._id === product._id
+    (item) => item?.product?._id === product?._id
   );
 
   const handleAddToCart = (event) => {
