@@ -36,6 +36,24 @@ button:disabled {
   cursor: not-allowed;
 }
 
+.button-success {
+  background-color: green;
+  color: white;
+
+  &:hover {
+    background-color: #019101;
+  }
+}
+
+.button-alert {
+  background-color: red;
+  color: white;
+
+  &:hover {
+    background-color: #ff4343;
+  }
+}
+
 .main-container {
   display: flex;
   align-items: center;
