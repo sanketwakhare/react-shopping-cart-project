@@ -2,6 +2,7 @@ import React from "react";
 
 import { NavLink } from "react-router-dom";
 import DropdownMenu from "../../ui-components/DropdownMenu/DropdownMenu";
+import CartHeader from "../Cart/CartHeader";
 import Search from "../Search/Search";
 import "./header.scss";
 
@@ -51,8 +52,12 @@ const Header = ({ isLoggedIn, handleLogin, handleLogout }) => {
           // Display content for logged-in users
           <>
             <DropdownMenu info={accountDropdownInfo} />
-            <NavLink to="/cart" key="cart" className="nav-link">
-              Cart
+            <NavLink
+              to="/cart"
+              key="cart"
+              className="nav-link-no-text-decoration"
+            >
+              <CartHeader />
             </NavLink>
           </>
         ) : (

@@ -138,3 +138,16 @@ a:hover {
   border: 1px solid #defce3;
   color: rgb(12, 116, 12);
 }
+
+.badge {
+  background-color: red;
+  color: white;
+  padding: 4px;
+  border-radius: 50%;
+  font-size: 12px;
+  position: relative;
+  bottom: 10px;
+  min-width: 16px;
+  display: flex;
+  justify-content: center;
+}

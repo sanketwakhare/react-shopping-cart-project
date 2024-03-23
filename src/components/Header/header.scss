@@ -7,6 +7,7 @@
   padding: 10px;
   background-color: darkblue;
   color: white;
+  min-height: 40px;
 }
 
 .logo {
@@ -31,6 +32,13 @@
   text-decoration: underline;
 }
 
-// .nav-link:active {
-//   color: red;
-// }
+.nav-link-no-text-decoration {
+  cursor: pointer;
+  padding: 8px;
+  color: white;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
