@@ -1,10 +1,9 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import "./cart-header.scss";
 
 const CartHeader = () => {
   const cartItems = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
 
   return (
     <div className="cart-header-container">

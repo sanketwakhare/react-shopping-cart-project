@@ -1,14 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { formatPrice } from "../../utils/Utils";
 import AddToCart from "../AddToCart/AddToCart";
 
 const Product = (props) => {
   const { product } = props;
-
-  const formattedPrice = new Intl.NumberFormat("en-IN", {
-    currency: "INR",
-  }).format(product?.price);
 
   return (
     <div className="product">
@@ -25,7 +22,7 @@ const Product = (props) => {
         <div className="product-actions">
           <div className="product-price">
             <span className="currency">₹</span>
-            <span className="price-value">{formattedPrice}</span>
+            <span className="price-value">{formatPrice(product?.price)}</span>
           </div>
           <AddToCart product={product} />
         </div>
