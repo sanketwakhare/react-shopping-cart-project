@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { isEmpty } from "underscore";
+import { formatPrice } from "../../utils/Utils";
 import "./cart-page.scss";
 
 const CartPage = () => {
@@ -31,11 +32,27 @@ const CartPage = () => {
               })}
             </div>
             <div className="cart-footer">
-              <div className="label">Subtotal({subtotalCount} items):</div>
-              <div className="subtotal">$ 2343.49</div>
+              <div className="subtotal-container">
+                <div className="label">Subtotal({subtotalCount} items):</div>
+                <div className="subtotal-price">
+                  <span className="currency">₹</span>
+                  <span className="price-value">{formatPrice(14599)}</span>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="payment-options-sidebar">Payment Options</div>
+          <div className="payment-options-sidebar">
+            <div className="subtotal-container">
+              <div className="label">Subtotal({subtotalCount} items):</div>
+              <div className="subtotal-price">
+                <span className="currency">₹</span>
+                <span className="price-value">{formatPrice(14599)}</span>
+              </div>
+            </div>
+            <button type="button" className="button-success proceed-to-buy">
+              Proceed to Buy
+            </button>
+          </div>
         </div>
       )}
       {isEmpty(cartItems) && noItemsInCartMessageTemplate}
