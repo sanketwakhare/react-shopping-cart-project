@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import useApi from "../../../hooks/useApi";
 
 import AddToCart from "../../AddToCart/AddToCart";
-import ProductDetailsLoader from "./ProductDetailsLoader";
+import ProductDetailsLoader from "./ProductDetailsLoader.jsx";
 
 import UrlConfig from "../../../utils/UrlConfig";
 import "./product-details.scss";

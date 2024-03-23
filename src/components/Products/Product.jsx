@@ -17,7 +17,9 @@ const Product = (props) => {
       </Link>
       <div className="product-info">
         <div className="product-title ellipsis-2-lines">
-          <Link to={`/products/${product._id}`}>{product.title}</Link>
+          <Link to={`/products/${product._id}`} className="link">
+            {product.title}
+          </Link>
           <span className="tooltip-text">{product.title}</span>
         </div>
         <div className="product-actions">
