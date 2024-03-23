@@ -10,24 +10,24 @@ const Logout = (props) => {
 
   useEffect(() => {
     const logout = async () => {
-      const response = await fetch(UrlConfig.LOGOUT_URL, {
-        method: "GET",
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setSuccessMsg(data.message);
-        setErrMsg(null);
+      try {
+        const response = await fetch(UrlConfig.LOGOUT_URL, {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setSuccessMsg(data.message);
+          setErrMsg(null);
+        }
+      } finally {
         // clear token from localStorage
         localStorage.removeItem("token");
         handleSetLogin(false);
         navigate("/", { replace: true, state: null });
         window.location.replace("/");
-      } else {
-        setErrMsg("Error logging out");
-        setSuccessMsg(null);
       }
     };
     logout();
