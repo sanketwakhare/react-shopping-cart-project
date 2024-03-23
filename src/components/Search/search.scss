@@ -39,6 +39,12 @@
     border-radius: 50%;
     background-color: transparent;
     cursor: pointer;
+
+    &:active,
+    &:focus,
+    &:hover {
+      background-color: transparent;
+    }
   }
 
   .show-clear-search {
