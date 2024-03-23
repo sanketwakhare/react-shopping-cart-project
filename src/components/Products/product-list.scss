@@ -51,7 +51,7 @@
       justify-content: space-between;
 
       .product-title {
-        font-weight: bold;
+        font-weight: 600;
         width: 100%;
         cursor: default;
       }
@@ -61,10 +61,15 @@
       }
 
       .product-price {
-        color: green;
         display: flex;
         justify-content: center;
-        font-weight: bold;
+        font-weight: 600;
+
+        .price-value {
+          font-size: 1.5rem;
+          padding-left: 1px;
+          margin-top: -3px;
+        }
       }
 
       .product-actions {

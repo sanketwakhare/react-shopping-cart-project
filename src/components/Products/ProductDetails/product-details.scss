@@ -32,7 +32,7 @@
 
       .product-details__title {
         font-weight: 600;
-        font-size: xx-large;
+        font-size: 1.5rem;
       }
 
       .product-details__description {
@@ -48,10 +48,14 @@
       }
 
       .product-details__price {
-        span {
-          font-size: xx-large;
-          color: green;
-          font-weight: bolder;
+        display: flex;
+        justify-content: flex-start;
+        font-weight: 600;
+
+        .price-value {
+          font-size: 1.5rem;
+          padding-left: 1px;
+          margin-top: -3px;
         }
       }
 

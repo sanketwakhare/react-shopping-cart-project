@@ -27,6 +27,10 @@ const ProductDetails = () => {
     return <div className="no-items-overlay">Oops. Something went wrong</div>;
   }
 
+  const formattedPrice = new Intl.NumberFormat("en-IN", {
+    currency: "INR",
+  }).format(product?.price);
+
   return (
     <div className="product-details-container">
       <div className="product-details">
@@ -36,7 +40,9 @@ const ProductDetails = () => {
             <div>{product?.title}</div>
           </div>
           <div className="product-details__price">
-            <span>₹ {product?.price}</span>
+            {/* <span>₹ {product?.price}</span> */}
+            <span className="currency">₹</span>
+            <span className="price-value">{formattedPrice}</span>
           </div>
           <div className="product-details__description">
             <label>Description:</label>
