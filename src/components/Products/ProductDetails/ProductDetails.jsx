@@ -6,6 +6,7 @@ import AddToCart from "../../AddToCart/AddToCart";
 import ProductDetailsLoader from "./ProductDetailsLoader.jsx";
 
 import UrlConfig from "../../../utils/UrlConfig";
+import { formatPrice } from "../../../utils/Utils.js";
 import "./product-details.scss";
 
 const ProductDetails = () => {
@@ -27,10 +28,6 @@ const ProductDetails = () => {
     return <div className="no-items-overlay">Oops. Something went wrong</div>;
   }
 
-  const formattedPrice = new Intl.NumberFormat("en-IN", {
-    currency: "INR",
-  }).format(product?.price);
-
   return (
     <div className="product-details-container">
       <div className="product-details">
@@ -42,7 +39,7 @@ const ProductDetails = () => {
           <div className="product-details__price">
             {/* <span>₹ {product?.price}</span> */}
             <span className="currency">₹</span>
-            <span className="price-value">{formattedPrice}</span>
+            <span className="price-value">{formatPrice(product?.price)}</span>
           </div>
           <div className="product-details__description">
             <label>Description:</label>
