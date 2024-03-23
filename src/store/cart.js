@@ -33,7 +33,7 @@ const reducer = (state = initialState, action) => {
       const product = action.payload;
       let newCartItems = [].concat(state);
       let existingItem = newCartItems.find(
-        (item) => item.product.id === product.id
+        (item) => item.product._id === product._id
       );
       if (existingItem) {
         existingItem.quantity++;
@@ -46,14 +46,14 @@ const reducer = (state = initialState, action) => {
       const product = action.payload;
       let newCartItems = [].concat(state);
       let existingItem = newCartItems.find(
-        (item) => item.product.id === product.id
+        (item) => item.product._id === product._id
       );
       if (existingItem) {
         if (existingItem.quantity > 1) {
           existingItem.quantity--;
         } else {
           newCartItems = newCartItems.filter(
-            (item) => item.product.id !== product.id
+            (item) => item.product._id !== product._id
           );
         }
       }
