@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { isEmpty } from "underscore";
+import AddToCart from "../../components/AddToCart/AddToCart";
 import { formatPrice } from "../../utils/Utils";
 import "./cart-page.scss";
 
@@ -11,7 +12,12 @@ const CartPage = () => {
 
   const noItemsInCartMessageTemplate = <div>No items in cart</div>;
   const subtotalCount = cartItems.reduce((acc, item) => {
-    acc += item.quantity;
+    acc += Number(item?.quantity ?? 0);
+    return acc;
+  }, 0);
+
+  const totalAmount = cartItems.reduce((acc, item) => {
+    acc += +(Number(item?.quantity ?? 0) * Number(item?.product?.price ?? 0));
     return acc;
   }, 0);
 
@@ -20,12 +26,15 @@ const CartPage = () => {
       {!isEmpty(cartItems) && (
         <div className="cart-container">
           <div className="cart-items-container">
-            <div className="cart-header">Shopping Cart</div>
+            <div className="cart-header">
+              <div className="title">Shopping Cart</div>
+              <div className="price-label">Price</div>
+            </div>
             <div className="cart-items">
               {cartItems.map((cartItem) => {
                 return (
-                  <div className="cart-item" key={cartItem?.product._id}>
-                    <img className="image" src={cartItem?.product.image}></img>
+                  <div className="cart-item" key={cartItem?.product?._id}>
+                    <img className="image" src={cartItem?.product?.image}></img>
                     <div className="item-details">
                       <div className="title">{cartItem?.product?.title}</div>
                       <div className="note">
@@ -34,7 +43,17 @@ const CartPage = () => {
                       </div>
                       <div className="quantity">
                         <div className="qty-label">Quantity</div>
-                        <div className="qty-value">{cartItem?.quantity}</div>
+                        <AddToCart product={cartItem?.product} />
+                      </div>
+                    </div>
+                    <div className="item-price-section">
+                      <div className="subtotal-container">
+                        <div className="subtotal-price">
+                          <span className="currency">₹</span>
+                          <span className="price-value">
+                            {formatPrice(cartItem?.product?.price)}
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -46,7 +65,9 @@ const CartPage = () => {
                 <div className="label">Subtotal({subtotalCount} items):</div>
                 <div className="subtotal-price">
                   <span className="currency">₹</span>
-                  <span className="price-value">{formatPrice(14599)}</span>
+                  <span className="price-value">
+                    {formatPrice(totalAmount)}
+                  </span>
                 </div>
               </div>
             </div>
@@ -56,7 +77,7 @@ const CartPage = () => {
               <div className="label">Subtotal({subtotalCount} items):</div>
               <div className="subtotal-price">
                 <span className="currency">₹</span>
-                <span className="price-value">{formatPrice(14599)}</span>
+                <span className="price-value">{formatPrice(totalAmount)}</span>
               </div>
             </div>
             <button type="button" className="button-success proceed-to-buy">
