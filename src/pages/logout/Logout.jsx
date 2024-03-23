@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { clearPersistedState } from "../../store";
 import { clearAuthUserInfo } from "../../store/auth";
+import { clearCartRedux } from "../../store/cart";
 import UrlConfig from "../../utils/UrlConfig";
 
 const Logout = () => {
@@ -27,7 +29,12 @@ const Logout = () => {
       } finally {
         // clear token from localStorage
         localStorage.removeItem("token");
+        // clear cart
+        dispatch(clearCartRedux());
+        // clear user info
         dispatch(clearAuthUserInfo());
+        // clear persisted states
+        clearPersistedState();
         navigate("/", { replace: true, state: null });
         window.location.replace("/");
       }

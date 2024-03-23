@@ -73,6 +73,13 @@ const Header = () => {
             <NavLink to="signup" className="nav-link">
               Sign up
             </NavLink>
+            <NavLink
+              to="/cart"
+              key="cart"
+              className="nav-link-no-text-decoration"
+            >
+              <CartHeader />
+            </NavLink>
           </>
         )}
       </div>

@@ -47,10 +47,11 @@ const reducer = (state = initialState, action) => {
     case CLEAR_AUTH_USER: {
       return {
         ...state,
+        ...initialState,
       };
     }
     default:
-      return { ...state };
+      return state;
   }
 };
 
