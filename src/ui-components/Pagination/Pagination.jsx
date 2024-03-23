@@ -22,6 +22,7 @@ const Pagination = (props) => {
       {totalPages > 1 && (
         <div className="pagination-controls">
           <button
+            className="button-dark"
             onClick={() => onPageChange(currentPage - 1)}
             disabled={currentPage === 1}
           >
@@ -31,6 +32,7 @@ const Pagination = (props) => {
             Page {currentPage} of {totalPages}
           </span>
           <button
+            className="button-dark"
             onClick={() => onPageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
           >
