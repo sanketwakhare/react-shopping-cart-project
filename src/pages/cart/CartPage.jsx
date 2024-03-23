@@ -24,9 +24,19 @@ const CartPage = () => {
             <div className="cart-items">
               {cartItems.map((cartItem) => {
                 return (
-                  <div className="cart-item">
-                    <div className="title">{cartItem?.product?.title}</div>
-                    <div className="title">{cartItem?.quantity}</div>
+                  <div className="cart-item" key={cartItem?.product._id}>
+                    <img className="image" src={cartItem?.product.image}></img>
+                    <div className="item-details">
+                      <div className="title">{cartItem?.product?.title}</div>
+                      <div className="note">
+                        <i class="fas fa-truck"></i>
+                        <span>Eligible for FREE Shipping</span>
+                      </div>
+                      <div className="quantity">
+                        <div className="qty-label">Quantity</div>
+                        <div className="qty-value">{cartItem?.quantity}</div>
+                      </div>
+                    </div>
                   </div>
                 );
               })}
