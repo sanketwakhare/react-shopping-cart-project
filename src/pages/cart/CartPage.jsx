@@ -10,7 +10,13 @@ const CartPage = () => {
   const dispatch = useDispatch();
   console.log(cartItems);
 
-  const noItemsInCartMessageTemplate = <div>No items in cart</div>;
+  const noItemsInCartMessageTemplate = (
+    <div className="cart-container">
+      <div className="no-items-in-cart">
+        Your cart is currently empty. Start shopping now to add items.
+      </div>
+    </div>
+  );
   const subtotalCount = cartItems.reduce((acc, item) => {
     acc += Number(item?.quantity ?? 0);
     return acc;
@@ -42,7 +48,7 @@ const CartPage = () => {
                         <span>Eligible for FREE Shipping</span>
                       </div>
                       <div className="quantity">
-                        <div className="qty-label">Quantity</div>
+                        <div className="qty-label">Quantity:</div>
                         <AddToCart product={cartItem?.product} />
                       </div>
                     </div>
