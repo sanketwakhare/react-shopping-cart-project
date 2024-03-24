@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { isEmpty } from "underscore";
 import AddToCart from "../../components/AddToCart/AddToCart";
 import { removeProductFromCartAction } from "../../store/cart";
@@ -9,8 +9,9 @@ import "./cart-page.scss";
 
 const CartPage = () => {
   const cartItems = useSelector((state) => state.cart);
+  const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  console.log(cartItems);
+  const navigate = useNavigate();
 
   const noItemsInCartMessageTemplate = (
     <div className="cart-container">
@@ -31,6 +32,14 @@ const CartPage = () => {
 
   const handleDeleteProductFromCart = (productId) => {
     dispatch(removeProductFromCartAction(productId));
+  };
+
+  const handleBuyNow = () => {
+    if (!auth?.isLoggerIn) {
+      navigate("/login", { state: { redirectUrl: "/payments-page" } });
+    } else {
+      console.log("user has logged in, moving to payments page");
+    }
   };
 
   return (
@@ -102,7 +111,11 @@ const CartPage = () => {
                 <span className="price-value">{formatPrice(totalAmount)}</span>
               </div>
             </div>
-            <button type="button" className="button-success proceed-to-buy">
+            <button
+              type="button"
+              className="button-success proceed-to-buy"
+              onClick={handleBuyNow}
+            >
               Proceed to Buy
             </button>
           </div>
