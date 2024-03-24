@@ -35,10 +35,10 @@ const CartPage = () => {
   };
 
   const handleBuyNow = () => {
-    if (!auth?.isLoggerIn) {
-      navigate("/login", { state: { redirectUrl: "/payments-page" } });
+    if (!auth?.isLoggedIn) {
+      navigate("/login", { state: { redirectUrl: "/payment" } });
     } else {
-      console.log("user has logged in, moving to payments page");
+      navigate("/payment");
     }
   };
 
