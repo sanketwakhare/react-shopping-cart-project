@@ -53,24 +53,31 @@ const CartPage = () => {
             </div>
             <div className="cart-items">
               {cartItems.map((cartItem) => {
+                const product = cartItem?.product;
                 return (
-                  <div className="cart-item" key={cartItem?.product?._id}>
-                    <img className="image" src={cartItem?.product?.image}></img>
+                  <div className="cart-item" key={product?._id}>
+                    <Link to={`/products/${product._id}`} className="link">
+                      <img className="image" src={product?.image}></img>
+                    </Link>
                     <div className="item-details">
-                      <div className="title">{cartItem?.product?.title}</div>
+                      <div className="title">
+                        <Link to={`/products/${product._id}`} className="link">
+                          {product.title}
+                        </Link>
+                      </div>
                       <div className="note">
                         <i className="fas fa-truck"></i>
                         <span>Eligible for FREE Shipping</span>
                       </div>
                       <div className="quantity">
                         <div className="qty-label">Quantity:</div>
-                        <AddToCart product={cartItem?.product} />
+                        <AddToCart product={product} />
                       </div>
                       <div className="actions">
                         <Link
                           className="link"
                           onClick={() =>
-                            handleDeleteProductFromCart(cartItem?.product?._id)
+                            handleDeleteProductFromCart(product?._id)
                           }
                         >
                           Delete
@@ -82,7 +89,7 @@ const CartPage = () => {
                         <div className="subtotal-price">
                           <span className="currency">₹</span>
                           <span className="price-value">
-                            {formatPrice(cartItem?.product?.price)}
+                            {formatPrice(product?.price)}
                           </span>
                         </div>
                       </div>
