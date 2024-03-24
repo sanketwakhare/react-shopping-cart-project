@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const useApi = (props) => {
   const { url } = props;
@@ -6,13 +7,16 @@ const useApi = (props) => {
   const [loading, setLoading] = useState(false);
   const [loadError, setLoadError] = useState(null);
 
+  const auth = useSelector((state) => state.auth);
+  const { token } = auth;
+
   useEffect(() => {
     setLoading(true);
     setLoadError(null);
 
     fetch(url, {
       headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
+        Authorization: "Bearer " + token,
       },
     })
       .then((res) => res.json())
