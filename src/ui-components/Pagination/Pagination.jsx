@@ -8,8 +8,9 @@ const Pagination = (props) => {
   const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
+    setCurrentPage(page);
     setTotalPages(Math.round(Math.ceil(totalCount / limit)));
-  }, []);
+  }, [page, totalCount]);
 
   // Function to handle page change
   const onPageChange = (newPageNumber) => {

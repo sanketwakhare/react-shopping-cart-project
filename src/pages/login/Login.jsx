@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { storeAuthUserInfo } from "../../store/auth";
+import { storeAuthAction } from "../../store/auth";
 import UrlConfig from "../../utils/UrlConfig";
 
 function Login(props) {
@@ -44,10 +44,9 @@ function Login(props) {
         setEmail("");
         setPassword("");
         const token = data?.token;
-        localStorage.setItem("token", token);
 
         dispatch(
-          storeAuthUserInfo({
+          storeAuthAction({
             user: { email: email },
             token: token,
             isLoggedIn: true,

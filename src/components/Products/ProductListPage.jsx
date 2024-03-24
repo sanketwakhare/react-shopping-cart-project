@@ -2,10 +2,17 @@ import React, { useEffect, useState } from "react";
 import Product from "./Product";
 import ProductListLoader from "./ProductListLoader";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useLocation, useParams } from "react-router";
-import { searchProducts } from "../../store/product-list";
+import _ from "underscore";
+import useApi from "../../hooks/useApi";
+import {
+  errorProductList,
+  initProductList,
+  successProductList,
+} from "../../store/product-list";
 import Pagination from "../../ui-components/Pagination/Pagination";
+import UrlConfig from "../../utils/UrlConfig";
 import NoItemsOverlay from "../NoItemsOverlay/NoItemsOverlay";
 import "./product-list.scss";
 
@@ -36,27 +43,32 @@ const ProductListPage = (props) => {
   } = props;
 
   const [currLimit, setCurrLimit] = useState(limit);
-  const [currentPage, setCurrentPage] = useState(page);
-
+  const [currentPage, setCurrentPage] = useState({
+    page: -1,
+    counter: 0,
+  });
   const dispatch = useDispatch();
   const location = useLocation();
   const params = useParams();
-  const { loading, loadError, data } = useSelector(
-    (state) => state.productList
-  );
+  const { data, loading, loadError, request } = useApi();
   const { data: prodData, totalCount } = data;
-  const totalPages = Math.round(Math.ceil(totalCount / currLimit));
+
+  useEffect(() => {}, []);
 
   useEffect(() => {
-    setCurrentPage(1);
-    setCurrLimit(limit);
+    onPageChange(1);
   }, [location]);
 
   const onPageChange = (page) => {
-    setCurrentPage(page);
+    setCurrentPage((prev) => {
+      return {
+        page: page,
+        counter: prev.counter + 1,
+      };
+    });
   };
 
-  useEffect(() => {
+  const getInputParams = () => {
     // read url params
     let categoryFilter = null;
     if (params?.categoryId) {
@@ -74,13 +86,83 @@ const ProductListPage = (props) => {
       freeTextPhrase: searchString,
       filter: filters,
       select: selectFields,
-      page: currentPage,
+      page: currentPage?.page,
       limit: currLimit,
       sort,
       order,
     };
-    dispatch(searchProducts(searchParams));
-  }, [location, currentPage]);
+    return searchParams;
+  };
+
+  const buildSearchQueryParams = (searchParams) => {
+    if (!searchParams) return;
+
+    const { filter, freeTextPhrase, select, page, limit, sort, order } =
+      searchParams;
+
+    // convert filter object to string
+    const filterString = !_.isEmpty(filter) ? JSON.stringify(filter) : "";
+
+    // build request params
+    const params = [
+      { name: "filter", value: filterString },
+      { name: "freeTextPhrase", value: freeTextPhrase },
+      { name: "select", value: (select ?? []).join(" ") },
+      { name: "page", value: page ?? 1 },
+      { name: "limit", value: limit ?? 10 },
+      { name: "sort", value: sort },
+      { name: "order", value: order },
+    ];
+    const paramStringArray = [];
+    params.forEach((param) => {
+      if (
+        _.isArray(param.value) ||
+        _.isObject(param.value) ||
+        !_.isEmpty(param.value)
+      ) {
+        paramStringArray.push(`${param.name}=${param.value}`);
+      } else if (
+        !_.isNull(param.value) &&
+        !_.isUndefined(param.value) &&
+        param.value !== ""
+      ) {
+        paramStringArray.push(`${param.name}=${param.value}`);
+      }
+    });
+    return paramStringArray.join("&");
+  };
+
+  const fetchProducts = async (queryParams) => {
+    try {
+      const response = await request(
+        `${UrlConfig.SEARCH_PRODUCTS_URL}?${queryParams}`
+      );
+      const { loading, loadError, data } = response;
+      if (loading === true) {
+        dispatch(initProductList());
+      } else if (loading === false && loadError) {
+        dispatch(errorProductList(loadError));
+      } else if (loading === false && !loadError) {
+        dispatch(successProductList(data));
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const searchProducts = async () => {
+    const searchParams = getInputParams();
+    const queryParams = buildSearchQueryParams(searchParams);
+    if (searchParams) {
+      await fetchProducts(queryParams);
+    }
+  };
+
+  useEffect(() => {
+    if (currentPage.page !== -1) {
+      searchProducts();
+    }
+  }, [currentPage]);
 
   if (loading === true) return <ProductListLoader cardCount={10} />;
 
@@ -97,7 +179,7 @@ const ProductListPage = (props) => {
           })}
       </div>
       <Pagination
-        page={currentPage}
+        page={currentPage?.page}
         totalCount={totalCount}
         limit={currLimit}
         onPageChangeCb={onPageChange}

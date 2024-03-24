@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { clearPersistedState } from "../../store";
-import { clearAuthUserInfo } from "../../store/auth";
+import { clearAuthAction } from "../../store/auth";
 import { clearCartRedux } from "../../store/cart";
 import UrlConfig from "../../utils/UrlConfig";
 
@@ -12,13 +12,16 @@ const Logout = () => {
   const [successMessage, setSuccessMsg] = useState(null);
   const [errMessage, setErrMsg] = useState(null);
 
+  const auth = useSelector((state) => state.auth);
+  const { token } = auth;
+
   useEffect(() => {
     const logout = async () => {
       try {
         const response = await fetch(UrlConfig.LOGOUT_URL, {
           method: "GET",
           headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
+            Authorization: "Bearer " + token,
           },
         });
         if (response.ok) {
@@ -27,12 +30,10 @@ const Logout = () => {
           setErrMsg(null);
         }
       } finally {
-        // clear token from localStorage
-        localStorage.removeItem("token");
         // clear cart
         dispatch(clearCartRedux());
         // clear user info
-        dispatch(clearAuthUserInfo());
+        dispatch(clearAuthAction());
         // clear persisted states
         clearPersistedState();
         navigate("/", { replace: true, state: null });
