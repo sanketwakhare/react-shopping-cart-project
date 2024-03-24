@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import UrlConfig from "../../utils/UrlConfig";
 
@@ -12,6 +13,16 @@ function Signup() {
   const [successMsg, setSuccessMsg] = useState(null);
 
   const navigate = useNavigate();
+  const auth = useSelector((state) => state.auth);
+  const { isLoggedIn } = auth;
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      // navigate to home page if user already logged in
+      navigate("/");
+    }
+  }, []);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {

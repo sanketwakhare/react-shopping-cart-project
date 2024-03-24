@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { storeAuthAction } from "../../store/auth";
 import UrlConfig from "../../utils/UrlConfig";
@@ -12,6 +12,15 @@ function Login(props) {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+  const { isLoggedIn } = auth;
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      // navigate to home page if user already logged in
+      navigate("/");
+    }
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

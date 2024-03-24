@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import UrlConfig from "../../utils/UrlConfig";
 
@@ -11,7 +12,21 @@ const ResetPassword = (props) => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const { userId } = location?.state;
+
+  const auth = useSelector((state) => state.auth);
+  const { isLoggedIn } = auth;
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      // navigate to home page if user already logged in
+      navigate("/");
+    } else if (!userId) {
+      // navigate to forgot password page
+      navigate("/forgot-password");
+    }
+  }, []);
+
+  const { userId } = location?.state ?? { userId: null };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
