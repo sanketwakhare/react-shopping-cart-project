@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-import UrlConfig from "../../utils/UrlConfig";
+
+import UrlConfig from "utils/UrlConfig";
 
 const VerifyForgotPasswordOtp = () => {
   const [otp, setOtp] = useState("");

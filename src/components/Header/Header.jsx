@@ -1,10 +1,9 @@
-import React from "react";
-
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import DropdownMenu from "../../ui-components/DropdownMenu/DropdownMenu";
-import CartHeader from "../Cart/CartHeader";
-import Search from "../Search/Search";
+
+import CartHeader from "components/Cart/CartHeader/CartHeader";
+import Search from "components/Search/Search";
+import DropdownMenu from "ui-components/DropdownMenu/DropdownMenu";
 import "./header.scss";
 
 // categories menu configuration

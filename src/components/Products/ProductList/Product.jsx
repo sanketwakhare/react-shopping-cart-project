@@ -1,8 +1,7 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
-import { formatPrice } from "../../utils/Utils";
-import AddToCart from "../AddToCart/AddToCart";
+import AddToCart from "components/Cart/AddToCart/AddToCart";
+import { formatPrice } from "utils/Utils";
 
 const Product = (props) => {
   const { product } = props;

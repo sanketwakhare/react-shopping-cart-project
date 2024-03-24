@@ -1,10 +1,10 @@
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { isEmpty } from "underscore";
-import AddToCart from "../../components/AddToCart/AddToCart";
-import { removeProductFromCartAction } from "../../store/cart";
-import { formatPrice } from "../../utils/Utils";
+
+import AddToCart from 'components/Cart/AddToCart/AddToCart';
+import { removeProductFromCartAction } from "store/cart";
+import { formatPrice } from "utils/Utils";
 import "./cart-page.scss";
 
 const CartPage = () => {

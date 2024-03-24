@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { storeAuthAction } from "../../store/auth";
-import UrlConfig from "../../utils/UrlConfig";
+
+import { storeAuthAction } from "store/auth";
+import UrlConfig from "utils/UrlConfig";
 
 function Login(props) {
   const [email, setEmail] = useState("");
