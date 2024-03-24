@@ -10,9 +10,7 @@ import Login from "../pages/login/Login";
 import Logout from "../pages/logout/Logout";
 import Signup from "../pages/signup/Signup";
 
-const AppRoutes = (props) => {
-  const { handleSetLogin } = props;
-
+const AppRoutes = () => {
   return (
     <div className="main-container">
       <Routes>
@@ -25,14 +23,8 @@ const AppRoutes = (props) => {
         <Route path="products/:productId" element={<ProductDetails />}></Route>
         <Route path="cart" element={<CartPage />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
-        <Route
-          path="/login"
-          element={<Login handleSetLogin={handleSetLogin} />}
-        ></Route>
-        <Route
-          path="/logout"
-          element={<Logout handleSetLogin={handleSetLogin} />}
-        ></Route>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/logout" element={<Logout />}></Route>
         <Route path="/forgot-password" element={<ForgotPassword />}></Route>
         <Route
           path="/verify-forgot-password-otp"

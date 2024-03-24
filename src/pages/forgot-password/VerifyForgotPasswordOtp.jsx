@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import UrlConfig from "../../utils/UrlConfig";
@@ -11,7 +12,21 @@ const VerifyForgotPasswordOtp = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const { email, userId } = location?.state;
+
+  const auth = useSelector((state) => state.auth);
+  const { isLoggedIn } = auth;
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      // navigate to home page if user already logged in
+      navigate("/");
+    } else if (!email || !userId) {
+      // navigate to forgot password page
+      navigate("/forgot-password");
+    }
+  }, []);
+
+  const { email, userId } = location?.state ?? { email: null, userId: null };
 
   const handleSubmit = async (event) => {
     event.preventDefault();

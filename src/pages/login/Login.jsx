@@ -1,15 +1,26 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { storeAuthAction } from "../../store/auth";
 import UrlConfig from "../../utils/UrlConfig";
 
 function Login(props) {
-  const { handleSetLogin } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [loading, setLoading] = useState(false);
   const [errMsg, setErrMsg] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+  const { isLoggedIn } = auth;
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      // navigate to home page if user already logged in
+      navigate("/");
+    }
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -41,11 +52,34 @@ function Login(props) {
       } else if (response.ok === true) {
         setEmail("");
         setPassword("");
-        const token = data?.token;
-        localStorage.setItem("token", token);
-        handleSetLogin(true);
+        const { token } = data;
 
-        navigate("/");
+        // user profile api call
+        const response = await fetch(UrlConfig.USER_PROFILE, {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        });
+        const responseData = await response?.json();
+        const { userId, email } = responseData?.data;
+
+        // save user details in redux store
+        dispatch(
+          storeAuthAction({
+            user: { userId, email },
+            token: token,
+            isLoggedIn: true,
+          })
+        );
+
+        // if any redirect url present, redirect to that page
+        const { redirectUrl } = location?.state ?? {};
+        if (redirectUrl) {
+          navigate(redirectUrl);
+        } else {
+          navigate("/");
+        }
       }
     } catch (err) {
       setErrMsg(err.message);
@@ -53,7 +87,9 @@ function Login(props) {
       setLoading(false);
     }
   };
+
   const signInLabel = loading ? "Signing in..." : "Sign in";
+
   return (
     <div className="form-screen">
       <div className="container">

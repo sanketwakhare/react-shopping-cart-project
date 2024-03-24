@@ -1,14 +1,17 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { isEmpty } from "underscore";
 import AddToCart from "../../components/AddToCart/AddToCart";
+import { removeProductFromCartAction } from "../../store/cart";
 import { formatPrice } from "../../utils/Utils";
 import "./cart-page.scss";
 
 const CartPage = () => {
   const cartItems = useSelector((state) => state.cart);
+  const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  console.log(cartItems);
+  const navigate = useNavigate();
 
   const noItemsInCartMessageTemplate = (
     <div className="cart-container">
@@ -27,6 +30,18 @@ const CartPage = () => {
     return acc;
   }, 0);
 
+  const handleDeleteProductFromCart = (productId) => {
+    dispatch(removeProductFromCartAction(productId));
+  };
+
+  const handleBuyNow = () => {
+    if (!auth?.isLoggedIn) {
+      navigate("/login", { state: { redirectUrl: "/payment" } });
+    } else {
+      navigate("/payment");
+    }
+  };
+
   return (
     <>
       {!isEmpty(cartItems) && (
@@ -44,12 +59,22 @@ const CartPage = () => {
                     <div className="item-details">
                       <div className="title">{cartItem?.product?.title}</div>
                       <div className="note">
-                        <i class="fas fa-truck"></i>
+                        <i className="fas fa-truck"></i>
                         <span>Eligible for FREE Shipping</span>
                       </div>
                       <div className="quantity">
                         <div className="qty-label">Quantity:</div>
                         <AddToCart product={cartItem?.product} />
+                      </div>
+                      <div className="actions">
+                        <Link
+                          className="link"
+                          onClick={() =>
+                            handleDeleteProductFromCart(cartItem?.product?._id)
+                          }
+                        >
+                          Delete
+                        </Link>
                       </div>
                     </div>
                     <div className="item-price-section">
@@ -86,7 +111,11 @@ const CartPage = () => {
                 <span className="price-value">{formatPrice(totalAmount)}</span>
               </div>
             </div>
-            <button type="button" className="button-success proceed-to-buy">
+            <button
+              type="button"
+              className="button-success proceed-to-buy"
+              onClick={handleBuyNow}
+            >
               Proceed to Buy
             </button>
           </div>

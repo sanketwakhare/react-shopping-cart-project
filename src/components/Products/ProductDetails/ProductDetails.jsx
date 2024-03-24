@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useApi from "../../../hooks/useApi";
 
@@ -11,11 +11,23 @@ import "./product-details.scss";
 
 const ProductDetails = () => {
   const { productId } = useParams();
-  const { data, loading, loadError } = useApi({
-    url: UrlConfig.PRODUCT_BY_ID_URL.replace(":productId", productId),
-  });
+  const { data, loading, loadError, request } = useApi();
 
   const product = data?.data;
+
+  const getProductDetails = async () => {
+    try {
+      await request(
+        UrlConfig.PRODUCT_BY_ID_URL.replace(":productId", productId)
+      );
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    getProductDetails();
+  }, []);
 
   if (loading === true)
     return (

@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { clearPersistedState } from "../../store";
+import { clearAuthAction } from "../../store/auth";
+import { clearCartRedux } from "../../store/cart";
 import UrlConfig from "../../utils/UrlConfig";
 
-const Logout = (props) => {
+const Logout = () => {
   const navigate = useNavigate();
-  const { handleSetLogin } = props;
+  const dispatch = useDispatch();
   const [successMessage, setSuccessMsg] = useState(null);
   const [errMessage, setErrMsg] = useState(null);
+
+  const auth = useSelector((state) => state.auth);
+  const { token } = auth;
 
   useEffect(() => {
     const logout = async () => {
@@ -14,7 +21,7 @@ const Logout = (props) => {
         const response = await fetch(UrlConfig.LOGOUT_URL, {
           method: "GET",
           headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
+            Authorization: "Bearer " + token,
           },
         });
         if (response.ok) {
@@ -23,9 +30,12 @@ const Logout = (props) => {
           setErrMsg(null);
         }
       } finally {
-        // clear token from localStorage
-        localStorage.removeItem("token");
-        handleSetLogin(false);
+        // clear cart
+        dispatch(clearCartRedux());
+        // clear user info
+        dispatch(clearAuthAction());
+        // clear persisted states
+        clearPersistedState();
         navigate("/", { replace: true, state: null });
         window.location.replace("/");
       }

@@ -1,5 +1,6 @@
 import React from "react";
 
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import DropdownMenu from "../../ui-components/DropdownMenu/DropdownMenu";
 import CartHeader from "../Cart/CartHeader";
@@ -33,7 +34,10 @@ const accountDropdownInfo = {
   startFrom: "left",
 };
 
-const Header = ({ isLoggedIn, handleLogin, handleLogout }) => {
+const Header = () => {
+  const auth = useSelector((state) => state.auth);
+  const { isLoggedIn } = auth;
+
   return (
     <div className="header">
       <div className="nav">
@@ -68,6 +72,13 @@ const Header = ({ isLoggedIn, handleLogin, handleLogout }) => {
             </NavLink>
             <NavLink to="signup" className="nav-link">
               Sign up
+            </NavLink>
+            <NavLink
+              to="/cart"
+              key="cart"
+              className="nav-link-no-text-decoration"
+            >
+              <CartHeader />
             </NavLink>
           </>
         )}

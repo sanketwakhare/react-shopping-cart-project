@@ -89,6 +89,14 @@
             column-gap: 10px;
             align-items: center;
           }
+
+          .actions {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+            height: 100%;
+            column-gap: 20px;
+          }
         }
 
         .item-price-section {
