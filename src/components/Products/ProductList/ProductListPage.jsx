@@ -1,16 +1,17 @@
 
 import NoItemsOverlay from "components/NoItemsOverlay/NoItemsOverlay";
-import useApi from "hooks/useApi";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useParams } from "react-router";
+import Pagination from "ui-components/Pagination/Pagination";
+import _ from "underscore";
+
+import useApi from "hooks/useApi";
 import {
   errorProductList,
   initProductList,
   successProductList,
 } from "store/product-list";
-import Pagination from "ui-components/Pagination/Pagination";
-import _ from "underscore";
 import UrlConfig from "utils/UrlConfig";
 
 import Product from "./Product";

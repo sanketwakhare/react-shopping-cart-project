@@ -1,11 +1,14 @@
-import AddToCart from "components/Cart/AddToCart/AddToCart.jsx";
-import useApi from "hooks/useApi.js";
+
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+
+import AddToCart from "components/Cart/AddToCart/AddToCart.jsx";
+import useApi from "hooks/useApi.js";
 import UrlConfig from "utils/UrlConfig.js";
 import { formatPrice } from "utils/Utils.js";
 
 import ProductDetailsLoader from "./ProductDetailsLoader.jsx";
+
 import "./product-details.scss";
 
 const ProductDetails = () => {

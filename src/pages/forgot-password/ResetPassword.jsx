@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+
 import UrlConfig from "utils/UrlConfig";
 
 const ResetPassword = (props) => {

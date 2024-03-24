@@ -1,4 +1,8 @@
 {
+    "env": {
+        "browser": true,
+        "es2022": true
+    },
     "parserOptions": {
         "ecmaVersion": "latest",
         "ecmaFeatures": {
@@ -6,7 +10,22 @@
         },
         "sourceType": "module"
     },
+    "settings": {
+        "react": {
+            "version": "detect"
+        },
+        "import/resolver": {
+            "node": {
+                "moduleDirectory": [
+                    "node_modules",
+                    "src"
+                ]
+            }
+        }
+    },
     "plugins": [
+        "react",
+        "react-hooks",
         "import"
     ],
     "rules": {
@@ -26,6 +45,39 @@
                     "caseInsensitive": true
                 }
             }
+        ],
+        "react/react-in-jsx-scope": "off",
+        "indent": [
+            "error",
+            2,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "object-curly-spacing": [
+            "error",
+            "always"
+        ],
+        "no-multiple-empty-lines": [
+            "error"
+        ],
+        "no-trailing-spaces": [
+            "error"
+        ],
+        "key-spacing": [
+            "error",
+            {
+                "beforeColon": false,
+                "afterColon": true
+            }
+        ],
+        "eol-last": [
+            "error",
+            "always"
         ]
     }
 }

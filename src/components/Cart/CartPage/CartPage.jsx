@@ -1,10 +1,10 @@
-import AddToCart from "components/Cart/AddToCart/AddToCart";
+import AddToCart from 'components/Cart/AddToCart/AddToCart';
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { removeProductFromCartAction } from "store/cart";
 import { isEmpty } from "underscore";
-import { formatPrice } from "utils/Utils";
 
+import { removeProductFromCartAction } from "store/cart";
+import { formatPrice } from "utils/Utils";
 import "./cart-page.scss";
 
 const CartPage = () => {

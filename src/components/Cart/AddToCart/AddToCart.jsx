@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addToCartRedux, removeFromCartRedux } from "store/cart";
 
+import { addToCartRedux, removeFromCartRedux } from "store/cart";
 import "./add-to-cart.scss";
 
 const AddToCart = (props) => {
