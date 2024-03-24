@@ -39,9 +39,10 @@ const reducer = (state = initialState, action) => {
     case STORE_AUTH_USER: {
       return {
         ...state,
-        user: action?.payload?.user,
-        isLoggedIn: action?.payload?.isLoggedIn,
-        token: action?.payload?.token,
+        ...action?.payload,
+        // user: action?.payload?.user ?? state.user,
+        // isLoggedIn: action?.payload?.isLoggedIn ?? state.isLoggedIn,
+        // token: action?.payload?.token ?? state.token,
       };
     }
     case CLEAR_AUTH_USER: {
