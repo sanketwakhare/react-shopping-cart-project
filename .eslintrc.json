@@ -118,8 +118,7 @@
             }
         ],
         "eol-last": [
-            "error",
-            "always"
+            "error"
         ]
     }
 }
