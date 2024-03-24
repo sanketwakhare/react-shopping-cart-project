@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { storeAuthUserInfo } from "../../store/auth";
 import UrlConfig from "../../utils/UrlConfig";
 
@@ -10,6 +10,7 @@ function Login(props) {
   const [loading, setLoading] = useState(false);
   const [errMsg, setErrMsg] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useDispatch();
 
   const handleSubmit = async (event) => {
@@ -53,7 +54,13 @@ function Login(props) {
           })
         );
 
-        navigate("/");
+        // if any redirect url present, redirect to that page
+        const { redirectUrl } = location?.state ?? {};
+        if (redirectUrl) {
+          navigate(redirectUrl);
+        } else {
+          navigate("/");
+        }
       }
     } catch (err) {
       setErrMsg(err.message);
