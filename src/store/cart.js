@@ -42,7 +42,7 @@ const reducer = (state = initialState, action) => {
       const product = action.payload;
       let newCartItems = [].concat(state);
       let existingItem = newCartItems.find(
-        (item) => item.product._id === product._id
+        (item) => item.product._id === product._id,
       );
       if (existingItem) {
         existingItem.quantity++;
@@ -55,14 +55,14 @@ const reducer = (state = initialState, action) => {
       const product = action.payload;
       let newCartItems = [].concat(state);
       let existingItem = newCartItems.find(
-        (item) => item.product._id === product._id
+        (item) => item.product._id === product._id,
       );
       if (existingItem) {
         if (existingItem.quantity > 1) {
           existingItem.quantity--;
         } else {
           newCartItems = newCartItems.filter(
-            (item) => item.product._id !== product._id
+            (item) => item.product._id !== product._id,
           );
         }
       }
@@ -75,11 +75,11 @@ const reducer = (state = initialState, action) => {
       const productId = action.payload;
       let newCartItems = [].concat(state);
       let existingItem = newCartItems.find(
-        (item) => item.product._id === productId
+        (item) => item.product._id === productId,
       );
       if (existingItem) {
         newCartItems = newCartItems.filter(
-          (item) => item.product._id !== productId
+          (item) => item.product._id !== productId,
         );
       }
       return newCartItems;

@@ -1,13 +1,11 @@
-import React from "react";
-import "./styles/form.scss";
-import "./styles/style.scss";
-
-import Header from "./components/Header/Header";
-
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
+
+import Header from "./components/Header/Header";
 import AppRoutes from "./routes/AppRoutes";
 import store, { persistor } from "./store";
+import "./styles/form.scss";
+import "./styles/style.scss";
 
 export default function App() {
   return (

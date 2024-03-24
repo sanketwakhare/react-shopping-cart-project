@@ -1,12 +1,11 @@
-import React, { useEffect } from "react";
+import AddToCart from "components/Cart/AddToCart/AddToCart.jsx";
+import useApi from "hooks/useApi.js";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import useApi from "../../../hooks/useApi";
+import UrlConfig from "utils/UrlConfig.js";
+import { formatPrice } from "utils/Utils.js";
 
-import AddToCart from "../../AddToCart/AddToCart";
 import ProductDetailsLoader from "./ProductDetailsLoader.jsx";
-
-import UrlConfig from "../../../utils/UrlConfig";
-import { formatPrice } from "../../../utils/Utils.js";
 import "./product-details.scss";
 
 const ProductDetails = () => {

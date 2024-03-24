@@ -1,4 +1,3 @@
-import React from "react";
 import "./no-items-overlay.scss";
 
 const NoItemsOverlay = () => {
