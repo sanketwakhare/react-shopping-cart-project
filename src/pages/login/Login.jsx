@@ -43,11 +43,22 @@ function Login(props) {
       } else if (response.ok === true) {
         setEmail("");
         setPassword("");
-        const token = data?.token;
+        const { token } = data;
 
+        // user profile api call
+        const response = await fetch(UrlConfig.USER_PROFILE, {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        });
+        const responseData = await response?.json();
+        const { userId, email } = responseData?.data;
+
+        // save user details in redux store
         dispatch(
           storeAuthAction({
-            user: { email: email },
+            user: { userId, email },
             token: token,
             isLoggedIn: true,
           })
@@ -67,7 +78,9 @@ function Login(props) {
       setLoading(false);
     }
   };
+
   const signInLabel = loading ? "Signing in..." : "Sign in";
+
   return (
     <div className="form-screen">
       <div className="container">

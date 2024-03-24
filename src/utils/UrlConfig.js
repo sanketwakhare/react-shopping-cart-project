@@ -16,6 +16,9 @@ const UrlConfig = {
   ALL_PRODUCTS_URL: REACT_APP_BASE_URL + "/api/products",
   SEARCH_PRODUCTS_URL: REACT_APP_BASE_URL + "/api/products/search",
   PRODUCT_BY_ID_URL: REACT_APP_BASE_URL + "/api/products/:productId",
+
+  // user
+  USER_PROFILE: REACT_APP_BASE_URL + "/api/users/me",
 };
 
 export default UrlConfig;
