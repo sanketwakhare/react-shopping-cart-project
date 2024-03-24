@@ -1,17 +1,17 @@
 
-import NoItemsOverlay from "components/NoItemsOverlay/NoItemsOverlay";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useParams } from "react-router";
-import Pagination from "ui-components/Pagination/Pagination";
-import _ from "underscore";
+import { isArray, isEmpty, isNull, isObject, isUndefined } from "underscore";
 
+import NoItemsOverlay from "components/NoItemsOverlay/NoItemsOverlay";
 import useApi from "hooks/useApi";
 import {
   errorProductList,
   initProductList,
   successProductList,
 } from "store/product-list";
+import Pagination from "ui-components/Pagination/Pagination";
 import UrlConfig from "utils/UrlConfig";
 
 import Product from "./Product";
@@ -103,7 +103,7 @@ const ProductListPage = (props) => {
       searchParams;
 
     // convert filter object to string
-    const filterString = !_.isEmpty(filter) ? JSON.stringify(filter) : "";
+    const filterString = !isEmpty(filter) ? JSON.stringify(filter) : "";
 
     // build request params
     const params = [
@@ -118,14 +118,14 @@ const ProductListPage = (props) => {
     const paramStringArray = [];
     params.forEach((param) => {
       if (
-        _.isArray(param.value) ||
-        _.isObject(param.value) ||
-        !_.isEmpty(param.value)
+        isArray(param.value) ||
+        isObject(param.value) ||
+        !isEmpty(param.value)
       ) {
         paramStringArray.push(`${param.name}=${param.value}`);
       } else if (
-        !_.isNull(param.value) &&
-        !_.isUndefined(param.value) &&
+        !isNull(param.value) &&
+        !isUndefined(param.value) &&
         param.value !== ""
       ) {
         paramStringArray.push(`${param.name}=${param.value}`);

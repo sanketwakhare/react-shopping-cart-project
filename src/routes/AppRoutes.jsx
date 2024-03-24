@@ -1,3 +1,5 @@
+import { Route, Routes } from "react-router";
+
 import CartPage from "components/Cart/CartPage/CartPage";
 import PageNotFound from "components/PageNotFound/PageNotFound";
 import ProductDetails from "components/Products/ProductDetails/ProductDetails";
@@ -8,7 +10,6 @@ import VerifyForgotPasswordOtp from "pages/forgot-password/VerifyForgotPasswordO
 import Login from "pages/login/Login";
 import Logout from "pages/logout/Logout";
 import Signup from "pages/signup/Signup";
-import { Route, Routes } from "react-router";
 
 const AppRoutes = () => {
   return (

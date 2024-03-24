@@ -1,6 +1,6 @@
-import AddToCart from "components/Cart/AddToCart/AddToCart";
 import { Link } from "react-router-dom";
 
+import AddToCart from "components/Cart/AddToCart/AddToCart";
 import { formatPrice } from "utils/Utils";
 
 const Product = (props) => {
