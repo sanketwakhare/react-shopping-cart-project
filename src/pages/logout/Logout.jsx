@@ -14,7 +14,7 @@ const Logout = () => {
   const [errMessage, setErrMsg] = useState(null);
 
   const auth = useSelector((state) => state.auth);
-  const { token } = auth;
+  const token = auth?.auth?.token ?? null;
 
   useEffect(() => {
     const logout = async () => {

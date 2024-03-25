@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import AddToCart from "components/Cart/AddToCart/AddToCart.jsx";
-import useApi from "hooks/useApi.js";
+import useApi from "hooks/useApi";
 import UrlConfig from "utils/UrlConfig.js";
 import { formatPrice } from "utils/Utils.js";
 

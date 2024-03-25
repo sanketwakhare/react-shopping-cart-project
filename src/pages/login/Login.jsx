@@ -53,13 +53,13 @@ function Login(props) {
       } else if (response.ok === true) {
         setEmail("");
         setPassword("");
-        const { token } = data;
+        const { auth } = data;
 
         // user profile api call
         const response = await fetch(UrlConfig.USER_PROFILE, {
           method: "GET",
           headers: {
-            Authorization: "Bearer " + token,
+            Authorization: "Bearer " + auth?.token,
           },
         });
         const responseData = await response?.json();
@@ -69,8 +69,8 @@ function Login(props) {
         dispatch(
           storeAuthAction({
             user: { userId, email },
-            token: token,
             isLoggedIn: true,
+            auth
           })
         );
 

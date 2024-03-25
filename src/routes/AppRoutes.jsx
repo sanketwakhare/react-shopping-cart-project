@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router";
 
 import CartPage from "components/Cart/CartPage/CartPage";
@@ -9,10 +10,15 @@ import ForgotPassword from "pages/forgot-password/ForgotPassword";
 import ResetPassword from "pages/forgot-password/ResetPassword";
 import VerifyForgotPasswordOtp from "pages/forgot-password/VerifyForgotPasswordOtp";
 import Login from "pages/login/Login";
+import TokenRefresh from "pages/login/TokenRefresh";
 import Logout from "pages/logout/Logout";
 import Signup from "pages/signup/Signup";
 
 const AppRoutes = () => {
+
+  const auth = useSelector((state) => state.auth);
+  const { isLoggedIn } = auth;
+
   return (
     <div className="main-container">
       <Routes>
@@ -36,6 +42,7 @@ const AppRoutes = () => {
         <Route path="/profile" element={<UserProfile />}></Route>
         <Route path="*" element={<PageNotFound />}></Route>
       </Routes>
+      {isLoggedIn && <TokenRefresh />}
     </div>
   );
 };
