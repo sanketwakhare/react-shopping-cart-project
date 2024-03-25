@@ -4,6 +4,7 @@ import CartPage from "components/Cart/CartPage/CartPage";
 import PageNotFound from "components/PageNotFound/PageNotFound";
 import ProductDetails from "components/Products/ProductDetails/ProductDetails";
 import ProductListPage from "components/Products/ProductList/ProductListPage";
+import UserProfile from "components/UserProfile/UserProfile";
 import ForgotPassword from "pages/forgot-password/ForgotPassword";
 import ResetPassword from "pages/forgot-password/ResetPassword";
 import VerifyForgotPasswordOtp from "pages/forgot-password/VerifyForgotPasswordOtp";
@@ -32,6 +33,7 @@ const AppRoutes = () => {
           element={<VerifyForgotPasswordOtp />}
         ></Route>
         <Route path="/reset-password" element={<ResetPassword />}></Route>
+        <Route path="/profile" element={<UserProfile />}></Route>
         <Route path="*" element={<PageNotFound />}></Route>
       </Routes>
     </div>

@@ -44,7 +44,7 @@ const ProductDetails = () => {
 
   return (
     <div className="product-details-container">
-      <div className="product-details">
+      <div className="product-details box-shadow">
         <img src={product?.image} alt="product"></img>
         <div className="product-details__container">
           <div className="product-details__title">
