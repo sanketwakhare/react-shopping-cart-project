@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import ProfileAvatar from "components/UserProfile/ProfileAvatar";
+import Avatar from "ui-components/Avatar/Avatar";
 import "./dropdown-menu.scss";
 
 const DropdownMenu = ({ info }) => {
@@ -42,7 +42,7 @@ const DropdownMenu = ({ info }) => {
         <div className="dropdown-toggle" onClick={toggleMenu}>
           {info?.mainMenu?.showGravatar && info?.mainMenu?.email &&
           <div className="gravatar-icon">
-            <ProfileAvatar email={info?.mainMenu?.email}/>
+            <Avatar email={info?.mainMenu?.email}/>
           </div>
           }
           {info?.mainMenu?.title &&

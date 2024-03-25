@@ -3,9 +3,9 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import useApi from "hooks/useApi";
+import Avatar from "ui-components/Avatar/Avatar";
 import UrlConfig from "utils/UrlConfig";
 
-import ProfileAvatar from "./ProfileAvatar";
 import "./user-profile.scss";
 
 const UserProfile = () => {
@@ -113,7 +113,7 @@ const UserProfile = () => {
               <div className="field-value">
                 {userData?.email && (
                   <div className="avatar-container">
-                    <ProfileAvatar email={userData?.email} />
+                    <Avatar email={userData?.email} />
                     <input
                       type="file"
                       accept="image/*"
