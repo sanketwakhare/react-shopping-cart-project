@@ -25,32 +25,18 @@ export const storeAuthAction = (payload) => {
   };
 };
 
-// export const storeAuthUserInfo = (payload) => {
-//   return (dispatch) => {
-//     dispatch(storeAuthAction(payload));
-//   };
-// };
-
-// export const clearAuthUserInfo = () => {
-//   return (dispatch) => {
-//     dispatch(clearAuthAction());
-//   };
-// };
-
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case STORE_AUTH_USER: {
-      return {
-        ...state,
-        ...action?.payload,
-        // user: action?.payload?.user ?? state.user,
-        // isLoggedIn: action?.payload?.isLoggedIn ?? state.isLoggedIn,
-        // token: action?.payload?.token ?? state.token,
-      };
+      const newState = action.payload ?? {};
+      const mergedState = {
+        ...state,    // Spread the key-value pairs of the 'state' object
+        ...newState, // Spread the key-value pairs of the 'newState' object
+      };;
+      return mergedState;
     }
     case CLEAR_AUTH_USER: {
       return {
-        ...state,
         ...initialState,
       };
     }
