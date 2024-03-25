@@ -44,11 +44,11 @@ const TokenRefresh = () => {
           })
         );
       } else {
-        // If token refresh failed, handle the error (e.g., logout the user)
+        // If token refresh failed, logout the user
         throw new Error("Token refresh failed");
       }
     } catch (error) {
-      console.error("Error refreshing token:", error?.message);
+      alert("Your session has expired. Please log in again.");
       navigate("/logout");
     } finally {
       setTokenRefreshed(() => !tokenRefreshed);
@@ -91,6 +91,10 @@ const TokenRefresh = () => {
     }
     // Call the function to start the token refresh interval
     startTokenRefreshInterval();
+
+    return () => {
+      clearInterval(tokenRefreshInterval);
+    };
   }, [tokenRefreshed]);
   return null;
 };
