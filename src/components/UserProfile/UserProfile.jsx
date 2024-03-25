@@ -19,6 +19,7 @@ const UserProfile = () => {
     email: "",
     mobile: "",
     avatar: "", // URL of the user's avatar image
+    roles: [],
   });
 
   useEffect(() => {
@@ -33,7 +34,12 @@ const UserProfile = () => {
     const fetchUserData = async () => {
       try {
         const response = await request(UrlConfig.USER_PROFILE);
-        setUserData(response?.data?.data);
+        setUserData((prevValues) => {
+          return {
+            ...prevValues,
+            ...response?.data?.data,
+          };
+        });
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -117,7 +123,7 @@ const UserProfile = () => {
                     <input
                       type="file"
                       accept="image/*"
-                      onChange={handleImageUpload}
+                      onClick={handleImageUpload}
                       disabled
                     />
                   </div>
