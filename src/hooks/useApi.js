@@ -7,7 +7,7 @@ const useApi = () => {
   const [loadError, setLoadError] = useState(null);
 
   const auth = useSelector((state) => state.auth);
-  const { token } = auth;
+  const { token } = auth?.auth;
 
   // call api
   const request = async (url, options) => {

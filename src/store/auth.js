@@ -1,7 +1,10 @@
 const initialState = {
   user: null,
   isLoggedIn: false,
-  token: null,
+  auth: {
+    token: null,
+    expiry: null
+  },
 };
 
 // action types
