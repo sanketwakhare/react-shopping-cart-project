@@ -41,7 +41,7 @@ const Header = () => {
   const { isLoggedIn } = auth;
 
   return (
-    <div className="header">
+    <div className="header box-shadow">
       <div className="nav">
         <div className="logo">
           <NavLink to="/" key="home" className="nav-link">

@@ -46,7 +46,7 @@ const CartPage = () => {
     <>
       {!isEmpty(cartItems) && (
         <div className="cart-container">
-          <div className="cart-items-container">
+          <div className="cart-items-container box-shadow">
             <div className="cart-header">
               <div className="title">Shopping Cart</div>
               <div className="price-label">Price</div>
@@ -110,7 +110,7 @@ const CartPage = () => {
               </div>
             </div>
           </div>
-          <div className="payment-options-sidebar">
+          <div className="payment-options-sidebar box-shadow">
             <div className="subtotal-container">
               <div className="label">Subtotal({subtotalCount} items):</div>
               <div className="subtotal-price">

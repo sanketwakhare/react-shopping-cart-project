@@ -71,7 +71,7 @@ const UserProfile = () => {
 
   return (
     <div className="profile-container">
-      <div className="profile-inner-container">
+      <div className="profile-inner-container box-shadow">
         <div className="profile-header">Profile</div>
         <div onSubmit={handleSubmit} className="profile-body-grid">
           <div className="profile-left-container">
