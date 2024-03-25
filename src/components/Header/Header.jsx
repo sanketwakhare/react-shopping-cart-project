@@ -45,7 +45,7 @@ const Header = () => {
       <div className="nav">
         <div className="logo">
           <NavLink to="/" key="home" className="nav-link">
-            <i className="fa fa-shopping-bag" aria-hidden="true"></i>
+            {/* <i className="fa fa-shopping-bag" aria-hidden="true"></i> */}
             <span className="shop-name">Shophub</span>
           </NavLink>
         </div>
