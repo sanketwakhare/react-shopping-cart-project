@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
+import ProfileAvatar from "components/UserProfile/ProfileAvatar";
 import "./dropdown-menu.scss";
 
 const DropdownMenu = ({ info }) => {
@@ -17,8 +19,9 @@ const DropdownMenu = ({ info }) => {
     };
   }, []);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
+  const toggleMenu = (event) => {
+    event.stopPropagation();
+    setIsOpen(() =>!isOpen);
   };
 
   const menuItems = info?.menuItems.map((category, index) => (
@@ -36,8 +39,23 @@ const DropdownMenu = ({ info }) => {
   return (
     <div className="dropdown-container">
       <div className={`dropdown ${isOpen ? "open" : ""}`}>
-        <div onClick={toggleMenu} className="dropdown-toggle">
-          {info?.mainMenu?.title}
+        <div className="dropdown-toggle" onClick={toggleMenu}>
+          {info?.mainMenu?.showGravatar && info?.mainMenu?.email &&
+          <div className="gravatar-icon">
+            <ProfileAvatar email={info?.mainMenu?.email}/>
+          </div>
+          }
+          {info?.mainMenu?.title &&
+          <div className="title">
+            {info?.mainMenu?.title}
+          </div>
+          }
+          {info?.mainMenu?.showCaretIcon &&
+            <div className="caret">
+              {isOpen && <i className="fa fa-caret-up"></i>}
+              {!isOpen && <i className="fa fa-caret-down"></i>}
+            </div>
+          }
         </div>
         {isOpen && (
           <>

@@ -10,6 +10,7 @@ import "./header.scss";
 const categoriesDropdownInfo = {
   mainMenu: {
     title: "Categories",
+    showCaretIcon: true
   },
   menuItems: [
     { title: "Electronics", to: "/category/electronics" },
@@ -24,13 +25,15 @@ const categoriesDropdownInfo = {
 const accountDropdownInfo = {
   mainMenu: {
     title: "Account",
+    showGravatar: false,
+    showCaretIcon: true
   },
   menuItems: [
     { title: "Profile", to: "/profile" },
     { title: "Orders", to: "/orders" },
     { title: "Sign out", to: "/logout" },
   ],
-  startFrom: "left",
+  startFrom: "right",
 };
 
 const Header = () => {
@@ -54,7 +57,14 @@ const Header = () => {
         {isLoggedIn ? (
           // Display content for logged-in users
           <>
-            <DropdownMenu info={accountDropdownInfo} />
+            <DropdownMenu info={{
+              ...accountDropdownInfo,
+              mainMenu: {
+                ...accountDropdownInfo.mainMenu,
+                email: auth?.user?.email,
+                title: auth?.user?.email
+              }
+            }} />
             <NavLink
               to="/cart"
               key="cart"

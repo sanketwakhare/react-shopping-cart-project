@@ -20,6 +20,17 @@
 .dropdown-toggle {
   padding: 8px;
   cursor: pointer;
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+
+  .gravatar-icon {
+    img {
+      height: 24px;
+      width: 24px;
+      border-radius: 50%;
+    }
+  }
 }
 
 .dropdown-menu {
