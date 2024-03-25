@@ -1,0 +1,115 @@
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  column-gap: 20px;
+  width: 100%;
+  height: 100%;
+  padding: 0 200px;
+
+  .profile-inner-container {
+    background-color: white;
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+    min-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+
+    .profile-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.2rem;
+      font-weight: 600;
+      border-bottom: 1px solid #ddd;
+      width: 100%;
+      padding-bottom: 20px;
+    }
+
+    .profile-body-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr; /* Two columns with fixed width for field name */
+      gap: 40px;
+      position: relative;
+
+      .profile-left-container,
+      .profile-right-container {
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+        padding: 20px 0;
+
+        .field {
+          display: grid;
+          grid-template-columns: 1fr 6fr;
+          align-items: center;
+
+          .field-name {
+            font-weight: 600;
+            min-width: 80px;
+          }
+
+          .field-value {
+            word-wrap: break-word; /* Wrap long text */
+            max-width: 300px;
+
+            .user-roles {
+              text-transform: capitalize;
+            }
+
+            .avatar-container {
+              display: flex;
+              flex-direction: column;
+              row-gap: 20px;
+
+              img {
+                height: 150px;
+                width: 150px;
+                border-radius: 50%;
+                background-color: white;
+                padding: 10px;
+                height: fit-content;
+                border: 1px solid #ddd;
+                box-shadow: 0 4px 8px #0000001a;
+              }
+            }
+          }
+
+          input[type="text"],
+          input[type="email"],
+          input[type="password"],
+          input[type="number"],
+          select,
+          textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            resize: vertical;
+          }
+        }
+      }
+    }
+
+    .profile-body-grid::after {
+      content: "";
+      position: absolute;
+      top: 20px;
+      bottom: 20px;
+      width: 1px; /* Width of the vertical line */
+      background-color: #ccc; /* Color of the vertical line */
+      left: calc(50% - 0.5px); /* Position the line in the center of the gap */
+    }
+
+    .profile-footer {
+      width: 100%;
+      padding-top: 20px;
+      border-top: 1px solid #ddd;
+    }
+  }
+}
