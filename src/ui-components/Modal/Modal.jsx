@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom";
 import "./modal.scss";
 
-const Modal = ({ isOpen, onClose, children, key }) => {
+const Modal = ({ isOpen, onClose, children, id }) => {
   if (!isOpen) return null;
 
   return ReactDOM.createPortal(
@@ -11,7 +11,7 @@ const Modal = ({ isOpen, onClose, children, key }) => {
       </div>
     </div>,
     document.getElementById("modal-overlay"),
-    key
+    id
   );
 };
 
