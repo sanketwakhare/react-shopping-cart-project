@@ -5,17 +5,16 @@ import CartPage from "components/Cart/CartPage/CartPage";
 import PageNotFound from "components/PageNotFound/PageNotFound";
 import ProductDetails from "components/Products/ProductDetails/ProductDetails";
 import ProductListPage from "components/Products/ProductList/ProductListPage";
+import TokenRefresh from "components/TokenRefresh/TokenRefresh";
 import UserProfile from "components/UserProfile/UserProfile";
 import ForgotPassword from "pages/forgot-password/ForgotPassword";
 import ResetPassword from "pages/forgot-password/ResetPassword";
 import VerifyForgotPasswordOtp from "pages/forgot-password/VerifyForgotPasswordOtp";
 import Login from "pages/login/Login";
-import TokenRefresh from "pages/login/TokenRefresh";
 import Logout from "pages/logout/Logout";
 import Signup from "pages/signup/Signup";
 
 const AppRoutes = () => {
-
   const auth = useSelector((state) => state.auth);
   const { isLoggedIn } = auth;
 
