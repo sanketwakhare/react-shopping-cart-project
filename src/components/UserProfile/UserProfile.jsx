@@ -33,7 +33,7 @@ const UserProfile = () => {
     // Fetch user data from the server
     const fetchUserData = async () => {
       try {
-        const response = await request(UrlConfig.USER_PROFILE);
+        const response = await request(UrlConfig.USER_PROFILE_URL);
         setUserData((prevValues) => {
           return {
             ...prevValues,
@@ -77,7 +77,16 @@ const UserProfile = () => {
           <div className="profile-left-container">
             <div className="field">
               <label className="field-name">Email</label>
-              <div className="field-value">{userData?.email}</div>
+              <div className="field-value">
+                <div className="email-container">
+                  <span className="email-value">{userData?.email}</span>
+                  {userData?.email && (
+                    <span className="email-verified-icon">
+                      <i className="fa fa-check-circle" aria-hidden="true"></i>
+                    </span>
+                  )}
+                </div>
+              </div>
             </div>
             <div className="field">
               <label htmlFor="name" className="field-name">
