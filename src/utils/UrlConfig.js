@@ -19,7 +19,10 @@ const UrlConfig = {
   PRODUCT_BY_ID_URL: REACT_APP_BASE_URL + "/api/products/:productId",
 
   // user
-  USER_PROFILE: REACT_APP_BASE_URL + "/api/users/me",
+  USER_PROFILE_URL: REACT_APP_BASE_URL + "/api/users/me",
+
+  // orders
+  CREATE_ORDER_URL: REACT_APP_BASE_URL + "/api/orders",
 };
 
 export default UrlConfig;

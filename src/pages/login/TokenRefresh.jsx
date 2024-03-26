@@ -93,7 +93,9 @@ const TokenRefresh = () => {
     startTokenRefreshInterval();
 
     return () => {
-      clearInterval(tokenRefreshInterval);
+      if (!isLoggedIn) {
+        clearInterval(tokenRefreshInterval);
+      }
     };
   }, [tokenRefreshed]);
   return null;

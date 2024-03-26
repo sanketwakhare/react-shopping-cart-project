@@ -56,7 +56,7 @@ function Login(props) {
         const { auth } = data;
 
         // user profile api call
-        const response = await fetch(UrlConfig.USER_PROFILE, {
+        const response = await fetch(UrlConfig.USER_PROFILE_URL, {
           method: "GET",
           headers: {
             Authorization: "Bearer " + auth?.token,
