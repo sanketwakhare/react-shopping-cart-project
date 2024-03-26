@@ -1,10 +1,13 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { isEmpty } from "underscore";
 
 import AddToCart from 'components/Cart/AddToCart/AddToCart';
 import { removeProductFromCartAction } from "store/cart";
+import Modal from "ui-components/Modal/Modal";
 import { formatPrice } from "utils/Utils";
+
 import "./cart-page.scss";
 
 const CartPage = () => {
@@ -12,6 +15,13 @@ const CartPage = () => {
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [isRemoveProductConfirmationModalOpen, setIsRemoveProductConfirmationModalOpen] = useState(false);
+  const [productToRemove, setProductToRemove] = useState(null);
+
+  const toggleRemoveProductConfirmationModal = () => {
+    setIsRemoveProductConfirmationModalOpen(!isRemoveProductConfirmationModalOpen);
+  };
 
   const noItemsInCartMessageTemplate = (
     <div className="cart-container">
@@ -30,8 +40,18 @@ const CartPage = () => {
     return acc;
   }, 0);
 
-  const handleDeleteProductFromCart = (productId) => {
-    dispatch(removeProductFromCartAction(productId));
+  const handleRemoveProductFromCart = () => {
+    if(productToRemove) {
+      dispatch(removeProductFromCartAction(productToRemove));
+      setProductToRemove(null);
+    }
+    toggleRemoveProductConfirmationModal();
+  };
+
+  const onRemoveProduct = (productId) => {
+    event.stopPropagation();
+    toggleRemoveProductConfirmationModal();
+    setProductToRemove(productId);
   };
 
   const handleBuyNow = () => {
@@ -77,10 +97,10 @@ const CartPage = () => {
                         <Link
                           className="link"
                           onClick={() =>
-                            handleDeleteProductFromCart(product?._id)
+                            onRemoveProduct(product?._id)
                           }
                         >
-                          Delete
+                          Remove
                         </Link>
                       </div>
                     </div>
@@ -129,6 +149,22 @@ const CartPage = () => {
         </div>
       )}
       {isEmpty(cartItems) && noItemsInCartMessageTemplate}
+      {isRemoveProductConfirmationModalOpen && (
+        <Modal isOpen={isRemoveProductConfirmationModalOpen} onClose={toggleRemoveProductConfirmationModal} key={'remove-product-from-cart'}>
+          <div className="delete-product-modal-container">
+            <div className="modal-header">
+              <div>Remove Product</div>
+            </div>
+            <div className="modal-body">
+              <div>Are you sure you want remove product?</div>
+            </div>
+            <div className="modal-footer">
+              <button onClick={toggleRemoveProductConfirmationModal} className="button-light">Cancel</button>
+              <button onClick={handleRemoveProductFromCart}>Remove</button>
+            </div>
+          </div>
+        </Modal>
+      )}
     </>
   );
 };
