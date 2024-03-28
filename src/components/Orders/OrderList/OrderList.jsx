@@ -77,6 +77,7 @@ const OrderList = () => {
             </div>
             <div className="orders-body">
               {ordersData.map((order) => {
+                const orderStatus = OrderStatusDisplayMapping[order?.status];
                 return (
                   <div
                     key={`order-${order?._id}`}
@@ -90,21 +91,15 @@ const OrderList = () => {
                       <div className="order-property">
                         <label>Status:</label>
                         <span className="order-status">
-                          {OrderStatusDisplayMapping[order?.status]?.icon && (
+                          {orderStatus?.faIcon && (
                             <i
-                              className={
-                                OrderStatusDisplayMapping[order?.status]?.icon
-                              }
+                              className={`fa ${orderStatus?.faIcon}`}
                               style={{
-                                color:
-                                  OrderStatusDisplayMapping[order?.status]
-                                    ?.color,
+                                color: orderStatus?.color,
                               }}
                             ></i>
                           )}
-                          <span>
-                            {OrderStatusDisplayMapping[order?.status]?.label}
-                          </span>
+                          <span>{orderStatus?.label}</span>
                         </span>
                       </div>
                       <div className="order-property order-amount">
