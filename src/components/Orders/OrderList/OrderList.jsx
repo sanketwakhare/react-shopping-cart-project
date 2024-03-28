@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
-import AddToCart from "components/Cart/AddToCart/AddToCart";
 import useApi from "hooks/useApi";
+import { addToCartRedux } from "store/cart";
 import UrlConfig from "utils/UrlConfig";
 import { formatDate, formatPrice } from "utils/Utils";
 
@@ -14,6 +14,7 @@ import "./orders-list.scss";
 const OrderList = () => {
   const { request } = useApi();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   const { isLoggedIn } = auth;
 
@@ -38,6 +39,11 @@ const OrderList = () => {
     };
     fetchOrdersData();
   }, []);
+
+  const handleBuyAgain = (product) => {
+    dispatch(addToCartRedux(product));
+    navigate("/cart");
+  };
 
   return (
     <div className="orders-container">
@@ -120,19 +126,15 @@ const OrderList = () => {
                             </div>
                           </div>
                           <div>
-                            <AddToCart
-                              product={product}
-                              options={{
-                                addToCartBtnLabel: (
-                                  <span className="buy-again">
-                                    <i class="fa fa-refresh"></i>
-                                    <span>Buy Again</span>
-                                  </span>
-                                ),
-                                isNavigateOnAddToCart: true,
-                                navigateTo: "/cart",
-                              }}
-                            />
+                            <button
+                              className="button-success"
+                              onClick={() => handleBuyAgain(product)}
+                            >
+                              <span className="buy-again">
+                                <i class="fa fa-refresh"></i>
+                                <span>Buy Again</span>
+                              </span>
+                            </button>
                           </div>
                         </div>
                       </div>
