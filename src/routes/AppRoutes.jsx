@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router";
 
 import CartPage from "components/Cart/CartPage/CartPage";
+import OrderList from "components/Orders/OrderList/OrderList";
 import PageNotFound from "components/PageNotFound/PageNotFound";
 import ProductDetails from "components/Products/ProductDetails/ProductDetails";
 import ProductListPage from "components/Products/ProductList/ProductListPage";
@@ -39,6 +40,7 @@ const AppRoutes = () => {
         ></Route>
         <Route path="/reset-password" element={<ResetPassword />}></Route>
         <Route path="/profile" element={<UserProfile />}></Route>
+        <Route path="/orders" element={<OrderList />}></Route>
         <Route path="*" element={<PageNotFound />}></Route>
       </Routes>
       {isLoggedIn && <TokenRefresh />}

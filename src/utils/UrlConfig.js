@@ -23,6 +23,7 @@ const UrlConfig = {
 
   // orders
   CREATE_ORDER_URL: REACT_APP_BASE_URL + "/api/orders",
+  USER_ORDERS_URL: REACT_APP_BASE_URL + "/api/orders/user-orders",
 };
 
 export default UrlConfig;
