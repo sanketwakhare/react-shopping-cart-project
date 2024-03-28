@@ -24,13 +24,20 @@ const CartPage = () => {
     setIsRemoveProductConfirmationModalOpen,
   ] = useState(false);
   const [productToRemove, setProductToRemove] = useState(null);
-
   const [isCreatingOrder, setIsCreatingOrder] = useState(false);
+  const [
+    isClearCartConfirmationModalOpen,
+    setIsClearCartConfirmationModalOpen,
+  ] = useState(false);
 
   const toggleRemoveProductConfirmationModal = () => {
     setIsRemoveProductConfirmationModalOpen(
       !isRemoveProductConfirmationModalOpen
     );
+  };
+
+  const toggleClearCartConfirmationModal = () => {
+    setIsClearCartConfirmationModalOpen(!isClearCartConfirmationModalOpen);
   };
 
   const noItemsInCartMessageTemplate = (
@@ -99,6 +106,16 @@ const CartPage = () => {
       // navigate to payment page
       navigate("/payment", { state: { orderId } });
     }
+  };
+
+  const clearCart = async () => {
+    dispatch(clearCartRedux());
+    toggleClearCartConfirmationModal();
+  };
+
+  const onClearCartClick = (productId) => {
+    event.stopPropagation();
+    toggleClearCartConfirmationModal();
   };
 
   return (
@@ -175,13 +192,18 @@ const CartPage = () => {
                 <span className="price-value">{formatPrice(totalAmount)}</span>
               </div>
             </div>
-            <button
-              type="button"
-              className="button-success proceed-to-buy"
-              onClick={handleBuyNow}
-            >
-              Proceed to Buy
-            </button>
+            <div className="actions-container">
+              <button
+                type="button"
+                className="button-success"
+                onClick={handleBuyNow}
+              >
+                Proceed to Buy
+              </button>
+              <button className="button-dark" onClick={onClearCartClick}>
+                Clear Cart
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -192,7 +214,7 @@ const CartPage = () => {
           onClose={toggleRemoveProductConfirmationModal}
           id="remove-product-from-cart"
         >
-          <div className="delete-product-modal-container">
+          <div>
             <div className="modal-header">
               <div>Remove Product</div>
             </div>
@@ -218,6 +240,31 @@ const CartPage = () => {
           id="placing-order-modal"
         >
           <div>Processing your order... Please wait.</div>
+        </Modal>
+      )}
+      {isClearCartConfirmationModalOpen && (
+        <Modal
+          isOpen={isClearCartConfirmationModalOpen}
+          onClose={toggleClearCartConfirmationModal}
+          id="clear-cart-confirmation-modal"
+        >
+          <div>
+            <div className="modal-header">
+              <div>Clear Cart</div>
+            </div>
+            <div className="modal-body">
+              <div>Are you sure you want clear cart?</div>
+            </div>
+            <div className="modal-footer">
+              <button
+                onClick={toggleClearCartConfirmationModal}
+                className="button-light"
+              >
+                Cancel
+              </button>
+              <button onClick={clearCart}>Clear</button>
+            </div>
+          </div>
         </Modal>
       )}
     </>
