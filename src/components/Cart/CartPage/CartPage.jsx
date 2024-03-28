@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { isEmpty } from "underscore";
 
-import AddToCart from 'components/Cart/AddToCart/AddToCart';
-import { removeProductFromCartAction } from "store/cart";
+import AddToCart from "components/Cart/AddToCart/AddToCart";
+import useApi from "hooks/useApi";
+import { clearCartRedux, removeProductFromCartAction } from "store/cart";
 import Modal from "ui-components/Modal/Modal";
+import UrlConfig from "utils/UrlConfig";
 import { formatPrice } from "utils/Utils";
 
 import "./cart-page.scss";
@@ -15,12 +17,27 @@ const CartPage = () => {
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { request } = useApi();
 
-  const [isRemoveProductConfirmationModalOpen, setIsRemoveProductConfirmationModalOpen] = useState(false);
+  const [
+    isRemoveProductConfirmationModalOpen,
+    setIsRemoveProductConfirmationModalOpen,
+  ] = useState(false);
   const [productToRemove, setProductToRemove] = useState(null);
+  const [isCreatingOrder, setIsCreatingOrder] = useState(false);
+  const [
+    isClearCartConfirmationModalOpen,
+    setIsClearCartConfirmationModalOpen,
+  ] = useState(false);
 
   const toggleRemoveProductConfirmationModal = () => {
-    setIsRemoveProductConfirmationModalOpen(!isRemoveProductConfirmationModalOpen);
+    setIsRemoveProductConfirmationModalOpen(
+      !isRemoveProductConfirmationModalOpen
+    );
+  };
+
+  const toggleClearCartConfirmationModal = () => {
+    setIsClearCartConfirmationModalOpen(!isClearCartConfirmationModalOpen);
   };
 
   const noItemsInCartMessageTemplate = (
@@ -30,6 +47,7 @@ const CartPage = () => {
       </div>
     </div>
   );
+
   const subtotalCount = cartItems.reduce((acc, item) => {
     acc += Number(item?.quantity ?? 0);
     return acc;
@@ -41,7 +59,7 @@ const CartPage = () => {
   }, 0);
 
   const handleRemoveProductFromCart = () => {
-    if(productToRemove) {
+    if (productToRemove) {
       dispatch(removeProductFromCartAction(productToRemove));
       setProductToRemove(null);
     }
@@ -54,12 +72,50 @@ const CartPage = () => {
     setProductToRemove(productId);
   };
 
-  const handleBuyNow = () => {
+  // place order
+  const placeOrder = async () => {
+    try {
+      const createOrderPayload = {
+        items: [...cartItems],
+      };
+      setIsCreatingOrder(true);
+      const { data, loadError } = await request(UrlConfig.CREATE_ORDER_URL, {
+        method: "POST",
+        body: JSON.stringify(createOrderPayload),
+      });
+      setIsCreatingOrder(false);
+      if (loadError) {
+        throw new Error(loadError.message);
+      }
+      if (data) {
+        dispatch(clearCartRedux());
+      }
+      return data?.orderId ?? null;
+    } catch (error) {
+      // TODO: handle error
+      console.error("Error creating order", error);
+    }
+  };
+
+  const handleBuyNow = async () => {
     if (!auth?.isLoggedIn) {
       navigate("/login", { state: { redirectUrl: "/payment" } });
     } else {
-      navigate("/payment");
+      // place order
+      const orderId = await placeOrder();
+      // navigate to payment page
+      navigate("/payment", { state: { orderId } });
     }
+  };
+
+  const clearCart = async () => {
+    dispatch(clearCartRedux());
+    toggleClearCartConfirmationModal();
+  };
+
+  const onClearCartClick = (productId) => {
+    event.stopPropagation();
+    toggleClearCartConfirmationModal();
   };
 
   return (
@@ -96,9 +152,7 @@ const CartPage = () => {
                       <div className="actions">
                         <Link
                           className="link"
-                          onClick={() =>
-                            onRemoveProduct(product?._id)
-                          }
+                          onClick={() => onRemoveProduct(product?._id)}
                         >
                           Remove
                         </Link>
@@ -138,20 +192,29 @@ const CartPage = () => {
                 <span className="price-value">{formatPrice(totalAmount)}</span>
               </div>
             </div>
-            <button
-              type="button"
-              className="button-success proceed-to-buy"
-              onClick={handleBuyNow}
-            >
-              Proceed to Buy
-            </button>
+            <div className="actions-container">
+              <button
+                type="button"
+                className="button-success"
+                onClick={handleBuyNow}
+              >
+                Proceed to Buy
+              </button>
+              <button className="button-dark" onClick={onClearCartClick}>
+                Clear Cart
+              </button>
+            </div>
           </div>
         </div>
       )}
       {isEmpty(cartItems) && noItemsInCartMessageTemplate}
       {isRemoveProductConfirmationModalOpen && (
-        <Modal isOpen={isRemoveProductConfirmationModalOpen} onClose={toggleRemoveProductConfirmationModal} key={'remove-product-from-cart'}>
-          <div className="delete-product-modal-container">
+        <Modal
+          isOpen={isRemoveProductConfirmationModalOpen}
+          onClose={toggleRemoveProductConfirmationModal}
+          id="remove-product-from-cart"
+        >
+          <div>
             <div className="modal-header">
               <div>Remove Product</div>
             </div>
@@ -159,8 +222,47 @@ const CartPage = () => {
               <div>Are you sure you want remove product?</div>
             </div>
             <div className="modal-footer">
-              <button onClick={toggleRemoveProductConfirmationModal} className="button-light">Cancel</button>
+              <button
+                onClick={toggleRemoveProductConfirmationModal}
+                className="button-light"
+              >
+                Cancel
+              </button>
               <button onClick={handleRemoveProductFromCart}>Remove</button>
+            </div>
+          </div>
+        </Modal>
+      )}
+      {isCreatingOrder && (
+        <Modal
+          isOpen={() => isCreatingOrder}
+          onClose={() => !isCreatingOrder}
+          id="placing-order-modal"
+        >
+          <div>Processing your order... Please wait.</div>
+        </Modal>
+      )}
+      {isClearCartConfirmationModalOpen && (
+        <Modal
+          isOpen={isClearCartConfirmationModalOpen}
+          onClose={toggleClearCartConfirmationModal}
+          id="clear-cart-confirmation-modal"
+        >
+          <div>
+            <div className="modal-header">
+              <div>Clear Cart</div>
+            </div>
+            <div className="modal-body">
+              <div>Are you sure you want clear cart?</div>
+            </div>
+            <div className="modal-footer">
+              <button
+                onClick={toggleClearCartConfirmationModal}
+                className="button-light"
+              >
+                Cancel
+              </button>
+              <button onClick={clearCart}>Clear</button>
             </div>
           </div>
         </Modal>

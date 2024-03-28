@@ -48,7 +48,7 @@ const TokenRefresh = () => {
         throw new Error("Token refresh failed");
       }
     } catch (error) {
-      alert("Your session has expired. Please log in again.");
+      clearInterval(tokenRefreshInterval);
       navigate("/logout");
     } finally {
       setTokenRefreshed(() => !tokenRefreshed);
