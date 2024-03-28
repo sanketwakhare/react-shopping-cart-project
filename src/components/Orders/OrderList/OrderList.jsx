@@ -162,7 +162,7 @@ const OrderList = () => {
                                   onClick={() => handleBuyAgain(product)}
                                 >
                                   <span className="buy-again">
-                                    <i class="fa fa-refresh"></i>
+                                    <i className="fa fa-refresh"></i>
                                     <span>Buy Again</span>
                                   </span>
                                 </button>
