@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router";
 import CartPage from "components/Cart/CartPage/CartPage";
 import OrderList from "components/Orders/OrderList/OrderList";
 import PageNotFound from "components/PageNotFound/PageNotFound";
+import PaymentsPage from "components/Payments/PaymentsPage";
 import ProductDetails from "components/Products/ProductDetails/ProductDetails";
 import ProductListPage from "components/Products/ProductList/ProductListPage";
 import TokenRefresh from "components/TokenRefresh/TokenRefresh";
@@ -41,6 +42,7 @@ const AppRoutes = () => {
         <Route path="/reset-password" element={<ResetPassword />}></Route>
         <Route path="/profile" element={<UserProfile />}></Route>
         <Route path="/orders" element={<OrderList />}></Route>
+        <Route path="/payment" element={<PaymentsPage />}></Route>
         <Route path="*" element={<PageNotFound />}></Route>
       </Routes>
       {isLoggedIn && <TokenRefresh />}

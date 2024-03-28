@@ -28,10 +28,10 @@ const useApi = () => {
         setLoadError(err);
       }
       setData(data);
-      return { data: data, loading: false, loadError: err ?? loadError };
+      return { data: data, loading: false, loadError: err };
     } catch (error) {
-      setLoadError(err);
-      return { data, loading: false, loadError: err };
+      setLoadError(error);
+      return { data, loading: false, loadError: error };
     } finally {
       setLoading(false);
     }

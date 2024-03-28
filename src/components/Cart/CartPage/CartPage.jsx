@@ -104,7 +104,7 @@ const CartPage = () => {
       // place order
       const orderId = await placeOrder();
       // navigate to payment page
-      navigate("/payment", { state: { orderId } });
+      navigate("/payment", { state: { orderId, amount: totalAmount } });
     }
   };
 
