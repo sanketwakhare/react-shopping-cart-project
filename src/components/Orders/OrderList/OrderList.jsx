@@ -119,7 +119,10 @@ const OrderList = () => {
                       {order?.items?.map((currOrder) => {
                         const product = currOrder?.product;
                         return (
-                          <div className="item">
+                          <div
+                            className="item"
+                            key={`order-items-${product?.id}`}
+                          >
                             <Link
                               to={`/products/${product._id}`}
                               className="link"

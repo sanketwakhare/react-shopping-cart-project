@@ -2,6 +2,7 @@ export const OrderStatus = {
   PROCESSING: "processing",
   IN_TRANSIT: "in_transit",
   PAYMENT_PENDING: "payment_pending",
+  PAYMENT_COMPLETED: "payment_completed",
   PAYMENT_FAILED: "payment_failed",
   SHIPPED: "shipped",
   DELIVERED: "delivered",
@@ -15,12 +16,17 @@ export const OrderStatusDisplayMapping = {
   [OrderStatus.PAYMENT_PENDING]: {
     label: "Payment Pending",
     faIcon: "fa fa-credit-card",
-    color: "darkblue",
+    color: "orange",
+  },
+  [OrderStatus.PAYMENT_COMPLETED]: {
+    label: "Payment Completed",
+    faIcon: "fa fa-credit-card",
+    color: "green",
   },
   [OrderStatus.PAYMENT_FAILED]: {
     label: "Payment Failed",
     faIcon: "fa-credit-card",
-    color: "darkblue",
+    color: "red",
   },
   [OrderStatus.PROCESSING]: {
     label: "Processing",

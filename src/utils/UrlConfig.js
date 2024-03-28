@@ -24,6 +24,20 @@ const UrlConfig = {
   // orders
   CREATE_ORDER_URL: REACT_APP_BASE_URL + "/api/orders",
   USER_ORDERS_URL: REACT_APP_BASE_URL + "/api/orders/user-orders",
+  UPDATE_ORDER_STATUS_URL: REACT_APP_BASE_URL + "/api/orders/:orderId",
+
+  // payments
+  CREATE_PAYMENT_ORDER_URL:
+    REACT_APP_BASE_URL + "/api/payments/create-payment-order",
+  VERIFY_PAYMENT_SIGNATURE_URL:
+    REACT_APP_BASE_URL + "/api/payments/verify-payment-signature",
+  CAPTURE_PAYMENT_TXN_URL:
+    REACT_APP_BASE_URL + "/api/payments/capture-payment-transaction",
+  GET_PAYMENT_TXN_BY_ORDER_ID_URL:
+    REACT_APP_BASE_URL +
+    "/api/payments/get-payment-transactions-for-order/:orderId",
+  UPDATE_PAYMENT_TXN_BY_TXN_ORDER_ID_URL:
+    REACT_APP_BASE_URL + "/api/payments/update-payment-transaction/:txnOrderId",
 };
 
 export default UrlConfig;
