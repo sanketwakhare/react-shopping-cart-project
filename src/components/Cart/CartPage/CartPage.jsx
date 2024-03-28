@@ -40,6 +40,7 @@ const CartPage = () => {
       </div>
     </div>
   );
+
   const subtotalCount = cartItems.reduce((acc, item) => {
     acc += Number(item?.quantity ?? 0);
     return acc;
