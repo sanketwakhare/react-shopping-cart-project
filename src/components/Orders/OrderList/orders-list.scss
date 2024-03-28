@@ -61,10 +61,9 @@
         border: 1px solid #ddd;
 
         .order-header {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          align-items: center;
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr 1fr;
+          justify-items: flex-start;
           background-color: #eeeefd;
           padding: 20px;
         }
