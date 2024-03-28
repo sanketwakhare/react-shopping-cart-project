@@ -1,12 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 
 import { addToCartRedux, removeFromCartRedux } from "store/cart";
+
 import "./add-to-cart.scss";
 
 const AddToCart = (props) => {
-  const { product } = props;
+  const { product, options } = props;
+  const addToCartBtnLabel = options?.addToCartBtnLabel ?? "Add to Cart";
+  const isNavigateOnAddToCart = options?.isNavigateOnAddToCart ?? false;
+  const navigateTo = options?.navigateTo;
   const cartItems = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const isProductPresentInCart = cartItems.find(
     (item) => item?.product?._id === product?._id
   );
@@ -14,6 +21,11 @@ const AddToCart = (props) => {
   const handleAddToCart = (event) => {
     dispatch(addToCartRedux(product));
     event.stopPropagation();
+
+    // navigate on click
+    if (isNavigateOnAddToCart && navigateTo) {
+      navigate(navigateTo);
+    }
   };
 
   const handleRemoveFromCart = (event) => {
@@ -38,7 +50,7 @@ const AddToCart = (props) => {
       )}
       {!isProductPresentInCart && (
         <button className="button-success" onClick={handleAddToCart}>
-          Add To Cart
+          {addToCartBtnLabel}
         </button>
       )}
     </div>

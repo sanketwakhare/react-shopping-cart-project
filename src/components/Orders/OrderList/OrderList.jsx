@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
+import AddToCart from "components/Cart/AddToCart/AddToCart";
 import useApi from "hooks/useApi";
 import UrlConfig from "utils/UrlConfig";
 import { formatDate, formatPrice } from "utils/Utils";
 
 import { OrderStatusDisplayMapping } from "../Orders.const";
+
 import "./orders-list.scss";
 
 const OrderList = () => {
@@ -85,7 +87,7 @@ const OrderList = () => {
                     return (
                       <div className="item">
                         <Link to={`/products/${product._id}`} className="link">
-                          <img src={product.image}></img>
+                          <img src={product?.image}></img>
                         </Link>
                         <div className="product-details">
                           <Link
@@ -94,6 +96,44 @@ const OrderList = () => {
                           >
                             {product?.title}
                           </Link>
+                          <div className="price-details">
+                            <div className="order-property">
+                              <label>Quantity:</label>
+                              <span>{currOrder?.quantity}</span>
+                            </div>
+                            <div className="order-property">
+                              <label>Price:</label>
+                              <span>
+                                {formatPrice(product?.price, {
+                                  showCurrency: true,
+                                })}
+                              </span>
+                            </div>
+                            <div className="order-property">
+                              <label>Subtotal:</label>
+                              <span>
+                                {formatPrice(
+                                  product?.price * currOrder?.quantity,
+                                  { showCurrency: true }
+                                )}
+                              </span>
+                            </div>
+                          </div>
+                          <div>
+                            <AddToCart
+                              product={product}
+                              options={{
+                                addToCartBtnLabel: (
+                                  <span className="buy-again">
+                                    <i class="fa fa-refresh"></i>
+                                    <span>Buy Again</span>
+                                  </span>
+                                ),
+                                isNavigateOnAddToCart: true,
+                                navigateTo: "/cart",
+                              }}
+                            />
+                          </div>
                         </div>
                       </div>
                     );
