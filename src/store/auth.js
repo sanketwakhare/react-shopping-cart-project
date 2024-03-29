@@ -3,7 +3,7 @@ const initialState = {
   isLoggedIn: false,
   auth: {
     token: null,
-    expiry: null
+    expiry: null,
   },
 };
 
@@ -30,9 +30,9 @@ const reducer = (state = initialState, action) => {
     case STORE_AUTH_USER: {
       const newState = action.payload ?? {};
       const mergedState = {
-        ...state,    // Spread the key-value pairs of the 'state' object
+        ...state, // Spread the key-value pairs of the 'state' object
         ...newState, // Spread the key-value pairs of the 'newState' object
-      };;
+      };
       return mergedState;
     }
     case CLEAR_AUTH_USER: {

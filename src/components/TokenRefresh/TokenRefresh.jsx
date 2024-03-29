@@ -40,7 +40,6 @@ const TokenRefresh = () => {
               token: newAuthDetails?.token,
               expiry: newAuthDetails?.expiry,
             },
-            token: newAuthDetails?.token,
           })
         );
       } else {

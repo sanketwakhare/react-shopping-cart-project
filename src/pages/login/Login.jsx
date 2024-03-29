@@ -63,14 +63,17 @@ function Login(props) {
           },
         });
         const responseData = await response?.json();
-        const { userId, email } = responseData?.data;
+        const userData = responseData?.data;
+        const { userId, email } = userData;
+        const mobile = userData?.mobile;
+        const name = userData?.name;
 
         // save user details in redux store
         dispatch(
           storeAuthAction({
-            user: { userId, email },
+            user: { userId, email, mobile, name },
             isLoggedIn: true,
-            auth
+            auth,
           })
         );
 
