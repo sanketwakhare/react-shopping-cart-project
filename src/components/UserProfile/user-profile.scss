@@ -45,7 +45,7 @@
 
         .field {
           display: grid;
-          grid-template-columns: 1fr 6fr;
+          grid-template-columns: 1fr 3fr 3fr;
           align-items: center;
 
           .field-name {
@@ -100,6 +100,16 @@
             border-radius: 4px;
             box-sizing: border-box;
             resize: vertical;
+
+            &:disabled {
+              background-color: #d4d3d3;
+              border: 1px solid #ddd;
+              cursor: not-allowed;
+            }
+
+            &:not(disabled) {
+              border: 1px solid darkblue;
+            }
           }
         }
       }
@@ -119,6 +129,27 @@
       width: 100%;
       padding-top: 20px;
       border-top: 1px solid #ddd;
+      display: flex;
+      column-gap: 20px;
+      align-items: center;
+      justify-content: flex-start;
     }
+  }
+  .save-note {
+    border-radius: 5px;
+    padding: 5px;
+    height: -moz-fit-content;
+    background-color: #defce3;
+    border: 1px solid #defce3;
+    color: rgb(12, 116, 12);
+  }
+
+  .error-note {
+    border-radius: 5px;
+    padding: 5px;
+    height: -moz-fit-content;
+    background-color: #fcdede;
+    border: 1px solid #fcdede;
+    color: rgb(222, 9, 9);
   }
 }
