@@ -20,6 +20,7 @@ const UrlConfig = {
 
   // user
   USER_PROFILE_URL: REACT_APP_BASE_URL + "/api/users/me",
+  UPDATE_USER_PROFILE_URL: REACT_APP_BASE_URL + "/api/users/update-profile",
 
   // orders
   CREATE_ORDER_URL: REACT_APP_BASE_URL + "/api/orders",

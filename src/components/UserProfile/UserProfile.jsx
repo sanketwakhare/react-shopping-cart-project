@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import useApi from "hooks/useApi";
+import useToggle from "hooks/useToggle";
 import Avatar from "ui-components/Avatar/Avatar";
 import UrlConfig from "utils/UrlConfig";
 
@@ -13,6 +14,13 @@ const UserProfile = () => {
   const navigate = useNavigate();
   const auth = useSelector((state) => state.auth);
   const { isLoggedIn } = auth;
+  const [isEditing, toggleEditProfile] = useToggle(false);
+  const [userUpdating, toggleUserUpdating] = useToggle(false);
+  const [userSaved, toggleUserSaved] = useToggle(false);
+  const [loadingError, setLoadingError] = useState(null);
+  const [userClone, setUserClone] = useState(null);
+
+  const inputNameRef = useRef(null);
 
   const [userData, setUserData] = useState({
     name: "",
@@ -28,6 +36,14 @@ const UserProfile = () => {
       navigate("/login");
     }
   }, []);
+
+  useEffect(() => {
+    if (userSaved) {
+      setTimeout(() => {
+        toggleUserSaved(false);
+      }, 5000);
+    }
+  }, [userSaved]);
 
   useEffect(() => {
     // Fetch user data from the server
@@ -48,8 +64,11 @@ const UserProfile = () => {
   }, []);
 
   const handleNameChange = (e) => {
-    // Update the user's name
     setUserData({ ...userData, name: e.target.value });
+  };
+
+  const handleMobileChange = (e) => {
+    setUserData({ ...userData, mobile: e.target.value });
   };
 
   const handleImageUpload = (e) => {
@@ -58,22 +77,58 @@ const UserProfile = () => {
     // Upload the file to the server using FormData
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      // Send updated user data to the server
-      await axios.put("/api/user/profile", userData);
-      alert("Profile updated successfully!");
-    } catch (error) {
-      console.error("Error updating profile:", error);
+  const handleOnEditOrSave = async () => {
+    toggleUserSaved(false);
+    if (isEditing) {
+      toggleUserUpdating(true);
+      setLoadingError(null);
+      // save the user's mobile and name if present
+      const payload = {
+        mobile: userData?.mobile,
+        name: userData?.name,
+      };
+      const response = await request(UrlConfig.UPDATE_USER_PROFILE_URL, {
+        method: "PUT",
+        body: JSON.stringify(payload),
+      });
+      if (response.loadError) {
+        if (response.data?.errors) {
+          setLoadingError(response.data.errors[0]);
+        } else {
+          setLoadingError(response.loadError);
+        }
+      } else if (response.data) {
+        toggleUserSaved(true);
+        toggleEditProfile();
+      }
+      toggleUserUpdating(false);
+    } else {
+      inputNameRef.current.focus({ focusVisible: true, preventScroll: false });
+      inputNameRef.current.select();
+      const clone = Object.assign({}, userData);
+      setUserClone(clone);
+      toggleEditProfile();
     }
   };
+
+  const handleOnCancelEdit = () => {
+    console.log("cancel clicked", userClone, "use this clone values");
+    toggleEditProfile();
+    setUserData((prevValues) => {
+      return {
+        ...prevValues,
+        ...userClone,
+      };
+    });
+  };
+
+  const saveLabel = userUpdating ? "Saving..." : "Save";
 
   return (
     <div className="profile-container">
       <div className="profile-inner-container box-shadow">
         <div className="profile-header">Profile</div>
-        <div onSubmit={handleSubmit} className="profile-body-grid">
+        <div className="profile-body-grid">
           <div className="profile-left-container">
             <div className="field">
               <label className="field-name">Email</label>
@@ -98,11 +153,16 @@ const UserProfile = () => {
                 name="name"
                 value={userData?.name}
                 onChange={handleNameChange}
-                disabled
+                disabled={!isEditing}
+                ref={inputNameRef}
+                autoFocus
               />
+              {loadingError && loadingError?.path === "name" && (
+                <div className="error-note">{loadingError?.msg}</div>
+              )}
             </div>
             <div className="field">
-              <label htmlFor="name" className="field-name">
+              <label htmlFor="roles" className="field-name">
                 Roles
               </label>
               <label className="field-value" name="roles">
@@ -114,13 +174,21 @@ const UserProfile = () => {
           </div>
           <div className="profile-right-container">
             <div className="field">
-              <label className="field-name">Mobile</label>
+              <label htmlFor="mobile" className="field-name">
+                Mobile
+              </label>
               <input
                 className="field-value"
                 type="text"
+                name="mobile"
                 value={userData?.mobile}
-                disabled
+                onChange={handleMobileChange}
+                disabled={!isEditing}
+                autoFocus
               />
+              {loadingError && loadingError?.path === "mobile" && (
+                <div className="error-note">{loadingError?.msg}</div>
+              )}
             </div>
             <div className="field">
               <label className="field-name">Avatar</label>
@@ -142,9 +210,22 @@ const UserProfile = () => {
           </div>
         </div>
         <div className="profile-footer">
-          <button type="submit" disabled>
-            Save
+          <button type="button" onClick={handleOnEditOrSave}>
+            {!isEditing ? "Edit" : saveLabel}
           </button>
+          {isEditing && (
+            <button
+              type="button"
+              className="button-dark"
+              onClick={handleOnCancelEdit}
+            >
+              Cancel
+            </button>
+          )}
+          {userSaved && <div className="save-note">User Saved</div>}
+          {loadingError && loadingError?.type !== "field" && (
+            <div className="error-note">{loadingError?.message}</div>
+          )}
         </div>
       </div>
     </div>
