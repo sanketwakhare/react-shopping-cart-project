@@ -5,7 +5,9 @@ import { Link, useNavigate } from "react-router-dom";
 import UrlConfig from "utils/UrlConfig";
 
 function Signup() {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [mobile, setMobile] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -40,8 +42,10 @@ function Signup() {
         return;
       }
       const userDetails = {
+        name: username,
         email: email,
         password: password,
+        mobile: mobile,
       };
       const response = await fetch(UrlConfig.SIGN_UP_URL, {
         method: "POST",
@@ -62,7 +66,9 @@ function Signup() {
             User <b>{email}</b> registered successfully.
           </>
         );
+        setUsername("");
         setEmail("");
+        setMobile("");
         setPassword("");
         setConfirmPassword("");
         setTimeout(() => {
@@ -88,6 +94,16 @@ function Signup() {
             </label>
           </div>
           <form onSubmit={handleSubmit}>
+            <label htmlFor="username">
+              Name<span required>*</span>
+            </label>
+            <input
+              type="text"
+              name="username"
+              placeholder="enter first name and last name"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
             <label htmlFor="email">
               Email<span required>*</span>
             </label>
@@ -97,6 +113,16 @@ function Signup() {
               placeholder="enter email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+            />
+            <label htmlFor="mobile">
+              Mobile<span required>*</span>
+            </label>
+            <input
+              type="text"
+              name="mobile"
+              placeholder="enter 10 digit mobile"
+              value={mobile}
+              onChange={(e) => setMobile(e.target.value)}
             />
             <label htmlFor="password">
               Password<span required>*</span>
