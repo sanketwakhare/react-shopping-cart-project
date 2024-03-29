@@ -119,9 +119,7 @@ const PaymentsPage = () => {
       amount: amount.toString(),
       currency: currency,
       name: "Shophub Corp",
-      description: "Payment transaction",
-      image:
-        "https://plus.unsplash.com/premium_photo-1684197414211-1f7a0807c59b?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      description: "Shophub Payment transaction",
       order_id: paymentTxnOrderId, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
       handler: async (response) => {
         // verify payment signature
@@ -168,15 +166,20 @@ const PaymentsPage = () => {
       },
       prefill: {
         //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
-        name: "Test User Name", //your customer's name
+        name: user?.name, //your customer's name
         email: user?.email,
-        contact: "9730511748", //Provide the customer's phone number for better conversion rates
+        contact: user?.mobile, //Provide the customer's phone number for better conversion rates
+      },
+      customer: {
+        name: user?.name,
+        email: user?.email,
+        contact: "+91" + user?.mobile,
       },
       notes: {
         address: "Shophub Services",
       },
       theme: {
-        color: "darkblue",
+        color: "#00008b",
       },
     };
 
