@@ -147,7 +147,11 @@ const PaymentsPage = () => {
           comments: "payment completed",
         });
 
-        navigate("/orders");
+        navigate(`/order/${orderId}`, {
+          state: {
+            paymentStatus: PaymentStatus.PAID,
+          },
+        });
       },
       modal: {
         ondismiss: async () => {

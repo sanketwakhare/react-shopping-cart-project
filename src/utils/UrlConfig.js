@@ -26,6 +26,7 @@ const UrlConfig = {
   CREATE_ORDER_URL: REACT_APP_BASE_URL + "/api/orders",
   USER_ORDERS_URL: REACT_APP_BASE_URL + "/api/orders/user-orders",
   UPDATE_ORDER_STATUS_URL: REACT_APP_BASE_URL + "/api/orders/:orderId",
+  GET_ORDER_DETAILS_URL: REACT_APP_BASE_URL + "/api/orders/:orderId",
 
   // payments
   CREATE_PAYMENT_ORDER_URL:
