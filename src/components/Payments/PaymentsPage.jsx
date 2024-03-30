@@ -260,8 +260,8 @@ const PaymentsPage = () => {
         }
       }
     } else {
-      // if not order id for payment page, navigate to orders page
-      navigate("/orders");
+      // if no order id for payment page, navigate to orders page
+      navigate("/cart");
     }
   };
 
