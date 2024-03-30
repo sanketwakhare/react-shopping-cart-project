@@ -205,12 +205,12 @@ const UserProfile = () => {
                 {userData?.email && (
                   <div className="avatar-container">
                     <Avatar email={userData?.email} />
-                    <input
+                    {/* <input
                       type="file"
                       accept="image/*"
                       onClick={handleImageUpload}
                       disabled
-                    />
+                    /> */}
                   </div>
                 )}
               </div>
