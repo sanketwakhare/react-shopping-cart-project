@@ -82,13 +82,15 @@ button {
 .link {
   text-decoration: none;
   cursor: pointer;
-  color: inherit;
+  // color: inherit;
+  color: darkblue;
 }
 
 .link:visited,
 .link:active,
 .link:hover {
-  color: inherit;
+  // color: inherit;
+  color: darkblue;
   text-decoration: underline;
 }
 

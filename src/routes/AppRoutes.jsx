@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router";
 
 import CartPage from "components/Cart/CartPage/CartPage";
+import Order from "components/Orders/Order/Order";
 import OrderList from "components/Orders/OrderList/OrderList";
 import PageNotFound from "components/PageNotFound/PageNotFound";
 import PaymentsPage from "components/Payments/PaymentsPage";
@@ -42,6 +43,7 @@ const AppRoutes = () => {
         <Route path="/reset-password" element={<ResetPassword />}></Route>
         <Route path="/profile" element={<UserProfile />}></Route>
         <Route path="/orders" element={<OrderList />}></Route>
+        <Route path="/order/:orderId" element={<Order />}></Route>
         <Route path="/payment" element={<PaymentsPage />}></Route>
         <Route path="*" element={<PageNotFound />}></Route>
       </Routes>

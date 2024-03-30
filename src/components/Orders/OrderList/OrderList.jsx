@@ -112,7 +112,9 @@ const OrderList = () => {
                       </div>
                       <div className="order-property order-id">
                         <label>Order Id:</label>
-                        <div>{order?._id}</div>
+                        <Link to={`/order/${order?._id}`} className="link">
+                          {order?._id}
+                        </Link>
                       </div>
                     </div>
                     <div className="order-content">
