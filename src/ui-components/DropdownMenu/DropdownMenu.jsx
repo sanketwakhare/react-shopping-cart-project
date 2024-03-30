@@ -21,7 +21,7 @@ const DropdownMenu = ({ info }) => {
 
   const toggleMenu = (event) => {
     event.stopPropagation();
-    setIsOpen(() =>!isOpen);
+    setIsOpen(() => !isOpen);
   };
 
   const menuItems = info?.menuItems.map((category, index) => (
@@ -40,22 +40,20 @@ const DropdownMenu = ({ info }) => {
     <div className="dropdown-container">
       <div className={`dropdown ${isOpen ? "open" : ""}`}>
         <div className="dropdown-toggle" onClick={toggleMenu}>
-          {info?.mainMenu?.showGravatar && info?.mainMenu?.email &&
-          <div className="gravatar-icon">
-            <Avatar email={info?.mainMenu?.email}/>
-          </div>
-          }
-          {info?.mainMenu?.title &&
-          <div className="title">
-            {info?.mainMenu?.title}
-          </div>
-          }
-          {info?.mainMenu?.showCaretIcon &&
+          {info?.mainMenu?.showGravatar && info?.mainMenu?.email && (
+            <div className="gravatar-icon">
+              <Avatar email={info?.mainMenu?.email} />
+            </div>
+          )}
+          {info?.mainMenu?.title && (
+            <div className="title">{info?.mainMenu?.title}</div>
+          )}
+          {info?.mainMenu?.showCaretIcon && (
             <div className="caret">
               {isOpen && <i className="fa fa-caret-up"></i>}
               {!isOpen && <i className="fa fa-caret-down"></i>}
             </div>
-          }
+          )}
         </div>
         {isOpen && (
           <>

@@ -1,3 +1,5 @@
+import { cloneDeep, merge } from "lodash";
+
 const initialState = {
   user: null,
   isLoggedIn: false,
@@ -29,10 +31,11 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case STORE_AUTH_USER: {
       const newState = action.payload ?? {};
-      const mergedState = {
-        ...state, // Spread the key-value pairs of the 'state' object
-        ...newState, // Spread the key-value pairs of the 'newState' object
-      };
+      const mergedState = merge(cloneDeep(state), newState);
+      // const mergedState = {
+      //   ...state, // Spread the key-value pairs of the 'state' object
+      //   ...newState, // Spread the key-value pairs of the 'newState' object
+      // };
       return mergedState;
     }
     case CLEAR_AUTH_USER: {

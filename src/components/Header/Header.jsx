@@ -4,13 +4,14 @@ import { NavLink } from "react-router-dom";
 import CartHeader from "components/Cart/CartHeader/CartHeader";
 import Search from "components/Search/Search";
 import DropdownMenu from "ui-components/DropdownMenu/DropdownMenu";
+
 import "./header.scss";
 
 // categories menu configuration
 const categoriesDropdownInfo = {
   mainMenu: {
     title: "Categories",
-    showCaretIcon: true
+    showCaretIcon: true,
   },
   menuItems: [
     { title: "Electronics", to: "/category/electronics" },
@@ -25,8 +26,8 @@ const categoriesDropdownInfo = {
 const accountDropdownInfo = {
   mainMenu: {
     title: "Account",
-    showGravatar: false,
-    showCaretIcon: true
+    showGravatar: true,
+    showCaretIcon: true,
   },
   menuItems: [
     { title: "Profile", to: "/profile" },
@@ -58,14 +59,16 @@ const Header = () => {
         {isLoggedIn ? (
           // Display content for logged-in users
           <>
-            <DropdownMenu info={{
-              ...accountDropdownInfo,
-              mainMenu: {
-                ...accountDropdownInfo.mainMenu,
-                email: auth?.user?.email,
-                title: auth?.user?.email
-              }
-            }} />
+            <DropdownMenu
+              info={{
+                ...accountDropdownInfo,
+                mainMenu: {
+                  ...accountDropdownInfo.mainMenu,
+                  email: auth?.user?.email,
+                  title: auth?.user?.name,
+                },
+              }}
+            />
             <NavLink
               to="/cart"
               key="cart"

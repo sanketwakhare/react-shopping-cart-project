@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import useApi from "hooks/useApi";
 import useToggle from "hooks/useToggle";
+import { storeAuthAction } from "store/auth";
 import Avatar from "ui-components/Avatar/Avatar";
 import UrlConfig from "utils/UrlConfig";
 
@@ -12,6 +13,7 @@ import "./user-profile.scss";
 const UserProfile = () => {
   const { request } = useApi();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   const { isLoggedIn } = auth;
   const [isEditing, toggleEditProfile] = useToggle(false);
@@ -23,6 +25,7 @@ const UserProfile = () => {
   const inputNameRef = useRef(null);
 
   const [userData, setUserData] = useState({
+    userId: "",
     name: "",
     email: "",
     mobile: "",
@@ -100,6 +103,11 @@ const UserProfile = () => {
       } else if (response.data) {
         toggleUserSaved(true);
         toggleEditProfile();
+        dispatch(
+          storeAuthAction({
+            user: { mobile: userData.mobile, name: userData.name },
+          })
+        );
       }
       toggleUserUpdating(false);
     } else {
