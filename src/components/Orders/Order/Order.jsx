@@ -9,11 +9,8 @@ import Timeline from "ui-components/Timeline/Timeline";
 import UrlConfig from "utils/UrlConfig";
 import { formatDate, formatPrice } from "utils/Utils";
 
-import {
-  OrderStatusDisplayMapping,
-  transformHistoryToEvents,
-} from "../Orders.const";
-
+import { OrderStatusDisplayMapping } from "../Orders.const";
+import { transformHistoryToEvents } from "../Orders.utils";
 import "./order.scss";
 
 const Order = () => {
