@@ -1,0 +1,65 @@
+.ul-container {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+
+  .list-item {
+    min-height: 70px;
+    display: flex;
+    flex-direction: row;
+
+    &:last-child {
+      .right-content {
+        border-left: 2px solid transparent;
+      }
+    }
+
+    .left-content {
+      padding-right: 20px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      min-width: 120px;
+    }
+
+    .right-content {
+      display: flex;
+      border-left: 2px solid #ccc;
+      padding-bottom: 20px;
+
+      .icon {
+        position: relative;
+        transform: translateX(-50%);
+      }
+
+      .icon-plain {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background-color: #ccc;
+      }
+
+      .icon-active {
+        color: darkblue;
+      }
+
+      .icon-completed {
+        color: green;
+      }
+
+      .icon-pending {
+        color: #ccc;
+      }
+
+      .italics {
+        font-style: italic;
+        font-size: 0.8rem;
+        font-weight: 400;
+        color: gray;
+      }
+    }
+
+    .pending {
+      border-left: 2px dotted #ccc;
+    }
+  }
+}

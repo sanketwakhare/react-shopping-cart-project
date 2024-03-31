@@ -5,10 +5,14 @@ import { isEmpty } from "underscore";
 
 import useApi from "hooks/useApi";
 import { addToCartRedux } from "store/cart";
+import Timeline from "ui-components/Timeline/Timeline";
 import UrlConfig from "utils/UrlConfig";
 import { formatDate, formatPrice } from "utils/Utils";
 
-import { OrderStatusDisplayMapping } from "../Orders.const";
+import {
+  OrderStatusDisplayMapping,
+  transformHistoryToEvents,
+} from "../Orders.const";
 
 import "./orders-list.scss";
 
@@ -78,6 +82,7 @@ const OrderList = () => {
             <div className="orders-body">
               {ordersData.map((order) => {
                 const orderStatus = OrderStatusDisplayMapping[order?.status];
+                const timelineEvents = transformHistoryToEvents(order?.history);
                 return (
                   <div
                     key={`order-${order?._id}`}
@@ -112,68 +117,75 @@ const OrderList = () => {
                       </div>
                       <div className="order-property order-id">
                         <label>Order Id:</label>
-                        <div>{order?._id}</div>
+                        <Link to={`/order/${order?._id}`} className="link">
+                          {order?._id}
+                        </Link>
                       </div>
                     </div>
-                    <div className="order-content">
-                      {order?.items?.map((currOrder) => {
-                        const product = currOrder?.product;
-                        return (
-                          <div
-                            className="item"
-                            key={`order-items-${product?.id}`}
-                          >
-                            <Link
-                              to={`/products/${product._id}`}
-                              className="link"
+                    <div className="order-details-container">
+                      <div className="order-content">
+                        {order?.items?.map((currOrder) => {
+                          const product = currOrder?.product;
+                          return (
+                            <div
+                              className="item"
+                              key={`order-items-${product?.id}`}
                             >
-                              <img src={product?.image}></img>
-                            </Link>
-                            <div className="product-details">
                               <Link
                                 to={`/products/${product._id}`}
                                 className="link"
                               >
-                                {product?.title}
+                                <img src={product?.image}></img>
                               </Link>
-                              <div className="price-details">
-                                <div className="order-property">
-                                  <label>Quantity:</label>
-                                  <span>{currOrder?.quantity}</span>
-                                </div>
-                                <div className="order-property">
-                                  <label>Price:</label>
-                                  <span>
-                                    {formatPrice(product?.price, {
-                                      showCurrency: true,
-                                    })}
-                                  </span>
-                                </div>
-                                <div className="order-property">
-                                  <label>Subtotal:</label>
-                                  <span>
-                                    {formatPrice(
-                                      product?.price * currOrder?.quantity,
-                                      { showCurrency: true }
-                                    )}
-                                  </span>
-                                </div>
-                              </div>
-                              <div>
-                                <button
-                                  className="button-success"
-                                  onClick={() => handleBuyAgain(product)}
+                              <div className="product-details">
+                                <Link
+                                  to={`/products/${product._id}`}
+                                  className="link"
                                 >
-                                  <span className="buy-again">
-                                    <i className="fa fa-refresh"></i>
-                                    <span>Buy Again</span>
-                                  </span>
-                                </button>
+                                  {product?.title}
+                                </Link>
+                                <div className="price-details">
+                                  <div className="order-property">
+                                    <label>Quantity:</label>
+                                    <span>{currOrder?.quantity}</span>
+                                  </div>
+                                  <div className="order-property">
+                                    <label>Price:</label>
+                                    <span>
+                                      {formatPrice(product?.price, {
+                                        showCurrency: true,
+                                      })}
+                                    </span>
+                                  </div>
+                                  <div className="order-property">
+                                    <label>Subtotal:</label>
+                                    <span>
+                                      {formatPrice(
+                                        product?.price * currOrder?.quantity,
+                                        { showCurrency: true }
+                                      )}
+                                    </span>
+                                  </div>
+                                </div>
+                                <div>
+                                  <button
+                                    className="button-success"
+                                    onClick={() => handleBuyAgain(product)}
+                                  >
+                                    <span className="buy-again">
+                                      <i className="fa fa-refresh"></i>
+                                      <span>Buy Again</span>
+                                    </span>
+                                  </button>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        );
-                      })}
+                          );
+                        })}
+                      </div>
+                      <div className="timeline-container">
+                        <Timeline events={timelineEvents}></Timeline>
+                      </div>
                     </div>
                   </div>
                 );

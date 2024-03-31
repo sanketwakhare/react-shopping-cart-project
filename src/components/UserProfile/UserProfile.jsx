@@ -120,8 +120,8 @@ const UserProfile = () => {
   };
 
   const handleOnCancelEdit = () => {
-    console.log("cancel clicked", userClone, "use this clone values");
     toggleEditProfile();
+    setLoadingError(null);
     setUserData((prevValues) => {
       return {
         ...prevValues,
