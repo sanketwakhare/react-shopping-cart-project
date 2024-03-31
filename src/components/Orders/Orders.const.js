@@ -1,10 +1,14 @@
+import { formatDate } from "utils/Utils";
+
 export const OrderStatus = {
-  PROCESSING: "processing",
-  IN_TRANSIT: "in_transit",
+  ORDER_INITIATED: "order-initiated",
   PAYMENT_PENDING: "payment_pending",
   PAYMENT_COMPLETED: "payment_completed",
   PAYMENT_FAILED: "payment_failed",
+  PROCESSING: "processing",
   SHIPPED: "shipped",
+  IN_TRANSIT: "in_transit",
+  OUT_FOR_DELIVERY: "out-for-delivery",
   DELIVERED: "delivered",
   CANCELLED: "cancelled",
   REFUNDED: "refunded",
@@ -13,6 +17,11 @@ export const OrderStatus = {
 };
 
 export const OrderStatusDisplayMapping = {
+  [OrderStatus.ORDER_INITIATED]: {
+    label: "Order Initiated",
+    faIcon: "fa-check",
+    color: "darkblue",
+  },
   [OrderStatus.PAYMENT_PENDING]: {
     label: "Payment Pending",
     faIcon: "fa fa-credit-card",
@@ -35,6 +44,11 @@ export const OrderStatusDisplayMapping = {
   },
   [OrderStatus.IN_TRANSIT]: {
     label: "In Transit",
+    faIcon: "fa-truck",
+    color: "darkblue",
+  },
+  [OrderStatus.OUT_FOR_DELIVERY]: {
+    label: "Out for Delivery",
     faIcon: "fa-truck",
     color: "darkblue",
   },
@@ -68,4 +82,123 @@ export const OrderStatusDisplayMapping = {
     faIcon: "fa-undo",
     color: "darkblue",
   },
+};
+
+export const OrderStatusTimelineDisplayMapping = {
+  [OrderStatus.ORDER_INITIATED]: {
+    rightContent: {
+      content: "Order Initiated",
+      subContent: "order initiated",
+    },
+  },
+  [OrderStatus.PAYMENT_PENDING]: {
+    rightContent: {
+      content: "Payment Pending",
+      subContent: "payment failed for this your order",
+    },
+  },
+  [OrderStatus.PAYMENT_COMPLETED]: {
+    rightContent: {
+      content: "Payment Completed",
+      subContent: "payment completed for this order",
+    },
+  },
+  [OrderStatus.PAYMENT_FAILED]: {
+    rightContent: {
+      content: "Payment Failed",
+      subContent: "payment failed",
+    },
+  },
+  [OrderStatus.PROCESSING]: {
+    rightContent: {
+      content: "Processing",
+      subContent: "processing your order",
+    },
+  },
+  [OrderStatus.IN_TRANSIT]: {
+    rightContent: {
+      content: "In Transit",
+      subContent: "order is in transit",
+    },
+  },
+  [OrderStatus.OUT_FOR_DELIVERY]: {
+    rightContent: {
+      content: "Out for Delivery",
+      subContent: "out for delivery",
+    },
+  },
+  [OrderStatus.SHIPPED]: {
+    rightContent: {
+      content: "Shipped",
+      subContent: "order shipped",
+    },
+  },
+  [OrderStatus.DELIVERED]: {
+    rightContent: {
+      content: "Delivered",
+      subContent: "order delivered",
+    },
+  },
+  [OrderStatus.CANCELLED]: {
+    rightContent: {
+      content: "Cancelled",
+      subContent: "order cancelled",
+    },
+  },
+  [OrderStatus.REFUNDED]: {
+    rightContent: {
+      content: "Refunded",
+      subContent: "refund completed",
+    },
+  },
+  [OrderStatus.ON_HOLD]: {
+    rightContent: {
+      content: "On Hold",
+      subContent: "This order is on hold. Please contact customer support",
+    },
+  },
+  [OrderStatus.RETURNED]: {
+    rightContent: {
+      content: "Returned",
+      subContent: "return completed",
+    },
+  },
+};
+
+export const transformHistoryToEvents = (history) => {
+  const events = history?.map((item, index) => {
+    let rightContent = {};
+    let isPending = false;
+    const status = item?.status;
+    const displayMapping = OrderStatusTimelineDisplayMapping[status];
+    rightContent = {
+      title: displayMapping?.rightContent?.content,
+      subContent: displayMapping?.rightContent?.subContent,
+    };
+
+    if (
+      [
+        OrderStatus.PAYMENT_PENDING,
+        OrderStatus.PROCESSING,
+        OrderStatus.IN_TRANSIT,
+        OrderStatus.ON_HOLD,
+        OrderStatus.OUT_FOR_DELIVERY,
+        OrderStatus.PAYMENT_FAILED,
+      ].includes(status) &&
+      index === history.length - 1
+    ) {
+      isPending = true;
+    }
+
+    return {
+      status: item.status,
+      leftContent: formatDate(item.updatedAt),
+      rightContent,
+      comments: item.comments || "",
+      isPending,
+      _id: item._id,
+    };
+  });
+
+  return events ?? [];
 };

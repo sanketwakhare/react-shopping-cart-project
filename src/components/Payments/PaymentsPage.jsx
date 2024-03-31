@@ -147,6 +147,15 @@ const PaymentsPage = () => {
           comments: "payment completed",
         });
 
+        // update order status for simulation
+        await updateOrderStatus(orderId, { status: OrderStatus.PROCESSING });
+        await updateOrderStatus(orderId, { status: OrderStatus.SHIPPED });
+        await updateOrderStatus(orderId, { status: OrderStatus.IN_TRANSIT });
+        await updateOrderStatus(orderId, {
+          status: OrderStatus.OUT_FOR_DELIVERY,
+        });
+        await updateOrderStatus(orderId, { status: OrderStatus.DELIVERED });
+
         navigate(`/order/${orderId}`, {
           state: {
             paymentStatus: PaymentStatus.PAID,
@@ -250,7 +259,6 @@ const PaymentsPage = () => {
           setError(resp?.loadError?.message);
         } else if (resp?.data) {
           const orderData = resp?.data;
-          console.log(orderData);
 
           // capture payment transaction order details
           await capturePaymentInitiated(orderData);

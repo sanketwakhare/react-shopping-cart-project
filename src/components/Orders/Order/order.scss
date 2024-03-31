@@ -68,46 +68,58 @@
         padding: 20px;
       }
 
-      .order-content {
-        display: flex;
-        flex-direction: column;
-        row-gap: 20px;
-        padding: 20px;
+      .order-details-container {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
 
-        .item {
+        .order-content {
           display: flex;
-          flex-direction: row;
-          column-gap: 20px;
+          flex-direction: column;
+          row-gap: 20px;
+          padding: 20px;
 
-          img {
-            width: 200px;
-            height: 200px;
-          }
-
-          .product-details {
+          .item {
             display: flex;
-            flex-direction: column;
-            row-gap: 20px;
-            align-items: flex-start;
-            justify-content: flex-start;
+            flex-direction: row;
+            column-gap: 20px;
 
-            .price-details {
+            img {
+              width: 200px;
+              height: 200px;
+            }
+
+            .product-details {
               display: flex;
-              column-gap: 20px;
+              flex-direction: column;
+              row-gap: 20px;
+              align-items: flex-start;
+              justify-content: flex-start;
 
-              .order-property {
-                min-width: 150px;
-                max-width: 200px;
+              .price-details {
+                display: flex;
+                column-gap: 20px;
+
+                .order-property {
+                  min-width: 150px;
+                  max-width: 200px;
+                }
+              }
+
+              .buy-again {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                column-gap: 10px;
               }
             }
-
-            .buy-again {
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              column-gap: 10px;
-            }
           }
+        }
+
+        .timeline-container {
+          display: flex;
+          align-items: flex-start;
+          justify-content: flex-start;
+          padding: 20px;
         }
       }
 

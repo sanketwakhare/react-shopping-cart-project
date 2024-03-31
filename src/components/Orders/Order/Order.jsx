@@ -5,10 +5,14 @@ import { Link, useLocation } from "react-router-dom";
 import { PaymentStatus } from "components/Payments/PaymentStatus";
 import useApi from "hooks/useApi";
 import useToggle from "hooks/useToggle";
+import Timeline from "ui-components/Timeline/Timeline";
 import UrlConfig from "utils/UrlConfig";
 import { formatDate, formatPrice } from "utils/Utils";
 
-import { OrderStatusDisplayMapping } from "../Orders.const";
+import {
+  OrderStatusDisplayMapping,
+  transformHistoryToEvents,
+} from "../Orders.const";
 
 import "./order.scss";
 
@@ -48,6 +52,7 @@ const Order = () => {
   }, [orderId]);
 
   const orderStatus = OrderStatusDisplayMapping[order?.status];
+  const timelineEvents = transformHistoryToEvents(order?.history);
 
   return (
     <div className="order-main-container">
@@ -99,44 +104,49 @@ const Order = () => {
               <div>{order?._id}</div>
             </div>
           </div>
-          <div className="order-content">
-            {order?.items?.map((currOrder) => {
-              const product = currOrder?.product;
-              return (
-                <div className="item" key={`order-items-${product?.id}`}>
-                  <Link to={`/products/${product._id}`} className="link">
-                    <img src={product?.image}></img>
-                  </Link>
-                  <div className="product-details">
+          <div className="order-details-container">
+            <div className="order-content">
+              {order?.items?.map((currOrder) => {
+                const product = currOrder?.product;
+                return (
+                  <div className="item" key={`order-items-${product?.id}`}>
                     <Link to={`/products/${product._id}`} className="link">
-                      {product?.title}
+                      <img src={product?.image}></img>
                     </Link>
-                    <div className="price-details">
-                      <div className="order-property">
-                        <label>Quantity:</label>
-                        <span>{currOrder?.quantity}</span>
-                      </div>
-                      <div className="order-property">
-                        <label>Price:</label>
-                        <span>
-                          {formatPrice(product?.price, {
-                            showCurrency: true,
-                          })}
-                        </span>
-                      </div>
-                      <div className="order-property">
-                        <label>Subtotal:</label>
-                        <span>
-                          {formatPrice(product?.price * currOrder?.quantity, {
-                            showCurrency: true,
-                          })}
-                        </span>
+                    <div className="product-details">
+                      <Link to={`/products/${product._id}`} className="link">
+                        {product?.title}
+                      </Link>
+                      <div className="price-details">
+                        <div className="order-property">
+                          <label>Quantity:</label>
+                          <span>{currOrder?.quantity}</span>
+                        </div>
+                        <div className="order-property">
+                          <label>Price:</label>
+                          <span>
+                            {formatPrice(product?.price, {
+                              showCurrency: true,
+                            })}
+                          </span>
+                        </div>
+                        <div className="order-property">
+                          <label>Subtotal:</label>
+                          <span>
+                            {formatPrice(product?.price * currOrder?.quantity, {
+                              showCurrency: true,
+                            })}
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
+            <div className="timeline-container">
+              <Timeline events={timelineEvents}></Timeline>
+            </div>
           </div>
         </div>
       </div>
