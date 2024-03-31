@@ -62,10 +62,6 @@ const ProductDetails = () => {
             <label>Category:</label>
             <span>{product?.category}</span>
           </div>
-          <div className="product-details__ratings">
-            <label>Ratings:</label>
-            <span>{product?.rating?.rate}</span>
-          </div>
           <div className="product-actions">
             <AddToCart product={product} />
           </div>
