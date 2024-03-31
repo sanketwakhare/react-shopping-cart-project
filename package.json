@@ -21,7 +21,7 @@
     "underscore": "^1.13.6"
   },
   "scripts": {
-    "start": "cross-env PORT=3001 react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
